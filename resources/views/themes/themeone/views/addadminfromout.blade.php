@@ -58,23 +58,23 @@
                                   <label for="name" class="col-sm-2 col-md-3 control-label">{{ trans('labels.FirstName') }} </label>
                                   <div class="col-sm-10 col-md-4">
                                     {!! Form::text('first_name',  '', array('class'=>'form-control field-validate', 'id'=>'first_name')) !!}
-                                    <span class="help-block" style="font-weight: normal;font-size: 11px;margin-bottom: 0;">{{ trans('labels.FirstNameText') }}</span>
-                                    <!-- <span class="help-block hidden">{{ trans('labels.textRequiredFieldMessage') }}</span> -->
+                                    <span class="help" style="font-weight: normal;font-size: 11px;margin-bottom: 0;">{{ trans('labels.FirstNameText') }}</span>
+                                    <!-- <span class="help hidden">{{ trans('labels.textRequiredFieldMessage') }}</span> -->
                                   </div>
                                 </div>
                                 <div class="form-group">
                                   <label for="name" class="col-sm-2 col-md-3 control-label">{{ trans('labels.LastName') }} </label>
                                   <div class="col-sm-10 col-md-4">
                                     {!! Form::text('last_name',  '', array('class'=>'form-control field-validate', 'id'=>'last_name')) !!}
-                                    <span class="help-block" style="font-weight: normal;font-size: 11px;margin-bottom: 0;">{{ trans('labels.lastNameText') }}</span>
-                                    <!-- <span class="help-block hidden">{{ trans('labels.textRequiredFieldMessage') }}</span> -->
+                                    <span class="help" style="font-weight: normal;font-size: 11px;margin-bottom: 0;">{{ trans('labels.lastNameText') }}</span>
+                                    <!-- <span class="help hidden">{{ trans('labels.textRequiredFieldMessage') }}</span> -->
                                   </div>
                                 </div> 
                                 <div class="form-group">
                                   <label for="name" class="col-sm-2 col-md-3 control-label">{{ trans('labels.Telephone') }}</label>
                                   <div class="col-sm-10 col-md-4">
                                     {!! Form::text('phone',  '', array('class'=>'form-control', 'id'=>'phone')) !!}
-                                   <span class="help-block" style="font-weight: normal;font-size: 11px;margin-bottom: 0;">
+                                   <span class="help" style="font-weight: normal;font-size: 11px;margin-bottom: 0;">
                                    {{ trans('labels.TelephoneText') }}</span>
                                   </div>
                                 </div>
@@ -82,7 +82,7 @@
                                   <label for="name" class="col-sm-2 col-md-3 control-label">{{ trans('labels.Picture') }} </label>
                                   <div class="col-sm-10 col-md-4">
                                     {!! Form::file('newImage', array('id'=>'newImage')) !!}
-                                    <span class="help-block" style="font-weight: normal;font-size: 11px;margin-bottom: 0;">
+                                    <span class="help" style="font-weight: normal;font-size: 11px;margin-bottom: 0;">
                                     {{ trans('labels.PictureText') }}</span>
                                     <br>
                                   </div>
@@ -95,7 +95,7 @@
                                   <label for="name" class="col-sm-2 col-md-3 control-label">{{ trans('labels.StreetAddress') }}</label>
                                   <div class="col-sm-10 col-md-4">
                                     {!! Form::text('address',  '', array('class'=>'form-control', 'id'=>'address')) !!}
-                                    <span class="help-block" style="font-weight: normal;font-size: 11px;margin-bottom: 0;">{{ trans('labels.StreetAddressText') }}</span>
+                                    <span class="help" style="font-weight: normal;font-size: 11px;margin-bottom: 0;">{{ trans('labels.StreetAddressText') }}</span>
                                   </div>
                                 </div>
                                 
@@ -103,7 +103,7 @@
                                   <label for="name" class="col-sm-2 col-md-3 control-label">{{ trans('labels.Zip/Postal Code') }}</label>
                                   <div class="col-sm-10 col-md-4">
                                     {!! Form::text('zip',  '', array('class'=>'form-control', 'id'=>'zip')) !!}
-                                    <span class="help-block" style="font-weight: normal;font-size: 11px;margin-bottom: 0;">{{ trans('labels.Zip/Postal Code Text') }}</span>
+                                    <span class="help" style="font-weight: normal;font-size: 11px;margin-bottom: 0;">{{ trans('labels.Zip/Postal Code Text') }}</span>
                                   </div>
                                 </div>
                                 
@@ -111,7 +111,7 @@
                                   <label for="name" class="col-sm-2 col-md-3 control-label">{{ trans('labels.City') }}</label>
                                   <div class="col-sm-10 col-md-4">
                                     {!! Form::text('city',  '', array('class'=>'form-control', 'id'=>'city')) !!}
-                                    <span class="help-block" style="font-weight: normal;font-size: 11px;margin-bottom: 0;">{{ trans('labels.CityText') }}</span>
+                                    <span class="help" style="font-weight: normal;font-size: 11px;margin-bottom: 0;">{{ trans('labels.CityText') }}</span>
                                   </div>
                                 </div>
                                 
@@ -124,7 +124,7 @@
                                         <option value="{{ $countries_data->countries_id }}">{{ $countries_data->countries_name }}</option>
                                    		@endforeach
                                     </select>
-                                    <span class="help-block" style="font-weight: normal;font-size: 11px;margin-bottom: 0;">{{ trans('labels.CountryText') }}</span>
+                                    <span class="help" style="font-weight: normal;font-size: 11px;margin-bottom: 0;">{{ trans('labels.CountryText') }}</span>
                                   </div>
                                 </div>
                                 
@@ -134,7 +134,7 @@
                                    <select class="form-control zoneContent" name="state">		
                                       <option value="">{{ trans('labels.SelectState') }}</option>									 
                                    </select>
-                                    <span class="help-block" style="font-weight: normal;font-size: 11px;margin-bottom: 0;">{{ trans('labels.StateText') }}</span>
+                                    <span class="help" style="font-weight: normal;font-size: 11px;margin-bottom: 0;">{{ trans('labels.StateText') }}</span>
                                   </div>
                                 </div>
                                 
@@ -149,18 +149,18 @@
                                   <label for="name" class="col-sm-2 col-md-3 control-label">{{ trans('labels.EmailAddress') }} </label>
                                   <div class="col-sm-10 col-md-4">
                                     {!! Form::text('email',  '', array('class'=>'form-control email-validate', 'id'=>'email')) !!}
-                                     <span class="help-block" style="font-weight: normal;font-size: 11px;margin-bottom: 0;">
+                                     <span class="help" style="font-weight: normal;font-size: 11px;margin-bottom: 0;">
                                      {{ trans('labels.EmailText') }}</span>
-                                    <!-- <span class="help-block hidden"> {{ trans('labels.EmailError') }}</span> -->
+                                    <!-- <span class="help hidden"> {{ trans('labels.EmailError') }}</span> -->
                                   </div>
                                 </div>
                                 <div class="form-group">
                                   <label for="name" class="col-sm-2 col-md-3 control-label">{{ trans('labels.Password') }}</label>
                                   <div class="col-sm-10 col-md-4">
                                     {!! Form::password('password', array('class'=>'form-control field-validate', 'id'=>'password')) !!}
-                	                <span class="help-block" style="font-weight: normal;font-size: 11px;margin-bottom: 0;">
+                	                <span class="help" style="font-weight: normal;font-size: 11px;margin-bottom: 0;">
                                    {{ trans('labels.PasswordText') }}</span>
-                                    <!-- <span class="help-block hidden">{{ trans('labels.textRequiredFieldMessage') }}</span> -->
+                                    <!-- <span class="help hidden">{{ trans('labels.textRequiredFieldMessage') }}</span> -->
                                   </div>
                                 </div>
                             
