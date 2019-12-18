@@ -132,8 +132,9 @@ class AdminProductsController extends Controller
 			}
 				
 			$products = $data->orderBy('products.products_id', 'DESC')->paginate(40);
-			
 		
+			
+
 		$results['subCategories'] = $subCategories;
 		$results['products'] = $products;
 		
@@ -141,6 +142,7 @@ class AdminProductsController extends Controller
 		$myVar = new AdminSiteSettingController();
 		$results['currency'] = $myVar->getSetting();
 		$results['units'] = $myVar->getUnits();
+		
 		
 		$currentTime =  array('currentTime'=>time());
 		return view("admin.products",$title)->with('results', $results);
@@ -1355,8 +1357,8 @@ class AdminProductsController extends Controller
 			->where('products.products_id','=', $products_id)
 
 			->get();
-
-		
+		$feature = DB::table('products')
+			->get();
 
 		$description_data = array();		
 
@@ -1433,6 +1435,7 @@ class AdminProductsController extends Controller
 		$result['description'] = $description_data;		
 
 		$result['product'] = $product;
+		$result['feature'] = $feature;
 
 		
 
@@ -3485,6 +3488,29 @@ class AdminProductsController extends Controller
 		
 		return redirect()->back()->withErrors([Lang::get("labels.OptionhasbeendeletedMessage")]);
 		}
+	}
+
+
+	// function feature to make product feature 
+	 
+	public function feature(Request $request){
+		$stat = $request->stat;
+
+	$id = $request->id;
+	if($stat == 0){
+
+	DB::table('products')->where('products_id',$id)->update([
+		'feature'	 =>   "1"
+		]);
+		
+	}else if($stat == 1){
+		
+		DB::table('products')->where('products_id',$id)->update([
+			'feature'	 =>   "0"
+			]);
+	}
+		return redirect()->back();
+
 	}
 
 	

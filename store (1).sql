@@ -1,13 +1,15 @@
 -- phpMyAdmin SQL Dump
--- version 4.6.6deb5
+-- version 4.9.0.1
 -- https://www.phpmyadmin.net/
 --
--- Host: localhost:3306
--- Generation Time: Dec 15, 2019 at 05:00 PM
--- Server version: 5.7.28-0ubuntu0.18.04.4
--- PHP Version: 7.2.24-0ubuntu0.18.04.1
+-- Host: 127.0.0.1
+-- Generation Time: Dec 18, 2019 at 11:44 AM
+-- Server version: 10.3.16-MariaDB
+-- PHP Version: 7.1.31
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET AUTOCOMMIT = 0;
+START TRANSACTION;
 SET time_zone = "+00:00";
 
 
@@ -17,7 +19,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `store`
+-- Database: `store_db`
 --
 
 -- --------------------------------------------------------
@@ -54,8 +56,8 @@ CREATE TABLE `address_book` (
   `entry_postcode` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `entry_city` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `entry_state` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `entry_country_id` int(11) NOT NULL DEFAULT '0',
-  `entry_zone_id` int(11) NOT NULL DEFAULT '0'
+  `entry_country_id` int(11) NOT NULL DEFAULT 0,
+  `entry_zone_id` int(11) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
@@ -91,7 +93,7 @@ CREATE TABLE `administrators` (
   `last_name` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `email` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `password` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `isActive` tinyint(1) NOT NULL DEFAULT '0',
+  `isActive` tinyint(1) NOT NULL DEFAULT 0,
   `address` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `city` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `state` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
@@ -99,7 +101,7 @@ CREATE TABLE `administrators` (
   `country` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `phone` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `image` text COLLATE utf8_unicode_ci NOT NULL,
-  `adminType` tinyint(1) NOT NULL DEFAULT '1',
+  `adminType` tinyint(1) NOT NULL DEFAULT 1,
   `remember_token` varchar(100) COLLATE utf8_unicode_ci DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
@@ -110,11 +112,12 @@ CREATE TABLE `administrators` (
 --
 
 INSERT INTO `administrators` (`myid`, `user_name`, `first_name`, `last_name`, `email`, `password`, `isActive`, `address`, `city`, `state`, `zip`, `country`, `phone`, `image`, `adminType`, `remember_token`, `created_at`, `updated_at`) VALUES
-(1, '', 'Admin', '', 'demo@ecommerce.com', '$2y$12$9iPapuVRu3W0ifUH8YgyXOrAsdefpAkJj9kf38M5FKqcB9Rb7FU86', 1, 'address', 'Nivada', '12', '38000', '223', '0312 6545 874', 'resources/views/admin/images/admin_profile/1513671470.fast.jpg', 1, 'EJ0cfTbyNTSNXzcWMAL7FqEv9cWaZAKSRyjvQLvch5D866Il3kFhy5fonw2I', '0000-00-00 00:00:00', '2017-12-18 21:32:50'),
+(1, '', 'Admin', '', 'demo@ecommerce.com', '$2y$12$9iPapuVRu3W0ifUH8YgyXOrAsdefpAkJj9kf38M5FKqcB9Rb7FU86', 1, 'address', 'Nivada', '12', '38000', '223', '0312 6545 874', 'resources/views/admin/images/admin_profile/1513671470.fast.jpg', 1, 'a0BVsMrkN7oWNapBA1XKi0CDjesBEvsOwL1j12rYUJUEej9ECSGwmQwrxaXE', '0000-00-00 00:00:00', '2017-12-18 21:32:50'),
 (8, 'Admin', 'Admin', '', 'demo@android.com', '$2y$10$vbQE1Lbu1kXCAILSvaH0uOZ3oA6oZdCf/0kjQB16iGnjc3eTaFBeu', 1, 'address', 'Nivada', '12', '38000', '223', '', 'resources/views/admin/images/admin_profile/1513671470.fast.jpg', 1, '6Dcgvv68EOQ27LdFKia0QOdjWkR0J7F5mu1PaECGDFKG1zSLr96sDEbbGCe4', NULL, NULL),
 (9, 'admin2', 'Admin', '', 'demo@ionic.com', '$2y$10$vbQE1Lbu1kXCAILSvaH0uOZ3oA6oZdCf/0kjQB16iGnjc3eTaFBeu', 1, 'address', 'Nivada', '12', '38000', '223', '', 'resources/views/admin/images/admin_profile/1513671470.fast.jpg', 1, 'c68im2rP1dzUw7guozSqEbxZHY5ebSGGOprcPezzYDo2ZIvxCaGplhjn5rFP', NULL, NULL),
 (10, 'vectorcoder', 'Vector', 'Coder', 'vectorcoder@gmail.com', '$2y$10$TKJBNrT7bkFqz49XazJL7.mTa49DI9CeCcZipjuFer1h.OeZWsaHC', 1, 'address', 'Nivada', '12', '38000', '223', '', 'resources/views/admin/images/admin_profile/1513671470.fast.jpg', 1, 'resources/views/admin/images/admin_profile/1505132393.1486628854.fast.jpg', NULL, NULL),
-(11, 'yousry_ahmed1576416965', 'yousry', 'ahmed', 'yousry@digitalpharaohs.com', '$2y$10$RoENWhSuPk4SlL6pKlcsD.jqOWcDhmsY2I1Ba86KgYVRIgoPa7g2G', 1, '', '', '', '', '', '012555', '', 3, '3JFvDrD04pKJyXI060OhtDo0CDPd9qHL6K9jWoyySecmWsKFoe5ImW6oA05t', NULL, NULL);
+(11, 'yousry_ahmed1576416965', 'yousry', 'ahmed', 'yousry@digitalpharaohs.com', '$2y$10$RoENWhSuPk4SlL6pKlcsD.jqOWcDhmsY2I1Ba86KgYVRIgoPa7g2G', 1, '', '', '', '', '', '012555', '', 3, '3JFvDrD04pKJyXI060OhtDo0CDPd9qHL6K9jWoyySecmWsKFoe5ImW6oA05t', NULL, NULL),
+(12, 'afaf_gomaa1576492873', 'afaf', 'gomaa', 'afaf@gmail.com', '$2y$10$E6EJI5DEVUdnFZalEIGhKe8hphGWU8nrTlMIE2OdECgjGmQZ5BD3O', 1, '', '', 'others', '12454', '3', '0101435667979', 'resources/views/admin/images/admin_profile/1576492873.1502190279.pPOLO2-26315541_alternate1_v360x480.jpg', 6, 'YEAUitr8BoDooTFWz6K58MVuat5biH2zU0a5VZem7AP0wwNzUD8Us3f5wccP', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -127,7 +130,7 @@ CREATE TABLE `admin_types` (
   `admin_type_name` varchar(255) NOT NULL,
   `created_at` int(30) DEFAULT NULL,
   `updated_at` int(30) DEFAULT NULL,
-  `isActive` tinyint(1) NOT NULL DEFAULT '1'
+  `isActive` tinyint(1) NOT NULL DEFAULT 1
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 --
@@ -138,7 +141,8 @@ INSERT INTO `admin_types` (`admin_type_id`, `admin_type_name`, `created_at`, `up
 (1, 'Super Admin', 1534774230, NULL, 1),
 (2, 'Sub Admin', 1534777027, 1542637734, 1),
 (3, 'Data Entry', 1538390209, NULL, 1),
-(5, 'Meharzada', 1542965906, NULL, 1);
+(5, 'Meharzada', 1542965906, NULL, 1),
+(6, 'admin', 1576500402, NULL, 1);
 
 -- --------------------------------------------------------
 
@@ -148,20 +152,20 @@ INSERT INTO `admin_types` (`admin_type_id`, `admin_type_name`, `created_at`, `up
 
 CREATE TABLE `alert_settings` (
   `alert_id` int(100) NOT NULL,
-  `create_customer_email` tinyint(1) NOT NULL DEFAULT '0',
-  `create_customer_notification` tinyint(1) NOT NULL DEFAULT '0',
-  `order_status_email` tinyint(1) NOT NULL DEFAULT '0',
-  `order_status_notification` tinyint(1) NOT NULL DEFAULT '0',
-  `new_product_email` tinyint(1) NOT NULL DEFAULT '0',
-  `new_product_notification` tinyint(1) NOT NULL DEFAULT '0',
-  `forgot_email` tinyint(1) NOT NULL DEFAULT '0',
-  `forgot_notification` tinyint(1) NOT NULL DEFAULT '0',
-  `news_email` tinyint(1) NOT NULL DEFAULT '0',
-  `news_notification` tinyint(1) NOT NULL DEFAULT '0',
-  `contact_us_email` tinyint(1) NOT NULL DEFAULT '0',
-  `contact_us_notification` tinyint(1) NOT NULL DEFAULT '0',
-  `order_email` tinyint(1) NOT NULL DEFAULT '0',
-  `order_notification` tinyint(1) NOT NULL DEFAULT '0'
+  `create_customer_email` tinyint(1) NOT NULL DEFAULT 0,
+  `create_customer_notification` tinyint(1) NOT NULL DEFAULT 0,
+  `order_status_email` tinyint(1) NOT NULL DEFAULT 0,
+  `order_status_notification` tinyint(1) NOT NULL DEFAULT 0,
+  `new_product_email` tinyint(1) NOT NULL DEFAULT 0,
+  `new_product_notification` tinyint(1) NOT NULL DEFAULT 0,
+  `forgot_email` tinyint(1) NOT NULL DEFAULT 0,
+  `forgot_notification` tinyint(1) NOT NULL DEFAULT 0,
+  `news_email` tinyint(1) NOT NULL DEFAULT 0,
+  `news_notification` tinyint(1) NOT NULL DEFAULT 0,
+  `contact_us_email` tinyint(1) NOT NULL DEFAULT 0,
+  `contact_us_notification` tinyint(1) NOT NULL DEFAULT 0,
+  `order_email` tinyint(1) NOT NULL DEFAULT 0,
+  `order_notification` tinyint(1) NOT NULL DEFAULT 0
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 --
@@ -182,7 +186,7 @@ CREATE TABLE `api_calls_list` (
   `nonce` text NOT NULL,
   `url` varchar(64) NOT NULL,
   `device_id` text NOT NULL,
-  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -197,13 +201,13 @@ CREATE TABLE `banners` (
   `banners_url` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `banners_image` mediumtext COLLATE utf8_unicode_ci NOT NULL,
   `banners_group` varchar(10) COLLATE utf8_unicode_ci NOT NULL,
-  `banners_html_text` mediumtext COLLATE utf8_unicode_ci,
-  `expires_impressions` int(7) DEFAULT '0',
+  `banners_html_text` mediumtext COLLATE utf8_unicode_ci DEFAULT NULL,
+  `expires_impressions` int(7) DEFAULT 0,
   `expires_date` datetime DEFAULT NULL,
   `date_scheduled` datetime DEFAULT NULL,
   `date_added` datetime NOT NULL,
   `date_status_change` datetime DEFAULT NULL,
-  `status` int(1) NOT NULL DEFAULT '1',
+  `status` int(1) NOT NULL DEFAULT 1,
   `type` varchar(250) COLLATE utf8_unicode_ci NOT NULL,
   `banners_slug` varchar(255) COLLATE utf8_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
@@ -229,8 +233,8 @@ INSERT INTO `banners` (`banners_id`, `banners_title`, `banners_url`, `banners_im
 CREATE TABLE `banners_history` (
   `banners_history_id` int(11) NOT NULL,
   `banners_id` int(11) NOT NULL,
-  `banners_shown` int(5) NOT NULL DEFAULT '0',
-  `banners_clicked` int(5) NOT NULL DEFAULT '0',
+  `banners_shown` int(5) NOT NULL DEFAULT 0,
+  `banners_clicked` int(5) NOT NULL DEFAULT 0,
   `banners_history_date` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
@@ -242,9 +246,9 @@ CREATE TABLE `banners_history` (
 
 CREATE TABLE `categories` (
   `categories_id` int(11) NOT NULL,
-  `categories_image` mediumtext COLLATE utf8_unicode_ci,
+  `categories_image` mediumtext COLLATE utf8_unicode_ci DEFAULT NULL,
   `categories_icon` mediumtext COLLATE utf8_unicode_ci NOT NULL,
-  `parent_id` int(11) NOT NULL DEFAULT '0',
+  `parent_id` int(11) NOT NULL DEFAULT 0,
   `sort_order` int(3) DEFAULT NULL,
   `date_added` datetime DEFAULT NULL,
   `last_modified` datetime DEFAULT NULL,
@@ -289,7 +293,9 @@ INSERT INTO `categories` (`categories_id`, `categories_image`, `categories_icon`
 (31, 'resources/assets/images/category_images/1531492822.watches.jpg', 'resources/assets/images/category_icons/1528806495.wedding-ring.png', 0, NULL, '2018-06-12 12:28:15', '2018-07-18 12:39:35', 'jewelry-watches'),
 (32, 'resources/assets/images/category_images/1531492844.mobiles.jpg', 'resources/assets/images/category_icons/1528806529.mobile-phone.png', 0, NULL, '2018-06-12 12:28:49', '2018-07-18 12:39:47', 'cellphones-accessories'),
 (33, '', 'resources/assets/images/category_icons/1528806833.computer.png', 0, NULL, '2018-06-12 12:33:53', '2018-07-18 12:40:03', 'computer-office-security'),
-(34, '', '', 0, NULL, '2018-10-03 10:58:12', NULL, 'n-a');
+(34, '', '', 0, NULL, '2018-10-03 10:58:12', NULL, 'n-a'),
+(37, 'resources/assets/images/category_images/1576494508.1502174861.pPOLO2-26314826_alternate1_v360x480.jpg', 'resources/assets/images/category_icons/1576494508.1502174861.pPOLO2-26314826_alternate1_v360x480.jpg', 0, NULL, '2019-12-16 11:08:28', NULL, 'food'),
+(38, 'resources/assets/images/category_images/1576494621.1502174874.pPOLO2-26314826_alternate3_v360x480.jpg', 'resources/assets/images/category_icons/1576494621.1502174874.pPOLO2-26314826_alternate3_v360x480.jpg', 37, NULL, '2019-12-16 11:10:21', NULL, 'food-sup');
 
 -- --------------------------------------------------------
 
@@ -299,8 +305,8 @@ INSERT INTO `categories` (`categories_id`, `categories_image`, `categories_icon`
 
 CREATE TABLE `categories_description` (
   `categories_description_id` int(100) NOT NULL,
-  `categories_id` int(11) NOT NULL DEFAULT '0',
-  `language_id` int(11) NOT NULL DEFAULT '1',
+  `categories_id` int(11) NOT NULL DEFAULT 0,
+  `language_id` int(11) NOT NULL DEFAULT 1,
   `categories_name` varchar(32) COLLATE utf8_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
@@ -377,10 +383,18 @@ INSERT INTO `categories_description` (`categories_description_id`, `categories_i
 (99, 33, 4, 'الكمبيوتر ، المكتب ، الأمن'),
 (100, 35, 1, 'test cat'),
 (101, 35, 4, 'test cat'),
-(102, 36, 1, 'test cat'),
-(103, 36, 4, 'test cat'),
+(102, 36, 1, 'cat'),
+(103, 36, 4, 'نتلبنلبتن'),
 (104, 37, 1, 'test sub'),
-(105, 37, 4, 'test sub');
+(105, 37, 4, 'test sub'),
+(106, 35, 1, 'dcd'),
+(107, 35, 4, 'fvf'),
+(109, 36, 1, 'cat'),
+(110, 36, 4, 'نتلبنلبتن'),
+(112, 37, 1, 'food'),
+(113, 37, 4, 'طعام'),
+(115, 38, 1, 'food sup'),
+(116, 38, 4, 'طعام سب');
 
 -- --------------------------------------------------------
 
@@ -406,7 +420,7 @@ CREATE TABLE `constant_banners` (
   `banners_url` mediumtext NOT NULL,
   `banners_image` mediumtext NOT NULL,
   `date_added` datetime NOT NULL,
-  `status` tinyint(1) NOT NULL DEFAULT '0',
+  `status` tinyint(1) NOT NULL DEFAULT 0,
   `languages_id` int(11) NOT NULL,
   `type` varchar(55) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
@@ -706,16 +720,16 @@ CREATE TABLE `coupons` (
   `amount` int(11) NOT NULL,
   `expiry_date` datetime NOT NULL,
   `usage_count` int(100) NOT NULL,
-  `individual_use` tinyint(1) NOT NULL DEFAULT '0',
+  `individual_use` tinyint(1) NOT NULL DEFAULT 0,
   `product_ids` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `exclude_product_ids` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `usage_limit` int(100) NOT NULL,
   `usage_limit_per_user` int(100) NOT NULL,
   `limit_usage_to_x_items` int(100) NOT NULL,
-  `free_shipping` tinyint(1) NOT NULL DEFAULT '0',
+  `free_shipping` tinyint(1) NOT NULL DEFAULT 0,
   `product_categories` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `excluded_product_categories` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `exclude_sale_items` tinyint(1) NOT NULL DEFAULT '0',
+  `exclude_sale_items` tinyint(1) NOT NULL DEFAULT 0,
   `minimum_amount` decimal(10,2) NOT NULL,
   `maximum_amount` decimal(10,2) NOT NULL,
   `email_restrictions` mediumtext COLLATE utf8_unicode_ci NOT NULL,
@@ -778,13 +792,13 @@ CREATE TABLE `customers` (
   `customers_fax` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `password` varchar(60) COLLATE utf8_unicode_ci NOT NULL,
   `customers_newsletter` char(1) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `isActive` tinyint(1) NOT NULL DEFAULT '1',
+  `isActive` tinyint(1) NOT NULL DEFAULT 1,
   `fb_id` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `google_id` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `customers_picture` mediumtext COLLATE utf8_unicode_ci NOT NULL,
   `created_at` int(100) NOT NULL,
   `updated_at` int(100) NOT NULL,
-  `is_seen` tinyint(1) NOT NULL DEFAULT '0',
+  `is_seen` tinyint(1) NOT NULL DEFAULT 0,
   `remember_token` varchar(255) COLLATE utf8_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
@@ -793,7 +807,8 @@ CREATE TABLE `customers` (
 --
 
 INSERT INTO `customers` (`customers_id`, `customers_gender`, `customers_firstname`, `customers_lastname`, `customers_dob`, `email`, `user_name`, `customers_default_address_id`, `customers_telephone`, `customers_fax`, `password`, `customers_newsletter`, `isActive`, `fb_id`, `google_id`, `customers_picture`, `created_at`, `updated_at`, `is_seen`, `remember_token`) VALUES
-(1, '0', 'yousry', 'ahmed', '', 'ayousry943@gmail.com', '', NULL, '', NULL, '$2y$10$H9DxIgJx2u8BOlZ3pCXJwO/i30lK4Q.3p0NoFbXJrpDr1RLkZTvaS', NULL, 1, NULL, NULL, 'resources/assets/images/user_profile/default_user.png', 19, 19, 0, '');
+(1, '0', 'yousry', 'ahmed', '', 'ayousry943@gmail.com', '', NULL, '', NULL, '$2y$10$H9DxIgJx2u8BOlZ3pCXJwO/i30lK4Q.3p0NoFbXJrpDr1RLkZTvaS', NULL, 1, NULL, NULL, 'resources/assets/images/user_profile/default_user.png', 19, 19, 0, ''),
+(2, '0', 'mohamed', 'gomaa', '', 'mohamed@gmail.com', '', NULL, '', NULL, '$2y$10$aSZLhxQjCX/.3kor4qIw/ufiUYRSis/YBxaA8ryvmAICJqp.HGujK', NULL, 1, NULL, NULL, 'resources/assets/images/user_profile/default_user.png', 19, 19, 1, '');
 
 -- --------------------------------------------------------
 
@@ -808,9 +823,17 @@ CREATE TABLE `customers_basket` (
   `customers_basket_quantity` int(2) NOT NULL,
   `final_price` decimal(15,2) DEFAULT NULL,
   `customers_basket_date_added` char(10) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `is_order` tinyint(1) NOT NULL DEFAULT '0',
+  `is_order` tinyint(1) NOT NULL DEFAULT 0,
   `session_id` varchar(255) COLLATE utf8_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Dumping data for table `customers_basket`
+--
+
+INSERT INTO `customers_basket` (`customers_basket_id`, `customers_id`, `products_id`, `customers_basket_quantity`, `final_price`, `customers_basket_date_added`, `is_order`, `session_id`) VALUES
+(1, 2, '77', 2, '56.00', '2019-12-16', 1, 'LZxGKoAUgSL15TuvDp2d8rhxL1WjtF9l4DhcOkst'),
+(2, 2, '77', 2, '56.00', '2019-12-16', 0, 'aOGh16xT6XL2qY5nhQ6ae5QxZ2Hf25wPs5Cw9ZT2');
 
 -- --------------------------------------------------------
 
@@ -828,6 +851,16 @@ CREATE TABLE `customers_basket_attributes` (
   `session_id` varchar(255) COLLATE utf8_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
+--
+-- Dumping data for table `customers_basket_attributes`
+--
+
+INSERT INTO `customers_basket_attributes` (`customers_basket_attributes_id`, `customers_basket_id`, `customers_id`, `products_id`, `products_options_id`, `products_options_values_id`, `session_id`) VALUES
+(1, 1, 2, '77', 1, 3, 'LZxGKoAUgSL15TuvDp2d8rhxL1WjtF9l4DhcOkst'),
+(2, 1, 2, '77', 3, 154, 'LZxGKoAUgSL15TuvDp2d8rhxL1WjtF9l4DhcOkst'),
+(3, 2, 2, '77', 1, 3, 'aOGh16xT6XL2qY5nhQ6ae5QxZ2Hf25wPs5Cw9ZT2'),
+(4, 2, 2, '77', 3, 154, 'aOGh16xT6XL2qY5nhQ6ae5QxZ2Hf25wPs5Cw9ZT2');
+
 -- --------------------------------------------------------
 
 --
@@ -840,7 +873,7 @@ CREATE TABLE `customers_info` (
   `customers_info_number_of_logons` int(5) DEFAULT NULL,
   `customers_info_date_account_created` datetime DEFAULT NULL,
   `customers_info_date_account_last_modified` datetime DEFAULT NULL,
-  `global_product_notifications` int(1) DEFAULT '0'
+  `global_product_notifications` int(1) DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
@@ -852,23 +885,23 @@ CREATE TABLE `customers_info` (
 CREATE TABLE `devices` (
   `id` int(100) NOT NULL,
   `device_id` text COLLATE utf8_unicode_ci NOT NULL,
-  `customers_id` int(100) NOT NULL DEFAULT '0',
+  `customers_id` int(100) NOT NULL DEFAULT 0,
   `device_type` text COLLATE utf8_unicode_ci NOT NULL,
-  `register_date` int(100) NOT NULL DEFAULT '0',
+  `register_date` int(100) NOT NULL DEFAULT 0,
   `update_date` int(100) DEFAULT NULL,
-  `status` tinyint(1) NOT NULL DEFAULT '0',
-  `isDesktop` tinyint(1) NOT NULL DEFAULT '0',
-  `onesignal` tinyint(1) NOT NULL DEFAULT '0',
-  `isEnableMobile` tinyint(1) NOT NULL DEFAULT '1',
-  `isEnableDesktop` tinyint(1) NOT NULL DEFAULT '1',
+  `status` tinyint(1) NOT NULL DEFAULT 0,
+  `isDesktop` tinyint(1) NOT NULL DEFAULT 0,
+  `onesignal` tinyint(1) NOT NULL DEFAULT 0,
+  `isEnableMobile` tinyint(1) NOT NULL DEFAULT 1,
+  `isEnableDesktop` tinyint(1) NOT NULL DEFAULT 1,
   `ram` varchar(250) COLLATE utf8_unicode_ci DEFAULT NULL,
   `processor` varchar(250) COLLATE utf8_unicode_ci DEFAULT NULL,
   `device_os` varchar(250) COLLATE utf8_unicode_ci DEFAULT NULL,
   `location` varchar(250) COLLATE utf8_unicode_ci DEFAULT NULL,
   `device_model` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `manufacturer` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
-  `is_notify` tinyint(1) NOT NULL DEFAULT '1',
-  `fcm` tinyint(1) NOT NULL DEFAULT '0'
+  `is_notify` tinyint(1) NOT NULL DEFAULT 1,
+  `fcm` tinyint(1) NOT NULL DEFAULT 0
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
@@ -917,7 +950,7 @@ CREATE TABLE `flash_sale` (
   `flash_sale_last_modified` int(100) NOT NULL,
   `flash_start_date` int(100) NOT NULL,
   `flash_expires_date` int(100) NOT NULL,
-  `flash_status` tinyint(1) NOT NULL DEFAULT '1'
+  `flash_status` tinyint(1) NOT NULL DEFAULT 1
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -1112,7 +1145,8 @@ INSERT INTO `inventory` (`inventory_ref_id`, `admin_id`, `added_date`, `referenc
 (130, 0, 1547714401, '', 1, 1, '0.00', 'out'),
 (145, 0, 1553262878, '', 1, 73, '0.00', 'out'),
 (144, 0, 1553262878, '', 1, 80, '0.00', 'out'),
-(143, 8, 1553005396, '', 100, 80, '25.00', 'in');
+(143, 8, 1553005396, '', 100, 80, '25.00', 'in'),
+(146, 0, 1576496416, '', 2, 77, '0.00', 'out');
 
 -- --------------------------------------------------------
 
@@ -1190,7 +1224,9 @@ INSERT INTO `inventory_detail` (`inventory_ref_id`, `products_id`, `attribute_id
 (134, 80, 3),
 (134, 80, 1),
 (133, 80, 3),
-(133, 80, 1);
+(133, 80, 1),
+(146, 77, 10),
+(146, 77, 12);
 
 -- --------------------------------------------------------
 
@@ -1795,12 +1831,12 @@ CREATE TABLE `languages` (
   `languages_id` int(11) NOT NULL,
   `name` varchar(32) COLLATE utf8_unicode_ci NOT NULL,
   `code` char(2) COLLATE utf8_unicode_ci NOT NULL,
-  `image` mediumtext COLLATE utf8_unicode_ci,
+  `image` mediumtext COLLATE utf8_unicode_ci DEFAULT NULL,
   `directory` varchar(32) COLLATE utf8_unicode_ci DEFAULT NULL,
   `sort_order` int(3) DEFAULT NULL,
   `direction` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
-  `is_default` tinyint(1) DEFAULT '0',
-  `languages_status` tinyint(1) NOT NULL DEFAULT '0'
+  `is_default` tinyint(1) DEFAULT 0,
+  `languages_status` tinyint(1) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
@@ -1940,67 +1976,67 @@ INSERT INTO `manage_min_max` (`min_max_id`, `min_level`, `max_level`, `products_
 
 CREATE TABLE `manage_role` (
   `manage_role_id` int(100) NOT NULL,
-  `admin_type_id` tinyint(1) NOT NULL DEFAULT '0',
-  `dashboard_view` tinyint(1) NOT NULL DEFAULT '0',
+  `admin_type_id` tinyint(1) NOT NULL DEFAULT 0,
+  `dashboard_view` tinyint(1) NOT NULL DEFAULT 0,
   `products_approve` varchar(255) DEFAULT NULL,
-  `manufacturer_view` tinyint(1) NOT NULL DEFAULT '0',
-  `manufacturer_create` tinyint(1) NOT NULL DEFAULT '0',
-  `manufacturer_update` tinyint(1) NOT NULL DEFAULT '0',
-  `manufacturer_delete` tinyint(1) NOT NULL DEFAULT '0',
-  `categories_view` tinyint(1) NOT NULL DEFAULT '0',
-  `categories_create` tinyint(1) NOT NULL DEFAULT '0',
-  `categories_update` tinyint(1) NOT NULL DEFAULT '0',
-  `categories_delete` tinyint(1) NOT NULL DEFAULT '0',
-  `products_view` tinyint(1) NOT NULL DEFAULT '0',
-  `products_create` tinyint(1) NOT NULL DEFAULT '0',
-  `products_update` tinyint(1) NOT NULL DEFAULT '0',
-  `products_delete` tinyint(1) NOT NULL DEFAULT '0',
-  `news_view` tinyint(1) NOT NULL DEFAULT '0',
-  `news_create` tinyint(1) NOT NULL DEFAULT '0',
-  `news_update` tinyint(1) NOT NULL DEFAULT '0',
-  `news_delete` tinyint(1) NOT NULL DEFAULT '0',
-  `customers_view` tinyint(1) NOT NULL DEFAULT '0',
-  `customers_create` tinyint(1) NOT NULL DEFAULT '0',
-  `customers_update` tinyint(1) NOT NULL DEFAULT '0',
-  `customers_delete` tinyint(1) NOT NULL DEFAULT '0',
-  `tax_location_view` tinyint(1) NOT NULL DEFAULT '0',
-  `tax_location_create` tinyint(1) NOT NULL DEFAULT '0',
-  `tax_location_update` tinyint(1) NOT NULL DEFAULT '0',
-  `tax_location_delete` tinyint(1) NOT NULL DEFAULT '0',
-  `coupons_view` tinyint(1) NOT NULL DEFAULT '0',
-  `coupons_create` tinyint(1) NOT NULL DEFAULT '0',
-  `coupons_update` tinyint(1) NOT NULL DEFAULT '0',
-  `coupons_delete` tinyint(1) NOT NULL DEFAULT '0',
-  `notifications_view` tinyint(1) NOT NULL DEFAULT '0',
-  `notifications_send` tinyint(1) NOT NULL DEFAULT '0',
-  `orders_view` tinyint(1) NOT NULL DEFAULT '0',
-  `orders_confirm` tinyint(1) NOT NULL DEFAULT '0',
-  `shipping_methods_view` tinyint(1) NOT NULL DEFAULT '0',
-  `shipping_methods_update` tinyint(1) NOT NULL DEFAULT '0',
-  `payment_methods_view` tinyint(1) NOT NULL DEFAULT '0',
-  `payment_methods_update` tinyint(1) NOT NULL DEFAULT '0',
-  `reports_view` tinyint(1) NOT NULL DEFAULT '0',
-  `website_setting_view` tinyint(1) NOT NULL DEFAULT '0',
-  `website_setting_update` tinyint(1) NOT NULL DEFAULT '0',
-  `application_setting_view` tinyint(1) NOT NULL DEFAULT '0',
-  `application_setting_update` tinyint(1) NOT NULL DEFAULT '0',
-  `general_setting_view` tinyint(1) NOT NULL DEFAULT '0',
-  `general_setting_update` tinyint(1) NOT NULL DEFAULT '0',
-  `manage_admins_view` tinyint(1) NOT NULL DEFAULT '0',
-  `manage_admins_create` tinyint(1) NOT NULL DEFAULT '0',
-  `manage_admins_update` tinyint(1) NOT NULL DEFAULT '0',
-  `manage_admins_delete` tinyint(1) NOT NULL DEFAULT '0',
-  `language_view` tinyint(1) NOT NULL DEFAULT '0',
-  `language_create` tinyint(1) NOT NULL DEFAULT '0',
-  `language_update` tinyint(1) NOT NULL DEFAULT '0',
-  `language_delete` tinyint(1) NOT NULL DEFAULT '0',
-  `profile_view` tinyint(1) NOT NULL DEFAULT '0',
-  `profile_update` tinyint(1) NOT NULL DEFAULT '0',
-  `admintype_view` tinyint(1) NOT NULL DEFAULT '0',
-  `admintype_create` tinyint(1) NOT NULL DEFAULT '0',
-  `admintype_update` tinyint(1) NOT NULL DEFAULT '0',
-  `admintype_delete` tinyint(1) NOT NULL DEFAULT '0',
-  `manage_admins_role` tinyint(1) NOT NULL DEFAULT '0'
+  `manufacturer_view` tinyint(1) NOT NULL DEFAULT 0,
+  `manufacturer_create` tinyint(1) NOT NULL DEFAULT 0,
+  `manufacturer_update` tinyint(1) NOT NULL DEFAULT 0,
+  `manufacturer_delete` tinyint(1) NOT NULL DEFAULT 0,
+  `categories_view` tinyint(1) NOT NULL DEFAULT 0,
+  `categories_create` tinyint(1) NOT NULL DEFAULT 0,
+  `categories_update` tinyint(1) NOT NULL DEFAULT 0,
+  `categories_delete` tinyint(1) NOT NULL DEFAULT 0,
+  `products_view` tinyint(1) NOT NULL DEFAULT 0,
+  `products_create` tinyint(1) NOT NULL DEFAULT 0,
+  `products_update` tinyint(1) NOT NULL DEFAULT 0,
+  `products_delete` tinyint(1) NOT NULL DEFAULT 0,
+  `news_view` tinyint(1) NOT NULL DEFAULT 0,
+  `news_create` tinyint(1) NOT NULL DEFAULT 0,
+  `news_update` tinyint(1) NOT NULL DEFAULT 0,
+  `news_delete` tinyint(1) NOT NULL DEFAULT 0,
+  `customers_view` tinyint(1) NOT NULL DEFAULT 0,
+  `customers_create` tinyint(1) NOT NULL DEFAULT 0,
+  `customers_update` tinyint(1) NOT NULL DEFAULT 0,
+  `customers_delete` tinyint(1) NOT NULL DEFAULT 0,
+  `tax_location_view` tinyint(1) NOT NULL DEFAULT 0,
+  `tax_location_create` tinyint(1) NOT NULL DEFAULT 0,
+  `tax_location_update` tinyint(1) NOT NULL DEFAULT 0,
+  `tax_location_delete` tinyint(1) NOT NULL DEFAULT 0,
+  `coupons_view` tinyint(1) NOT NULL DEFAULT 0,
+  `coupons_create` tinyint(1) NOT NULL DEFAULT 0,
+  `coupons_update` tinyint(1) NOT NULL DEFAULT 0,
+  `coupons_delete` tinyint(1) NOT NULL DEFAULT 0,
+  `notifications_view` tinyint(1) NOT NULL DEFAULT 0,
+  `notifications_send` tinyint(1) NOT NULL DEFAULT 0,
+  `orders_view` tinyint(1) NOT NULL DEFAULT 0,
+  `orders_confirm` tinyint(1) NOT NULL DEFAULT 0,
+  `shipping_methods_view` tinyint(1) NOT NULL DEFAULT 0,
+  `shipping_methods_update` tinyint(1) NOT NULL DEFAULT 0,
+  `payment_methods_view` tinyint(1) NOT NULL DEFAULT 0,
+  `payment_methods_update` tinyint(1) NOT NULL DEFAULT 0,
+  `reports_view` tinyint(1) NOT NULL DEFAULT 0,
+  `website_setting_view` tinyint(1) NOT NULL DEFAULT 0,
+  `website_setting_update` tinyint(1) NOT NULL DEFAULT 0,
+  `application_setting_view` tinyint(1) NOT NULL DEFAULT 0,
+  `application_setting_update` tinyint(1) NOT NULL DEFAULT 0,
+  `general_setting_view` tinyint(1) NOT NULL DEFAULT 0,
+  `general_setting_update` tinyint(1) NOT NULL DEFAULT 0,
+  `manage_admins_view` tinyint(1) NOT NULL DEFAULT 0,
+  `manage_admins_create` tinyint(1) NOT NULL DEFAULT 0,
+  `manage_admins_update` tinyint(1) NOT NULL DEFAULT 0,
+  `manage_admins_delete` tinyint(1) NOT NULL DEFAULT 0,
+  `language_view` tinyint(1) NOT NULL DEFAULT 0,
+  `language_create` tinyint(1) NOT NULL DEFAULT 0,
+  `language_update` tinyint(1) NOT NULL DEFAULT 0,
+  `language_delete` tinyint(1) NOT NULL DEFAULT 0,
+  `profile_view` tinyint(1) NOT NULL DEFAULT 0,
+  `profile_update` tinyint(1) NOT NULL DEFAULT 0,
+  `admintype_view` tinyint(1) NOT NULL DEFAULT 0,
+  `admintype_create` tinyint(1) NOT NULL DEFAULT 0,
+  `admintype_update` tinyint(1) NOT NULL DEFAULT 0,
+  `admintype_delete` tinyint(1) NOT NULL DEFAULT 0,
+  `manage_admins_role` tinyint(1) NOT NULL DEFAULT 0
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 --
@@ -2009,7 +2045,8 @@ CREATE TABLE `manage_role` (
 
 INSERT INTO `manage_role` (`manage_role_id`, `admin_type_id`, `dashboard_view`, `products_approve`, `manufacturer_view`, `manufacturer_create`, `manufacturer_update`, `manufacturer_delete`, `categories_view`, `categories_create`, `categories_update`, `categories_delete`, `products_view`, `products_create`, `products_update`, `products_delete`, `news_view`, `news_create`, `news_update`, `news_delete`, `customers_view`, `customers_create`, `customers_update`, `customers_delete`, `tax_location_view`, `tax_location_create`, `tax_location_update`, `tax_location_delete`, `coupons_view`, `coupons_create`, `coupons_update`, `coupons_delete`, `notifications_view`, `notifications_send`, `orders_view`, `orders_confirm`, `shipping_methods_view`, `shipping_methods_update`, `payment_methods_view`, `payment_methods_update`, `reports_view`, `website_setting_view`, `website_setting_update`, `application_setting_view`, `application_setting_update`, `general_setting_view`, `general_setting_update`, `manage_admins_view`, `manage_admins_create`, `manage_admins_update`, `manage_admins_delete`, `language_view`, `language_create`, `language_update`, `language_delete`, `profile_view`, `profile_update`, `admintype_view`, `admintype_create`, `admintype_update`, `admintype_delete`, `manage_admins_role`) VALUES
 (7, 3, 1, '0', 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
-(5, 2, 0, '1', 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
+(9, 2, 0, NULL, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
+(8, 6, 0, NULL, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
 
 -- --------------------------------------------------------
 
@@ -2020,7 +2057,7 @@ INSERT INTO `manage_role` (`manage_role_id`, `admin_type_id`, `dashboard_view`, 
 CREATE TABLE `manufacturers` (
   `manufacturers_id` int(11) NOT NULL,
   `manufacturers_name` varchar(32) COLLATE utf8_unicode_ci NOT NULL,
-  `manufacturers_image` mediumtext COLLATE utf8_unicode_ci,
+  `manufacturers_image` mediumtext COLLATE utf8_unicode_ci DEFAULT NULL,
   `date_added` datetime DEFAULT NULL,
   `last_modified` datetime DEFAULT NULL,
   `manufacturers_slug` varchar(255) COLLATE utf8_unicode_ci NOT NULL
@@ -2036,7 +2073,7 @@ CREATE TABLE `manufacturers_info` (
   `manufacturers_id` int(11) NOT NULL,
   `languages_id` int(11) NOT NULL,
   `manufacturers_url` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `url_clicked` int(5) NOT NULL DEFAULT '0',
+  `url_clicked` int(5) NOT NULL DEFAULT 0,
   `date_last_click` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
@@ -2059,11 +2096,11 @@ CREATE TABLE `migrations` (
 
 CREATE TABLE `news` (
   `news_id` int(11) NOT NULL,
-  `news_image` mediumtext COLLATE utf8_unicode_ci,
+  `news_image` mediumtext COLLATE utf8_unicode_ci DEFAULT NULL,
   `news_date_added` datetime NOT NULL,
   `news_last_modified` datetime DEFAULT NULL,
   `news_status` tinyint(1) NOT NULL,
-  `is_feature` tinyint(1) NOT NULL DEFAULT '0',
+  `is_feature` tinyint(1) NOT NULL DEFAULT 0,
   `news_slug` varchar(255) COLLATE utf8_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
@@ -2128,7 +2165,7 @@ CREATE TABLE `newsletters` (
   `date_added` datetime NOT NULL,
   `date_sent` datetime DEFAULT NULL,
   `status` int(1) DEFAULT NULL,
-  `locked` int(1) DEFAULT '0'
+  `locked` int(1) DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
@@ -2139,9 +2176,9 @@ CREATE TABLE `newsletters` (
 
 CREATE TABLE `news_categories` (
   `categories_id` int(11) NOT NULL,
-  `categories_image` mediumtext COLLATE utf8_unicode_ci,
+  `categories_image` mediumtext COLLATE utf8_unicode_ci DEFAULT NULL,
   `categories_icon` mediumtext COLLATE utf8_unicode_ci NOT NULL,
-  `parent_id` int(11) NOT NULL DEFAULT '0',
+  `parent_id` int(11) NOT NULL DEFAULT 0,
   `sort_order` int(3) DEFAULT NULL,
   `date_added` datetime DEFAULT NULL,
   `last_modified` datetime DEFAULT NULL,
@@ -2166,28 +2203,11 @@ INSERT INTO `news_categories` (`categories_id`, `categories_image`, `categories_
 
 CREATE TABLE `news_categories_description` (
   `categories_description_id` int(100) NOT NULL,
-  `categories_id` int(11) NOT NULL DEFAULT '0',
-  `language_id` int(11) NOT NULL DEFAULT '1',
+  `categories_id` int(11) NOT NULL DEFAULT 0,
+  `language_id` int(11) NOT NULL DEFAULT 1,
   `categories_name` varchar(32) COLLATE utf8_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-
---
--- Dumping data for table `news_categories_description`
---
-
-INSERT INTO `news_categories_description` (`categories_description_id`, `categories_id`, `language_id`, `categories_name`) VALUES
-(16, 6, 1, 'App Features'),
-(17, 6, 2, 'App Functies'),
-(18, 6, 4, 'ميزات التطبيق'),
-(19, 7, 1, 'Introduction'),
-(20, 7, 2, 'Invoering'),
-(21, 7, 4, 'المقدمة'),
-(22, 8, 1, 'Platforms'),
-(23, 8, 2, 'Platforms'),
-(24, 8, 4, 'منصات'),
-(25, 9, 1, 'Screen Shots'),
-(26, 9, 2, 'Schermafbeeldingen'),
-(27, 9, 4, 'لقطات الشاشة');
+-- Error reading data for table store_db.news_categories_description: #1064 - You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'FROM `store_db`.`news_categories_description`' at line 1
 
 -- --------------------------------------------------------
 
@@ -2197,11 +2217,11 @@ INSERT INTO `news_categories_description` (`categories_description_id`, `categor
 
 CREATE TABLE `news_description` (
   `news_id` int(11) NOT NULL,
-  `language_id` int(11) NOT NULL DEFAULT '1',
+  `language_id` int(11) NOT NULL DEFAULT 1,
   `news_name` varchar(64) COLLATE utf8_unicode_ci NOT NULL DEFAULT '',
-  `news_description` text COLLATE utf8_unicode_ci,
+  `news_description` text COLLATE utf8_unicode_ci DEFAULT NULL,
   `news_url` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `news_viewed` int(5) DEFAULT '0'
+  `news_viewed` int(5) DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
@@ -2450,19 +2470,26 @@ CREATE TABLE `orders` (
   `shipping_method` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
   `shipping_duration` int(100) DEFAULT NULL,
   `order_information` mediumtext COLLATE utf8_unicode_ci NOT NULL,
-  `is_seen` tinyint(1) NOT NULL DEFAULT '0',
+  `is_seen` tinyint(1) NOT NULL DEFAULT 0,
   `coupon_code` text COLLATE utf8_unicode_ci NOT NULL,
   `coupon_amount` int(100) NOT NULL,
   `exclude_product_ids` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `product_categories` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `excluded_product_categories` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `free_shipping` tinyint(1) NOT NULL DEFAULT '0',
+  `free_shipping` tinyint(1) NOT NULL DEFAULT 0,
   `product_ids` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `ordered_source` tinyint(1) NOT NULL DEFAULT '1' COMMENT '1: Website, 2: App',
+  `ordered_source` tinyint(1) NOT NULL DEFAULT 1 COMMENT '1: Website, 2: App',
   `delivery_phone` varchar(30) COLLATE utf8_unicode_ci NOT NULL,
   `billing_phone` varchar(30) COLLATE utf8_unicode_ci NOT NULL,
-  `transaction_id` text COLLATE utf8_unicode_ci
+  `transaction_id` text COLLATE utf8_unicode_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Dumping data for table `orders`
+--
+
+INSERT INTO `orders` (`orders_id`, `total_tax`, `customers_id`, `customers_name`, `customers_company`, `customers_street_address`, `customers_suburb`, `customers_city`, `customers_postcode`, `customers_state`, `customers_country`, `customers_telephone`, `email`, `customers_address_format_id`, `delivery_name`, `delivery_company`, `delivery_street_address`, `delivery_suburb`, `delivery_city`, `delivery_postcode`, `delivery_state`, `delivery_country`, `delivery_address_format_id`, `billing_name`, `billing_company`, `billing_street_address`, `billing_suburb`, `billing_city`, `billing_postcode`, `billing_state`, `billing_country`, `billing_address_format_id`, `payment_method`, `cc_type`, `cc_owner`, `cc_number`, `cc_expires`, `last_modified`, `date_purchased`, `orders_date_finished`, `currency`, `currency_value`, `order_price`, `shipping_cost`, `shipping_method`, `shipping_duration`, `order_information`, `is_seen`, `coupon_code`, `coupon_amount`, `exclude_product_ids`, `product_categories`, `excluded_product_categories`, `free_shipping`, `product_ids`, `ordered_source`, `delivery_phone`, `billing_phone`, `transaction_id`) VALUES
+(1, '0.00', 2, 'mohamed gomaa', NULL, 'drdf', '', 'cairo', '12655', 'other', 'Egypt', '', 'mohamed@gmail.com', NULL, 'mohamed gomaa', NULL, 'drdf', '', 'cairo', '12655', 'other', 'Egypt', NULL, 'mohamed gomaa', NULL, 'drdf', '', 'cairo', '12655', 'other', 'Egypt', 0, 'stripe', '', '', '', '', '2019-12-16 11:40:12', '2019-12-16 11:40:12', NULL, '$', NULL, '122.00', '10.00', 'Shipping Price', NULL, '{\"paid\":\"true\",\"transaction_id\":\"ch_1FqHvvIWMHLSEw9HffsRGmAX\",\"type\":\"authorized\",\"balance_transaction\":\"txn_1FqHvvIWMHLSEw9Hq9Rs2f1U\",\"status\":\"succeeded\",\"currency\":\"usd\",\"amount\":12200,\"created\":\"16 Dec,2019\",\"dispute\":null,\"customer\":\"cus_GN1zVAT8YVaQmT\",\"address_zip\":null,\"seller_message\":\"Payment complete.\",\"network_status\":\"approved_by_network\",\"expirationMonth\":\"authorized\"}', 1, '', 0, '', '', '', 0, '', 1, '012445664764', '012445664764', NULL);
 
 -- --------------------------------------------------------
 
@@ -2482,6 +2509,13 @@ CREATE TABLE `orders_products` (
   `products_quantity` int(2) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
+--
+-- Dumping data for table `orders_products`
+--
+
+INSERT INTO `orders_products` (`orders_products_id`, `orders_id`, `products_id`, `products_model`, `products_name`, `products_price`, `final_price`, `products_tax`, `products_quantity`) VALUES
+(1, 1, 77, NULL, 'PLEATED MADRAS SKIRT', '56.50', '112.00', '1', 2);
+
 -- --------------------------------------------------------
 
 --
@@ -2499,6 +2533,14 @@ CREATE TABLE `orders_products_attributes` (
   `price_prefix` char(1) COLLATE utf8_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
+--
+-- Dumping data for table `orders_products_attributes`
+--
+
+INSERT INTO `orders_products_attributes` (`orders_products_attributes_id`, `orders_id`, `orders_products_id`, `products_id`, `products_options`, `products_options_values`, `options_values_price`, `price_prefix`) VALUES
+(1, 1, 1, 77, 'Colors', 'Green', '0.00', '+'),
+(2, 1, 1, 77, 'Size', 'Small', '0.00', '+');
+
 -- --------------------------------------------------------
 
 --
@@ -2507,11 +2549,11 @@ CREATE TABLE `orders_products_attributes` (
 
 CREATE TABLE `orders_products_download` (
   `orders_products_download_id` int(11) NOT NULL,
-  `orders_id` int(11) NOT NULL DEFAULT '0',
-  `orders_products_id` int(11) NOT NULL DEFAULT '0',
+  `orders_id` int(11) NOT NULL DEFAULT 0,
+  `orders_products_id` int(11) NOT NULL DEFAULT 0,
   `orders_products_filename` varchar(255) COLLATE utf8_unicode_ci NOT NULL DEFAULT '',
-  `download_maxdays` int(2) NOT NULL DEFAULT '0',
-  `download_count` int(2) NOT NULL DEFAULT '0'
+  `download_maxdays` int(2) NOT NULL DEFAULT 0,
+  `download_count` int(2) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
@@ -2521,11 +2563,11 @@ CREATE TABLE `orders_products_download` (
 --
 
 CREATE TABLE `orders_status` (
-  `orders_status_id` int(11) NOT NULL DEFAULT '0',
-  `language_id` int(11) NOT NULL DEFAULT '1',
+  `orders_status_id` int(11) NOT NULL DEFAULT 0,
+  `language_id` int(11) NOT NULL DEFAULT 1,
   `orders_status_name` varchar(32) COLLATE utf8_unicode_ci NOT NULL,
-  `public_flag` int(11) DEFAULT '0',
-  `downloads_flag` int(11) DEFAULT '0'
+  `public_flag` int(11) DEFAULT 0,
+  `downloads_flag` int(11) DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
@@ -2562,9 +2604,17 @@ CREATE TABLE `orders_status_history` (
   `orders_id` int(11) NOT NULL,
   `orders_status_id` int(5) NOT NULL,
   `date_added` datetime NOT NULL,
-  `customer_notified` int(1) DEFAULT '0',
-  `comments` mediumtext COLLATE utf8_unicode_ci
+  `customer_notified` int(1) DEFAULT 0,
+  `comments` mediumtext COLLATE utf8_unicode_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Dumping data for table `orders_status_history`
+--
+
+INSERT INTO `orders_status_history` (`orders_status_history_id`, `orders_id`, `orders_status_id`, `date_added`, `customer_notified`, `comments`) VALUES
+(1, 1, 1, '2019-12-16 11:40:12', 1, ''),
+(2, 1, 2, '2019-12-16 11:45:55', 1, '');
 
 -- --------------------------------------------------------
 
@@ -2591,7 +2641,7 @@ CREATE TABLE `orders_total` (
 CREATE TABLE `pages` (
   `page_id` int(100) NOT NULL,
   `slug` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
-  `status` tinyint(1) NOT NULL DEFAULT '0',
+  `status` tinyint(1) NOT NULL DEFAULT 0,
   `type` tinyint(1) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
@@ -2658,18 +2708,18 @@ CREATE TABLE `payments_setting` (
   `braintree_merchant_id` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `braintree_public_key` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `braintree_private_key` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `brantree_active` tinyint(1) NOT NULL DEFAULT '0',
+  `brantree_active` tinyint(1) NOT NULL DEFAULT 0,
   `stripe_enviroment` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `stripe_name` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
   `secret_key` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `publishable_key` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `stripe_active` tinyint(1) NOT NULL DEFAULT '0',
-  `cash_on_delivery` tinyint(1) NOT NULL DEFAULT '0',
+  `stripe_active` tinyint(1) NOT NULL DEFAULT 0,
+  `cash_on_delivery` tinyint(1) NOT NULL DEFAULT 0,
   `cod_name` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
   `paypal_name` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
   `paypal_id` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `paypal_status` tinyint(1) NOT NULL DEFAULT '0',
-  `paypal_enviroment` tinyint(1) DEFAULT '0',
+  `paypal_status` tinyint(1) NOT NULL DEFAULT 0,
+  `paypal_enviroment` tinyint(1) DEFAULT 0,
   `payment_currency` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
   `instamojo_enviroment` tinyint(1) NOT NULL,
   `instamojo_name` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
@@ -2677,13 +2727,13 @@ CREATE TABLE `payments_setting` (
   `instamojo_auth_token` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `instamojo_client_id` text COLLATE utf8_unicode_ci NOT NULL,
   `instamojo_client_secret` text COLLATE utf8_unicode_ci NOT NULL,
-  `instamojo_active` tinyint(1) NOT NULL DEFAULT '0',
+  `instamojo_active` tinyint(1) NOT NULL DEFAULT 0,
   `cybersource_name` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `cybersource_status` tinyint(1) NOT NULL DEFAULT '0',
-  `cybersource_enviroment` tinyint(1) NOT NULL DEFAULT '0',
-  `hyperpay_enviroment` tinyint(1) NOT NULL DEFAULT '0',
+  `cybersource_status` tinyint(1) NOT NULL DEFAULT 0,
+  `cybersource_enviroment` tinyint(1) NOT NULL DEFAULT 0,
+  `hyperpay_enviroment` tinyint(1) NOT NULL DEFAULT 0,
   `hyperpay_name` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `hyperpay_active` tinyint(1) NOT NULL DEFAULT '0',
+  `hyperpay_active` tinyint(1) NOT NULL DEFAULT 0,
   `hyperpay_userid` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `hyperpay_password` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `hyperpay_entityid` varchar(255) COLLATE utf8_unicode_ci NOT NULL
@@ -2747,7 +2797,7 @@ CREATE TABLE `products` (
   `products_approve` int(255) DEFAULT NULL,
   `products_quantity` int(4) NOT NULL,
   `products_model` varchar(250) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `products_image` mediumtext COLLATE utf8_unicode_ci,
+  `products_image` mediumtext COLLATE utf8_unicode_ci DEFAULT NULL,
   `products_price` decimal(15,2) NOT NULL,
   `products_date_added` datetime NOT NULL,
   `products_last_modified` datetime DEFAULT NULL,
@@ -2757,103 +2807,109 @@ CREATE TABLE `products` (
   `products_status` tinyint(1) NOT NULL,
   `products_tax_class_id` int(11) NOT NULL,
   `manufacturers_id` int(11) DEFAULT NULL,
-  `products_ordered` int(11) NOT NULL DEFAULT '0',
+  `products_ordered` int(11) NOT NULL DEFAULT 0,
   `products_liked` int(100) NOT NULL,
   `low_limit` int(4) NOT NULL,
-  `is_feature` tinyint(1) NOT NULL DEFAULT '0',
+  `is_feature` tinyint(1) NOT NULL DEFAULT 0,
   `products_slug` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `products_type` int(1) NOT NULL DEFAULT '0',
-  `products_min_order` int(100) NOT NULL DEFAULT '1',
-  `products_max_stock` int(100) DEFAULT NULL
+  `products_type` int(1) NOT NULL DEFAULT 0,
+  `products_min_order` int(100) NOT NULL DEFAULT 1,
+  `products_max_stock` int(100) DEFAULT NULL,
+  `admin_id` int(11) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Dumping data for table `products`
 --
 
-INSERT INTO `products` (`products_id`, `products_approve`, `products_quantity`, `products_model`, `products_image`, `products_price`, `products_date_added`, `products_last_modified`, `products_date_available`, `products_weight`, `products_weight_unit`, `products_status`, `products_tax_class_id`, `manufacturers_id`, `products_ordered`, `products_liked`, `low_limit`, `is_feature`, `products_slug`, `products_type`, `products_min_order`, `products_max_stock`) VALUES
-(1, NULL, 0, '', 'resources/assets/images/product_images/1502174889.pPOLO2-26314766_standard_v400.jpg', '85.00', '2017-08-07 11:44:10', '2018-11-19 01:30:58', NULL, '0.500', 'Gram', 1, 1, 0, 12, 6, 0, 0, 'classic-fit-soft-touch-polo', 0, 1, 0),
-(2, NULL, 0, '', 'resources/assets/images/product_images/1502114036.pPOLO2-26316336_standard_v400.jpg', '98.50', '2017-08-07 01:53:56', '2018-11-19 01:30:37', NULL, '0.500', 'Kilogram', 1, 0, 0, 0, 5, 0, 0, 'hampton-classic-fit-shirt', 0, 1, 0),
-(3, NULL, 9999, '', 'resources/assets/images/product_images/1502174346.pPOLO2-26314826_standard_v400.jpg', '85.00', '2017-08-08 06:39:06', NULL, NULL, '0.500', 'Kilogram', 1, 1, NULL, 0, 0, 0, 0, 'classic-fit-cotton-polo-shirt-1', 0, 1, NULL),
-(4, NULL, -1, '', 'resources/assets/images/product_images/1502174364.pPOLO2-26314826_standard_v400.jpg', '85.00', '2017-08-08 06:39:24', '2018-11-19 01:30:00', NULL, '0.500', 'Kilogram', 1, 1, 0, 5, 4, 0, 0, 'classic-fit-cotton-polo-shirt', 0, 1, 0),
-(5, NULL, 0, '', 'resources/assets/images/product_images/1502176579.pPOLO2-26316348_standard_v400.jpg', '98.50', '2017-08-08 07:16:19', '2018-11-19 01:29:38', NULL, '0.500', 'Kilogram', 1, 1, 0, 0, 3, 0, 0, 'custom-slim-fit-cotton-shirt', 0, 1, 0),
-(6, NULL, 0, '', 'resources/assets/images/product_images/1502177321.pPOLO2-26314634_standard_v400.jpg', '89.50', '2017-08-08 07:28:41', '2018-11-19 01:29:15', NULL, '0.500', 'Kilogram', 1, 1, 0, 0, 2, 0, 0, 'custom-slim-fit-weathered-polo', 0, 1, 0),
-(7, NULL, 0, '', 'resources/assets/images/product_images/1502180946.pPOLO2-26008917_standard_v400.jpg', '98.50', '2017-08-08 08:29:06', '2018-11-19 01:28:52', NULL, '0.500', 'Kilogram', 1, 1, 0, 0, 1, 0, 0, 'standard-fit-cotton-shirt', 0, 1, 0),
-(8, NULL, 0, '', 'resources/assets/images/product_images/1502181584.pPOLO2-26008953_standard_v400.jpg', '125.50', '2017-08-08 08:39:44', '2018-11-19 01:28:19', NULL, '0.500', 'Kilogram', 1, 1, 0, 8, 4, 0, 0, 'standard-fit-cotton-popover', 0, 1, 0),
-(9, NULL, 0, '', 'resources/assets/images/product_images/1502182426.pPOLO2-26008935_standard_v400.jpg', '89.50', '2017-08-08 08:53:46', '2018-11-19 01:27:58', NULL, '0.500', 'Kilogram', 1, 1, 0, 0, 4, 0, 0, 'standard-fit-madras-popover', 0, 1, 0),
-(10, NULL, 0, '', 'resources/assets/images/product_images/1502186978.pPOLO2-26315018_standard_v400.jpg', '165.00', '2017-08-08 10:09:38', '2018-11-19 01:26:47', NULL, '0.500', 'Kilogram', 1, 1, 0, 0, 0, 0, 0, 'standard-fit-cotton-workshirt', 0, 1, 0),
-(11, NULL, 0, '', 'resources/assets/images/product_images/1502187824.pPOLO2-26317497_standard_v400.jpg', '145.00', '2017-08-08 10:23:44', '2018-11-19 01:26:26', NULL, '0.500', 'Kilogram', 1, 1, 0, 0, 0, 0, 0, 'eldridge-super-slim-jean', 0, 1, 0),
-(12, NULL, 0, '', 'resources/assets/images/product_images/1502189779.pPOLO2-26316198_standard_v360x480.jpg', '165.00', '2017-08-08 10:56:19', '2018-11-19 01:26:06', NULL, '0.500', 'Kilogram', 1, 1, 0, 0, 0, 0, 0, 'sullivan-slim-fit-jean', 0, 1, 0),
-(13, NULL, 0, '', 'resources/assets/images/product_images/1502190187.pPOLO2-26315541_standard_v400.jpg', '125.00', '2017-08-08 11:03:07', '2018-11-19 01:25:29', NULL, '0.500', 'Kilogram', 1, 1, 0, 6, 3, 0, 0, 'hampton-straight-fit-jean', 0, 1, 0),
-(14, NULL, 0, '', 'resources/assets/images/product_images/1502190590.pPOLO2-26404754_standard_v400.jpg', '90.00', '2017-08-08 11:09:50', '2018-11-19 01:25:04', NULL, '0.500', 'Kilogram', 1, 1, 0, 0, 1, 0, 0, 'laxman-tech-suede-sneaker-1', 0, 1, 0),
-(15, NULL, 0, '', 'resources/assets/images/product_images/1502191191.pPOLO2-26256326_standard_v400.jpg', '69.50', '2017-08-08 11:19:51', '2018-11-19 01:21:48', NULL, '0.500', 'Kilogram', 1, 1, 0, 0, 2, 0, 0, 'vaughn-suede-slip-on-sneaker', 0, 1, 0),
-(16, NULL, 0, '', 'resources/assets/images/product_images/1502191373.pPOLO2-21857429_standard_v400.jpg', '175.00', '2017-08-08 11:22:53', '2018-11-19 01:21:04', NULL, '0.500', 'Kilogram', 1, 0, 0, 0, 0, 0, 0, 'workington-leather-driver', 0, 1, 0),
-(17, NULL, -1, '', 'resources/assets/images/product_images/1502191568.pPOLO2-26256404_standard_v400.jpg', '275.00', '2017-08-08 11:26:08', '2018-11-19 01:20:33', NULL, '0.500', 'Gram', 1, 1, 0, 1, 6, 0, 1, 'dillian-ii-suede-chelsea-boot', 0, 1, 0),
-(18, NULL, 0, '', 'resources/assets/images/product_images/1502191856.pPOLO2-24354359_standard_v400.jpg', '559.00', '2017-08-08 11:30:56', '2018-11-19 01:20:03', NULL, '0.500', 'Kilogram', 1, 1, 0, 0, 0, 0, 0, 'brunel-leather-work-boot', 0, 1, 0),
-(19, NULL, 0, '', 'resources/assets/images/product_images/1502192066.pPOLO2-25784541_standard_v400.jpg', '89.00', '2017-08-08 11:34:26', '2018-11-19 01:19:35', NULL, '0.500', 'Kilogram', 1, 0, 0, 0, 1, 0, 0, 'laxman-tech-suede-sneaker', 0, 1, 0),
-(20, NULL, 0, 'Polo', 'resources/assets/images/product_images/1502192365.pPOLO2-12181663_standard_v400.jpg', '250.00', '2017-08-08 11:39:25', '2018-11-19 01:15:06', NULL, '0.500', 'Kilogram', 1, 0, 0, 0, 0, 0, 0, 'round-sunglasses', 0, 1, 0),
-(21, NULL, 0, 'Polo', 'resources/assets/images/product_images/1502193410.pPOLO2-19116009_standard_v400.jpg', '150.00', '2017-08-08 11:56:50', '2018-11-19 01:14:30', NULL, '0.500', 'Kilogram', 1, 0, 0, 0, 0, 0, 0, 'nautical-striped-sunglasses', 0, 1, 0),
-(22, NULL, 0, '', 'resources/assets/images/product_images/1502193577.pPOLO2-24933842_standard_v400.jpg', '129.00', '2017-08-08 11:59:37', '2018-11-19 01:13:56', NULL, '0.500', 'Kilogram', 1, 0, 0, 0, 0, 0, 0, 'polo-square-sunglasses', 0, 1, 0),
-(23, NULL, 0, '', 'resources/assets/images/product_images/1502193710.pPOLO2-24128696_standard_v400.jpg', '229.00', '2017-08-08 12:01:50', '2018-11-19 01:09:59', NULL, '0.500', 'Kilogram', 1, 0, 0, 0, 0, 0, 0, 'polo-aviator-sunglasses', 0, 1, 0),
-(24, NULL, 0, '', 'resources/assets/images/product_images/1502194893.pPOLO2-25759503_alternate1_v400.jpg', '198.00', '2017-08-08 12:21:33', '2018-11-19 01:09:02', NULL, '0.500', 'Kilogram', 1, 1, 0, 0, 0, 0, 0, 'strapless-jersey-maxidress', 0, 1, 0),
-(25, NULL, 0, '', 'resources/assets/images/product_images/1502195102.pPOLO2-25759495_alternate1_v400.jpg', '258.00', '2017-08-08 12:25:02', '2018-11-19 01:08:17', NULL, '0.500', 'Kilogram', 1, 0, 0, 0, 0, 0, 0, 'madras-fit-and-flare-dress', 0, 1, 0),
-(26, NULL, 0, '', 'resources/assets/images/product_images/1502195452.pPOLO2-26059809_alternate1_v400.jpg', '298.00', '2017-08-08 12:30:52', '2018-11-19 01:07:27', NULL, '0.500', 'Kilogram', 1, 1, 0, 0, 0, 0, 0, 'silk-crepe-shirtdress', 0, 1, 0),
-(27, NULL, 0, '', 'resources/assets/images/product_images/1502195642.pPOLO2-25854363_alternate1_v400.jpg', '198.00', '2017-08-08 12:34:02', '2018-11-19 01:06:51', NULL, '0.500', 'Kilogram', 1, 0, 0, 0, 0, 0, 0, 'beaded-jersey-gown', 0, 1, 0),
-(28, NULL, 0, '', 'resources/assets/images/product_images/1502196660.pPOLO2-25759710_standard_v400.jpg', '98.00', '2017-08-08 12:51:00', '2018-11-19 01:06:09', NULL, '0.500', 'Kilogram', 1, 0, 0, 0, 0, 0, 0, 'striped-cotton-crewneck-tee', 0, 1, 0),
-(29, NULL, 0, '', 'resources/assets/images/product_images/1502197951.pPOLO2-25759868_standard_v400.jpg', '145.00', '2017-08-08 01:12:31', '2018-11-19 01:02:22', NULL, '0.500', 'Kilogram', 1, 0, 0, 0, 0, 0, 0, 'cotton-blend-crewneck-pullover', 0, 1, 0),
-(30, NULL, 0, '', 'resources/assets/images/product_images/1502198422.pPOLO2-26060127_standard_v400.jpg', '85.00', '2017-08-08 01:20:22', '2018-11-19 01:01:05', NULL, '0.500', 'Kilogram', 1, 0, 0, 0, 0, 0, 0, 'crewneck-long-sleeve-top', 0, 1, 0),
-(31, NULL, 0, '', 'resources/assets/images/product_images/1502199326.pPOLO2-26451235_standard_v400.jpg', '205.00', '2017-08-08 01:35:26', '2018-11-19 12:58:36', NULL, '0.500', 'Kilogram', 1, 0, 0, 0, 0, 0, 0, 'tompkins-skinny-crop-jean', 0, 1, 0),
-(32, NULL, 0, '', 'resources/assets/images/product_images/1502200730.pPOLO2-26328182_standard_v400.jpg', '145.00', '2017-08-08 01:58:50', '2018-11-19 12:58:09', NULL, '0.500', 'Kilogram', 1, 0, 0, 0, 0, 0, 0, 'tompkins-skinny-crop-jeans', 0, 1, 0),
-(33, NULL, 0, '', 'resources/assets/images/product_images/1502201105.pPOLO2-26328155_standard_v400.jpg', '215.00', '2017-08-08 02:05:05', '2018-11-19 12:57:35', NULL, '0.500', 'Kilogram', 1, 1, 0, 0, 0, 0, 0, 'tompkins-skinny-jean', 0, 1, 0),
-(34, NULL, 0, '', 'resources/assets/images/product_images/1502261147.pPOLO2-25480910_alternate2_v360x480.jpg', '468.00', '2017-08-09 06:45:47', '2018-11-19 12:55:54', NULL, '0.500', 'Kilogram', 1, 0, 0, 0, 0, 0, 0, 'small-sullivan-saddle-bag', 0, 1, 0),
-(35, NULL, 0, '', 'resources/assets/images/product_images/1502261648.pPOLO2-26161986_standard_v400.jpg', '128.00', '2017-08-09 06:54:08', '2018-11-19 12:23:33', NULL, '0.500', 'Kilogram', 1, 1, 0, 0, 0, 0, 0, 'patchwork-canvas-big-pony-tote', 0, 1, 0),
-(36, NULL, 0, '', 'resources/assets/images/product_images/1502261990.pPOLO2-26161985_standard_v400.jpg', '98.00', '2017-08-09 06:59:50', '2018-11-19 12:23:09', NULL, '0.500', 'Kilogram', 1, 0, 0, 0, 0, 0, 0, 'color-blocked-big-pony-tote', 0, 1, 0),
-(37, NULL, 0, '', 'resources/assets/images/product_images/1502262425.pPOLO2-25480914_standard_v400.jpg', '398.00', '2017-08-09 07:07:05', '2018-11-19 12:22:40', NULL, '0.500', 'Kilogram', 1, 1, 0, 0, 1, 0, 0, 'laser-cut-floral-leather-tote', 0, 1, 0),
-(38, NULL, 0, '', 'resources/assets/images/product_images/1502263616.pPOLO2-11724079_lifestyle_v400.jpg', '29.50', '2017-08-09 07:26:56', '2018-11-19 12:22:16', NULL, '0.500', 'Kilogram', 1, 1, 0, 0, 0, 0, 0, 'bear-print-cotton-coverall', 0, 1, 0),
-(39, NULL, 0, '', 'resources/assets/images/product_images/1502264917.pPOLO2-21465903_lifestyle_v400.jpg', '29.50', '2017-08-09 07:48:37', '2018-11-19 12:21:51', NULL, '0.500', 'Kilogram', 1, 1, 0, 0, 1, 0, 0, 'striped-cotton-henley-coverall', 0, 1, 0),
-(40, NULL, 0, '', 'resources/assets/images/product_images/1502265209.pPOLO2-21466203_lifestyle_v400.jpg', '29.50', '2017-08-09 07:53:29', '2018-11-19 12:20:56', NULL, '0.500', 'Kilogram', 1, 0, 0, 0, 0, 0, 0, 'striped-cotton-henley-bodysuit', 0, 1, 0),
-(41, NULL, 0, '', 'resources/assets/images/product_images/1502265614.pPOLO2-22839467_lifestyle_v400.jpg', '103.50', '2017-08-09 08:00:14', '2018-11-19 12:20:36', NULL, '0.500', 'Kilogram', 1, 1, 0, 0, 0, 0, 0, 'abc-block-4-piece-gift-basket', 0, 1, 0),
-(42, NULL, 0, '', 'resources/assets/images/product_images/1502267748.pPOLO2-26397584_standard_v400.jpg', '25.00', '2017-08-09 08:35:48', '2018-11-19 12:20:15', NULL, '0.500', 'Kilogram', 1, 0, 0, 0, 0, 0, 0, 'cotton-polo-dress-bloomer', 0, 1, 0),
-(43, NULL, -1, '', 'resources/assets/images/product_images/1502268005.pPOLO2-25655666_standard_v400.jpg', '35.00', '2017-08-09 08:40:05', '2018-11-19 12:19:49', NULL, '0.500', 'Kilogram', 1, 0, 0, 1, 3, 0, 0, 'striped-polo-dress-bloomer', 0, 1, 0),
-(44, NULL, -1, '', 'resources/assets/images/product_images/1502268706.pPOLO2-25240665_standard_v400.jpg', '55.50', '2017-08-09 08:51:46', '2018-11-19 12:19:24', NULL, '0.500', 'Kilogram', 1, 1, 0, 1, 2, 0, 0, 'ruffled-floral-dress-bloomer', 0, 1, 0),
-(45, NULL, 0, '', 'resources/assets/images/product_images/1502273498.pPOLO2-26000954_standard_v400.jpg', '29.50', '2017-08-09 10:11:38', '2018-11-19 12:12:31', NULL, '0.500', 'Kilogram', 1, 1, 0, 0, 1, 0, 0, 'striped-cotton-blanket', 0, 1, 0),
-(46, NULL, 0, '', 'resources/assets/images/product_images/1502273672.pPOLO2-23450031_lifestyle_v400.jpg', '75.00', '2017-08-09 10:14:32', '2018-11-19 12:12:01', NULL, '0.500', 'Kilogram', 1, 0, 0, 0, 0, 0, 0, 'crepe-swaddling-blanket-set', 0, 1, 0),
-(47, NULL, 0, '', 'resources/assets/images/product_images/1502273766.pPOLO2-23700424_standard_v400.jpg', '45.00', '2017-08-09 10:16:06', '2018-11-19 12:11:35', NULL, '0.500', 'Kilogram', 1, 1, 0, 0, 0, 0, 0, 'plush-blanket', 0, 1, 0),
-(48, NULL, 0, '', 'resources/assets/images/product_images/1502274870.pPOLO2-25426585_alternate7_v360x480.jpg', '470.00', '2017-08-09 10:34:30', '2018-11-19 12:11:13', NULL, '0.500', 'Kilogram', 1, 1, 0, 0, 3, 0, 0, 'rl-bowery-sateen-duvet-cover', 0, 1, 0),
-(49, NULL, 0, '', 'resources/assets/images/product_images/1502275397.pPOLO2-23742156_standard_v360x480.jpg', '500.00', '2017-08-09 10:43:17', '2018-11-19 12:10:44', NULL, '0.500', 'Kilogram', 1, 1, 0, 0, 1, 0, 0, 'bedford-jacquard-duvet-cover', 0, 1, 0),
-(50, NULL, 0, '', 'resources/assets/images/product_images/1502275538.pPOLO2-25426632_alternate7_v400.jpg', '160.00', '2017-08-09 10:45:38', '2018-11-19 12:09:47', NULL, '0.500', 'Kilogram', 1, 0, 0, 0, 1, 0, 0, 'monaco-sateen-duvet-cover', 0, 1, 0),
-(51, NULL, 0, '', 'resources/assets/images/product_images/1502276177.pPOLO2-18063379_mailer_v360x480.jpg', '130.00', '2017-08-09 10:56:17', '2018-11-19 12:09:25', NULL, '0.500', 'Kilogram', 1, 1, 0, 0, 1, 0, 0, 'pink-palmer-sham', 0, 1, 0),
-(52, NULL, 0, '', 'resources/assets/images/product_images/1502278983.pPOLO2-16519324_lifestyle_v400.jpg', '255.00', '2017-08-09 11:43:03', '2018-11-19 12:09:01', NULL, '0.500', 'Kilogram', 1, 1, 0, 0, 1, 0, 0, 'rl-beaded-dylan-pillow', 0, 1, 0),
-(53, NULL, 0, '', 'resources/assets/images/product_images/1502279135.pPOLO2-13318847_lifestyle_v400.jpg', '595.00', '2017-08-09 11:45:35', '2018-11-19 12:08:39', NULL, '0.500', 'Kilogram', 1, 1, 0, 0, 1, 0, 0, 'great-basin-throw-pillow', 0, 1, 0),
-(54, NULL, 0, '', 'resources/assets/images/product_images/1502279578.pPOLO2-18086941_lifestyle_v400.jpg', '395.00', '2017-08-09 11:52:58', '2018-11-19 12:08:18', NULL, '0.500', 'Kilogram', 1, 0, 0, 0, 1, 0, 0, 'cabled-cashmere-travel-set', 0, 1, 0),
-(55, NULL, 0, '', 'resources/assets/images/product_images/1502282050.pPOLO2-18177063_lifestyle_v360x480.jpg', '5.00', '2017-08-09 12:34:10', '2018-11-19 12:06:28', NULL, '0.500', 'Kilogram', 1, 0, 0, 0, 1, 0, 0, 'langdon-embroidered-bathrobe', 0, 1, 0),
-(56, NULL, 0, '', 'resources/assets/images/product_images/1502347627.pPOLO2-25995642_standard_v400.jpg', '49.50', '2017-08-10 06:47:07', '2018-11-19 12:06:01', NULL, '0.500', 'Kilogram', 1, 0, 0, 0, 1, 0, 0, 'cotton-mesh-polo-shirt-1', 0, 1, 0),
-(57, NULL, 0, '', 'resources/assets/images/product_images/1502348404.pPOLO2-23625768_standard_v400.jpg', '29.50', '2017-08-10 07:00:04', '2018-11-19 12:05:29', NULL, '0.500', 'Kilogram', 1, 0, 0, 0, 1, 0, 0, 'cotton-mesh-polo-shirt', 0, 1, 0),
-(58, NULL, 0, '', 'resources/assets/images/product_images/1502349078.pPOLO2-25961612_standard_v400.jpg', '55.00', '2017-08-10 07:11:18', '2018-11-19 12:04:28', NULL, '0.500', 'Kilogram', 1, 0, 0, 0, 1, 0, 0, 'banner-cotton-mesh-polo', 0, 1, 0),
-(59, NULL, 0, '', 'resources/assets/images/product_images/1502349501.pPOLO2-25563187_standard_v400.jpg', '45.00', '2017-08-10 07:18:21', '2018-11-19 12:04:05', NULL, '0.500', 'Kilogram', 1, 1, 0, 0, 2, 0, 0, 'cotton-mesh-long-sleeve-polo', 0, 1, 0),
-(60, NULL, 0, '', 'resources/assets/images/product_images/1502350673.pPOLO2-25961171_standard_v400.jpg', '45.00', '2017-08-10 07:37:53', '2018-11-19 12:03:09', NULL, '0.500', 'Kilogram', 1, 1, 0, 0, 1, 0, 0, 'plaid-cotton-twill-workshirt', 0, 1, 0),
-(61, NULL, 0, '', 'resources/assets/images/product_images/1502351678.pPOLO2-25961083_standard_v400.jpg', '45.00', '2017-08-10 07:54:38', '2018-11-19 12:02:16', NULL, '0.500', 'Kilogram', 1, 1, 0, 0, 1, 0, 0, 'cotton-oxford-sport-shirt', 0, 1, 0),
-(62, NULL, -1, '', 'resources/assets/images/product_images/1502351882.pPOLO2-24921004_standard_v400.jpg', '55.00', '2017-08-10 07:58:02', '2018-11-19 12:01:47', NULL, '0.500', 'Kilogram', 1, 1, 0, 1, 4, 0, 0, 'cotton-mesh-workshirt', 0, 1, 0),
-(63, NULL, 0, '', 'resources/assets/images/product_images/1502352055.pPOLO2-25363631_standard_v400.jpg', '50.00', '2017-08-10 08:00:55', '2018-11-19 12:01:16', NULL, '0.500', 'Kilogram', 1, 0, 0, 0, 1, 0, 0, 'striped-cotton-shirt-1', 0, 1, 0),
-(64, NULL, 0, '', 'resources/assets/images/product_images/1502352545.pPOLO2-25363631_standard_v400.jpg', '55.00', '2017-08-10 08:09:05', '2018-11-19 12:00:20', NULL, '0.500', 'Kilogram', 1, 1, 0, 0, 1, 0, 0, 'striped-cotton-shirt', 0, 1, 0),
-(65, NULL, -1, '', 'resources/assets/images/product_images/1502353123.pPOLO2-10531663_standard_v400.jpg', '45.00', '2017-08-10 08:18:43', '2018-11-19 11:59:52', NULL, '0.500', 'Kilogram', 1, 1, 0, 1, 3, 0, 0, 'slim-mott-wash-jean', 0, 1, 0),
-(66, NULL, 0, '', 'resources/assets/images/product_images/1502359349.pPOLO2-25961644_lifestyle_v400.jpg', '39.50', '2017-08-10 10:02:29', '2018-11-19 11:59:27', NULL, '0.500', 'Kilogram', 1, 1, 0, 0, 1, 0, 0, 'eldridge-stretch-skinny-jean', 0, 1, 0),
-(67, NULL, 0, '', 'resources/assets/images/product_images/1502362089.pPOLO2-14689748_standard_v400.jpg', '550.00', '2017-08-10 10:48:09', '2018-11-19 11:58:39', NULL, '0.500', 'Kilogram', 1, 1, 0, 0, 3, 0, 0, 'polo-i-wool-twill-suit', 0, 1, 0),
-(68, NULL, 0, '', 'resources/assets/images/product_images/1502362408.pPOLO2-24922918_standard_v400.jpg', '49.50', '2017-08-10 10:53:28', '2018-11-19 11:58:04', NULL, '0.500', 'Kilogram', 1, 1, 0, 0, 1, 0, 0, 'belted-stretch-cotton-chino', 0, 1, 0),
-(69, NULL, 0, '', 'resources/assets/images/product_images/1502362738.pPOLO2-25464515_lifestyle_v400.jpg', '40.00', '2017-08-10 10:58:58', '2018-11-19 11:57:11', NULL, '0.500', 'Kilogram', 1, 1, 0, 0, 0, 0, 0, 'batten-canvas-ez-boat-shoe', 0, 1, 0),
-(70, NULL, 0, '', 'resources/assets/images/product_images/1502363119.pPOLO2-25464682_standard_v400.jpg', '45.00', '2017-08-10 11:05:19', '2018-11-19 08:39:03', NULL, '0.500', 'Gram', 1, 1, 0, 0, 4, 0, 0, 'propell-ii-sneaker', 0, 1, 0),
-(71, NULL, 0, '', 'resources/assets/images/product_images/1502363378.pPOLO2-25464575_standard_v400.jpg', '30.00', '2017-08-10 11:09:38', '2018-11-19 08:38:37', NULL, '0.500', 'Kilogram', 1, 1, 0, 0, 1, 0, 0, 'banks-sandal', 0, 1, 0),
-(72, NULL, 0, '', 'resources/assets/images/product_images/1502364150.pPOLO2-26091141_standard_v400.jpg', '59.00', '2017-08-10 11:22:30', '2018-11-19 08:38:03', NULL, '0.500', 'Kilogram', 1, 1, 0, 0, 2, 0, 0, 'madras-cotton-shirtdress', 0, 1, 0),
-(73, NULL, 0, '', 'resources/assets/images/product_images/1502364697.pPOLO2-23643008_standard_v400.jpg', '55.00', '2017-08-10 11:31:37', '2018-11-19 08:37:32', NULL, '0.500', 'Kilogram', 1, 1, 0, 0, 5, 0, 0, 'cotton-chino-belted-shirtdress', 0, 1, 0),
-(74, NULL, 0, '', 'resources/assets/images/product_images/1502364932.pPOLO2-25835439_standard_v400.jpg', '45.00', '2017-08-10 11:35:32', '2018-11-19 08:35:49', NULL, '0.500', 'Kilogram', 1, 1, 0, 0, 3, 0, 0, 'striped-off-the-shoulder-dress', 1, 1, 0),
-(75, NULL, 0, '', 'resources/assets/images/product_images/1502365189.pPOLO2-26091856_standard_v400.jpg', '49.50', '2017-08-10 11:39:49', '2018-11-19 08:33:37', NULL, '0.500', 'Kilogram', 1, 1, 0, 0, 3, 0, 0, 'button-front-denim-skirt', 1, 1, 5),
-(76, NULL, 0, '', 'resources/assets/images/product_images/1502365515.pPOLO2-26091862_alternate1_v400.jpg', '49.50', '2017-08-10 11:45:15', '2018-11-19 08:33:01', NULL, '0.500', 'Kilogram', 1, 1, 0, 0, 6, 0, 0, 'floral-skirt', 0, 1, 5),
-(77, NULL, -16, '', 'resources/assets/images/product_images/1502366105.pPOLO2-26091049_alternate1_v400.jpg', '56.50', '2017-08-10 11:55:05', '2018-11-19 08:31:40', NULL, '0.500', 'Kilogram', 1, 1, 0, 4, 5, 0, 0, 'pleated-madras-skirt', 1, 2, 8),
-(78, NULL, 0, '', 'resources/assets/images/product_images/1502366342.pPOLO2-26090785_standard_v400.jpg', '195.00', '2017-08-10 11:59:02', '2018-11-19 08:30:45', NULL, '0.500', 'Kilogram', 1, 1, 0, 0, 8, 0, 0, 'cable-knit-cashmere-sweater', 0, 1, 0),
-(79, NULL, 0, '', 'resources/assets/images/product_images/1502366462.pPOLO2-26090829_standard_v400.jpg', '45.00', '2017-08-10 12:01:02', '2018-11-19 08:27:53', NULL, '0.500', 'Kilogram', 1, 1, 0, 0, 4, 0, 0, 'fair-isle-hooded-sweater', 1, 1, 0),
-(80, NULL, 0, '', 'resources/assets/images/product_images/1502366586.pPOLO2-25834797_standard_v400.jpg', '125.00', '2017-08-10 12:03:06', '2019-03-20 08:30:31', NULL, '0.500', 'Kilogram', 1, 1, 0, 0, 4, 0, 0, 'flag-combed-cotton-sweater', 1, 1, 0),
-(81, 1, 0, '', 'resources/assets/images/product_images/1502366686.pPOLO2-25207761_standard_v400.jpg', '49.50', '2017-08-10 12:04:46', '2019-12-15 01:23:44', NULL, '0.500', 'Kilogram', 1, 0, 0, 1, 4, 0, 0, 'ruffled-cotton-cardigan', 0, 1, 0),
-(82, 0, 0, '', 'resources/assets/images/product_images/1576416306.Screenshot from 2019-12-15 12-39-02.png', '100.00', '2019-12-15 01:25:06', NULL, NULL, '100', 'Gram', 1, 0, 0, 0, 0, 0, 0, 'yousry-product', 0, 1, 0);
+INSERT INTO `products` (`products_id`, `products_approve`, `products_quantity`, `products_model`, `products_image`, `products_price`, `products_date_added`, `products_last_modified`, `products_date_available`, `products_weight`, `products_weight_unit`, `products_status`, `products_tax_class_id`, `manufacturers_id`, `products_ordered`, `products_liked`, `low_limit`, `is_feature`, `products_slug`, `products_type`, `products_min_order`, `products_max_stock`, `admin_id`) VALUES
+(1, NULL, 0, '', 'resources/assets/images/product_images/1502174889.pPOLO2-26314766_standard_v400.jpg', '85.00', '2017-08-07 11:44:10', '2018-11-19 01:30:58', NULL, '0.500', 'Gram', 1, 1, 0, 12, 6, 0, 0, 'classic-fit-soft-touch-polo', 0, 1, 0, 0),
+(2, NULL, 0, '', 'resources/assets/images/product_images/1502114036.pPOLO2-26316336_standard_v400.jpg', '98.50', '2017-08-07 01:53:56', '2018-11-19 01:30:37', NULL, '0.500', 'Kilogram', 1, 0, 0, 0, 5, 0, 0, 'hampton-classic-fit-shirt', 0, 1, 0, 0),
+(3, NULL, 9999, '', 'resources/assets/images/product_images/1502174346.pPOLO2-26314826_standard_v400.jpg', '85.00', '2017-08-08 06:39:06', NULL, NULL, '0.500', 'Kilogram', 1, 1, NULL, 0, 0, 0, 0, 'classic-fit-cotton-polo-shirt-1', 0, 1, NULL, 0),
+(4, NULL, -1, '', 'resources/assets/images/product_images/1502174364.pPOLO2-26314826_standard_v400.jpg', '85.00', '2017-08-08 06:39:24', '2018-11-19 01:30:00', NULL, '0.500', 'Kilogram', 1, 1, 0, 5, 4, 0, 0, 'classic-fit-cotton-polo-shirt', 0, 1, 0, 0),
+(5, NULL, 0, '', 'resources/assets/images/product_images/1502176579.pPOLO2-26316348_standard_v400.jpg', '98.50', '2017-08-08 07:16:19', '2018-11-19 01:29:38', NULL, '0.500', 'Kilogram', 1, 1, 0, 0, 3, 0, 0, 'custom-slim-fit-cotton-shirt', 0, 1, 0, 0),
+(6, NULL, 0, '', 'resources/assets/images/product_images/1502177321.pPOLO2-26314634_standard_v400.jpg', '89.50', '2017-08-08 07:28:41', '2018-11-19 01:29:15', NULL, '0.500', 'Kilogram', 1, 1, 0, 0, 2, 0, 0, 'custom-slim-fit-weathered-polo', 0, 1, 0, 0),
+(7, NULL, 0, '', 'resources/assets/images/product_images/1502180946.pPOLO2-26008917_standard_v400.jpg', '98.50', '2017-08-08 08:29:06', '2018-11-19 01:28:52', NULL, '0.500', 'Kilogram', 1, 1, 0, 0, 1, 0, 0, 'standard-fit-cotton-shirt', 0, 1, 0, 0),
+(8, NULL, 0, '', 'resources/assets/images/product_images/1502181584.pPOLO2-26008953_standard_v400.jpg', '125.50', '2017-08-08 08:39:44', '2018-11-19 01:28:19', NULL, '0.500', 'Kilogram', 1, 1, 0, 8, 4, 0, 0, 'standard-fit-cotton-popover', 0, 1, 0, 0),
+(9, NULL, 0, '', 'resources/assets/images/product_images/1502182426.pPOLO2-26008935_standard_v400.jpg', '89.50', '2017-08-08 08:53:46', '2018-11-19 01:27:58', NULL, '0.500', 'Kilogram', 1, 1, 0, 0, 4, 0, 0, 'standard-fit-madras-popover', 0, 1, 0, 0),
+(10, NULL, 0, '', 'resources/assets/images/product_images/1502186978.pPOLO2-26315018_standard_v400.jpg', '165.00', '2017-08-08 10:09:38', '2018-11-19 01:26:47', NULL, '0.500', 'Kilogram', 1, 1, 0, 0, 0, 0, 0, 'standard-fit-cotton-workshirt', 0, 1, 0, 0),
+(11, NULL, 0, '', 'resources/assets/images/product_images/1502187824.pPOLO2-26317497_standard_v400.jpg', '145.00', '2017-08-08 10:23:44', '2018-11-19 01:26:26', NULL, '0.500', 'Kilogram', 1, 1, 0, 0, 0, 0, 0, 'eldridge-super-slim-jean', 0, 1, 0, 0),
+(12, NULL, 0, '', 'resources/assets/images/product_images/1502189779.pPOLO2-26316198_standard_v360x480.jpg', '165.00', '2017-08-08 10:56:19', '2018-11-19 01:26:06', NULL, '0.500', 'Kilogram', 1, 1, 0, 0, 0, 0, 0, 'sullivan-slim-fit-jean', 0, 1, 0, 0),
+(13, NULL, 0, '', 'resources/assets/images/product_images/1502190187.pPOLO2-26315541_standard_v400.jpg', '125.00', '2017-08-08 11:03:07', '2018-11-19 01:25:29', NULL, '0.500', 'Kilogram', 1, 1, 0, 6, 3, 0, 0, 'hampton-straight-fit-jean', 0, 1, 0, 0),
+(14, NULL, 0, '', 'resources/assets/images/product_images/1502190590.pPOLO2-26404754_standard_v400.jpg', '90.00', '2017-08-08 11:09:50', '2018-11-19 01:25:04', NULL, '0.500', 'Kilogram', 1, 1, 0, 0, 1, 0, 0, 'laxman-tech-suede-sneaker-1', 0, 1, 0, 0),
+(15, NULL, 0, '', 'resources/assets/images/product_images/1502191191.pPOLO2-26256326_standard_v400.jpg', '69.50', '2017-08-08 11:19:51', '2018-11-19 01:21:48', NULL, '0.500', 'Kilogram', 1, 1, 0, 0, 2, 0, 0, 'vaughn-suede-slip-on-sneaker', 0, 1, 0, 0),
+(16, NULL, 0, '', 'resources/assets/images/product_images/1502191373.pPOLO2-21857429_standard_v400.jpg', '175.00', '2017-08-08 11:22:53', '2018-11-19 01:21:04', NULL, '0.500', 'Kilogram', 1, 0, 0, 0, 0, 0, 0, 'workington-leather-driver', 0, 1, 0, 0),
+(17, NULL, -1, '', 'resources/assets/images/product_images/1502191568.pPOLO2-26256404_standard_v400.jpg', '275.00', '2017-08-08 11:26:08', '2018-11-19 01:20:33', NULL, '0.500', 'Gram', 1, 1, 0, 1, 6, 0, 1, 'dillian-ii-suede-chelsea-boot', 0, 1, 0, 0),
+(18, NULL, 0, '', 'resources/assets/images/product_images/1502191856.pPOLO2-24354359_standard_v400.jpg', '559.00', '2017-08-08 11:30:56', '2018-11-19 01:20:03', NULL, '0.500', 'Kilogram', 1, 1, 0, 0, 0, 0, 0, 'brunel-leather-work-boot', 0, 1, 0, 0),
+(19, NULL, 0, '', 'resources/assets/images/product_images/1502192066.pPOLO2-25784541_standard_v400.jpg', '89.00', '2017-08-08 11:34:26', '2018-11-19 01:19:35', NULL, '0.500', 'Kilogram', 1, 0, 0, 0, 1, 0, 0, 'laxman-tech-suede-sneaker', 0, 1, 0, 0),
+(20, NULL, 0, 'Polo', 'resources/assets/images/product_images/1502192365.pPOLO2-12181663_standard_v400.jpg', '250.00', '2017-08-08 11:39:25', '2018-11-19 01:15:06', NULL, '0.500', 'Kilogram', 1, 0, 0, 0, 0, 0, 0, 'round-sunglasses', 0, 1, 0, 0),
+(21, NULL, 0, 'Polo', 'resources/assets/images/product_images/1502193410.pPOLO2-19116009_standard_v400.jpg', '150.00', '2017-08-08 11:56:50', '2018-11-19 01:14:30', NULL, '0.500', 'Kilogram', 1, 0, 0, 0, 0, 0, 0, 'nautical-striped-sunglasses', 0, 1, 0, 0),
+(22, NULL, 0, '', 'resources/assets/images/product_images/1502193577.pPOLO2-24933842_standard_v400.jpg', '129.00', '2017-08-08 11:59:37', '2018-11-19 01:13:56', NULL, '0.500', 'Kilogram', 1, 0, 0, 0, 0, 0, 0, 'polo-square-sunglasses', 0, 1, 0, 0),
+(23, NULL, 0, '', 'resources/assets/images/product_images/1502193710.pPOLO2-24128696_standard_v400.jpg', '229.00', '2017-08-08 12:01:50', '2018-11-19 01:09:59', NULL, '0.500', 'Kilogram', 1, 0, 0, 0, 0, 0, 0, 'polo-aviator-sunglasses', 0, 1, 0, 0),
+(24, NULL, 0, '', 'resources/assets/images/product_images/1502194893.pPOLO2-25759503_alternate1_v400.jpg', '198.00', '2017-08-08 12:21:33', '2018-11-19 01:09:02', NULL, '0.500', 'Kilogram', 1, 1, 0, 0, 0, 0, 0, 'strapless-jersey-maxidress', 0, 1, 0, 0),
+(25, NULL, 0, '', 'resources/assets/images/product_images/1502195102.pPOLO2-25759495_alternate1_v400.jpg', '258.00', '2017-08-08 12:25:02', '2018-11-19 01:08:17', NULL, '0.500', 'Kilogram', 1, 0, 0, 0, 0, 0, 0, 'madras-fit-and-flare-dress', 0, 1, 0, 0),
+(26, NULL, 0, '', 'resources/assets/images/product_images/1502195452.pPOLO2-26059809_alternate1_v400.jpg', '298.00', '2017-08-08 12:30:52', '2018-11-19 01:07:27', NULL, '0.500', 'Kilogram', 1, 1, 0, 0, 0, 0, 0, 'silk-crepe-shirtdress', 0, 1, 0, 0),
+(27, NULL, 0, '', 'resources/assets/images/product_images/1502195642.pPOLO2-25854363_alternate1_v400.jpg', '198.00', '2017-08-08 12:34:02', '2018-11-19 01:06:51', NULL, '0.500', 'Kilogram', 1, 0, 0, 0, 0, 0, 0, 'beaded-jersey-gown', 0, 1, 0, 0),
+(28, NULL, 0, '', 'resources/assets/images/product_images/1502196660.pPOLO2-25759710_standard_v400.jpg', '98.00', '2017-08-08 12:51:00', '2018-11-19 01:06:09', NULL, '0.500', 'Kilogram', 1, 0, 0, 0, 0, 0, 0, 'striped-cotton-crewneck-tee', 0, 1, 0, 0),
+(29, NULL, 0, '', 'resources/assets/images/product_images/1502197951.pPOLO2-25759868_standard_v400.jpg', '145.00', '2017-08-08 01:12:31', '2018-11-19 01:02:22', NULL, '0.500', 'Kilogram', 1, 0, 0, 0, 0, 0, 0, 'cotton-blend-crewneck-pullover', 0, 1, 0, 0),
+(30, NULL, 0, '', 'resources/assets/images/product_images/1502198422.pPOLO2-26060127_standard_v400.jpg', '85.00', '2017-08-08 01:20:22', '2018-11-19 01:01:05', NULL, '0.500', 'Kilogram', 1, 0, 0, 0, 0, 0, 0, 'crewneck-long-sleeve-top', 0, 1, 0, 0),
+(31, NULL, 0, '', 'resources/assets/images/product_images/1502199326.pPOLO2-26451235_standard_v400.jpg', '205.00', '2017-08-08 01:35:26', '2018-11-19 12:58:36', NULL, '0.500', 'Kilogram', 1, 0, 0, 0, 0, 0, 0, 'tompkins-skinny-crop-jean', 0, 1, 0, 0),
+(32, NULL, 0, '', 'resources/assets/images/product_images/1502200730.pPOLO2-26328182_standard_v400.jpg', '145.00', '2017-08-08 01:58:50', '2018-11-19 12:58:09', NULL, '0.500', 'Kilogram', 1, 0, 0, 0, 0, 0, 0, 'tompkins-skinny-crop-jeans', 0, 1, 0, 0),
+(33, NULL, 0, '', 'resources/assets/images/product_images/1502201105.pPOLO2-26328155_standard_v400.jpg', '215.00', '2017-08-08 02:05:05', '2018-11-19 12:57:35', NULL, '0.500', 'Kilogram', 1, 1, 0, 0, 0, 0, 0, 'tompkins-skinny-jean', 0, 1, 0, 0),
+(34, NULL, 0, '', 'resources/assets/images/product_images/1502261147.pPOLO2-25480910_alternate2_v360x480.jpg', '468.00', '2017-08-09 06:45:47', '2018-11-19 12:55:54', NULL, '0.500', 'Kilogram', 1, 0, 0, 0, 0, 0, 0, 'small-sullivan-saddle-bag', 0, 1, 0, 0),
+(35, NULL, 0, '', 'resources/assets/images/product_images/1502261648.pPOLO2-26161986_standard_v400.jpg', '128.00', '2017-08-09 06:54:08', '2018-11-19 12:23:33', NULL, '0.500', 'Kilogram', 1, 1, 0, 0, 0, 0, 0, 'patchwork-canvas-big-pony-tote', 0, 1, 0, 0),
+(36, NULL, 0, '', 'resources/assets/images/product_images/1502261990.pPOLO2-26161985_standard_v400.jpg', '98.00', '2017-08-09 06:59:50', '2018-11-19 12:23:09', NULL, '0.500', 'Kilogram', 1, 0, 0, 0, 0, 0, 0, 'color-blocked-big-pony-tote', 0, 1, 0, 0),
+(37, NULL, 0, '', 'resources/assets/images/product_images/1502262425.pPOLO2-25480914_standard_v400.jpg', '398.00', '2017-08-09 07:07:05', '2018-11-19 12:22:40', NULL, '0.500', 'Kilogram', 1, 1, 0, 0, 1, 0, 0, 'laser-cut-floral-leather-tote', 0, 1, 0, 0),
+(38, NULL, 0, '', 'resources/assets/images/product_images/1502263616.pPOLO2-11724079_lifestyle_v400.jpg', '29.50', '2017-08-09 07:26:56', '2018-11-19 12:22:16', NULL, '0.500', 'Kilogram', 1, 1, 0, 0, 0, 0, 0, 'bear-print-cotton-coverall', 0, 1, 0, 0),
+(39, NULL, 0, '', 'resources/assets/images/product_images/1502264917.pPOLO2-21465903_lifestyle_v400.jpg', '29.50', '2017-08-09 07:48:37', '2018-11-19 12:21:51', NULL, '0.500', 'Kilogram', 1, 1, 0, 0, 1, 0, 0, 'striped-cotton-henley-coverall', 0, 1, 0, 0),
+(40, NULL, 0, '', 'resources/assets/images/product_images/1502265209.pPOLO2-21466203_lifestyle_v400.jpg', '29.50', '2017-08-09 07:53:29', '2018-11-19 12:20:56', NULL, '0.500', 'Kilogram', 1, 0, 0, 0, 0, 0, 0, 'striped-cotton-henley-bodysuit', 0, 1, 0, 0),
+(41, NULL, 0, '', 'resources/assets/images/product_images/1502265614.pPOLO2-22839467_lifestyle_v400.jpg', '103.50', '2017-08-09 08:00:14', '2018-11-19 12:20:36', NULL, '0.500', 'Kilogram', 1, 1, 0, 0, 0, 0, 0, 'abc-block-4-piece-gift-basket', 0, 1, 0, 0),
+(42, NULL, 0, '', 'resources/assets/images/product_images/1502267748.pPOLO2-26397584_standard_v400.jpg', '25.00', '2017-08-09 08:35:48', '2018-11-19 12:20:15', NULL, '0.500', 'Kilogram', 1, 0, 0, 0, 0, 0, 0, 'cotton-polo-dress-bloomer', 0, 1, 0, 0),
+(43, NULL, -1, '', 'resources/assets/images/product_images/1502268005.pPOLO2-25655666_standard_v400.jpg', '35.00', '2017-08-09 08:40:05', '2018-11-19 12:19:49', NULL, '0.500', 'Kilogram', 1, 0, 0, 1, 3, 0, 0, 'striped-polo-dress-bloomer', 0, 1, 0, 0),
+(44, NULL, -1, '', 'resources/assets/images/product_images/1502268706.pPOLO2-25240665_standard_v400.jpg', '55.50', '2017-08-09 08:51:46', '2018-11-19 12:19:24', NULL, '0.500', 'Kilogram', 1, 1, 0, 1, 2, 0, 0, 'ruffled-floral-dress-bloomer', 0, 1, 0, 0),
+(45, NULL, 0, '', 'resources/assets/images/product_images/1502273498.pPOLO2-26000954_standard_v400.jpg', '29.50', '2017-08-09 10:11:38', '2018-11-19 12:12:31', NULL, '0.500', 'Kilogram', 1, 1, 0, 0, 1, 0, 0, 'striped-cotton-blanket', 0, 1, 0, 0),
+(46, NULL, 0, '', 'resources/assets/images/product_images/1502273672.pPOLO2-23450031_lifestyle_v400.jpg', '75.00', '2017-08-09 10:14:32', '2018-11-19 12:12:01', NULL, '0.500', 'Kilogram', 1, 0, 0, 0, 0, 0, 0, 'crepe-swaddling-blanket-set', 0, 1, 0, 0),
+(47, NULL, 0, '', 'resources/assets/images/product_images/1502273766.pPOLO2-23700424_standard_v400.jpg', '45.00', '2017-08-09 10:16:06', '2018-11-19 12:11:35', NULL, '0.500', 'Kilogram', 1, 1, 0, 0, 0, 0, 0, 'plush-blanket', 0, 1, 0, 0),
+(48, NULL, 0, '', 'resources/assets/images/product_images/1502274870.pPOLO2-25426585_alternate7_v360x480.jpg', '470.00', '2017-08-09 10:34:30', '2018-11-19 12:11:13', NULL, '0.500', 'Kilogram', 1, 1, 0, 0, 3, 0, 0, 'rl-bowery-sateen-duvet-cover', 0, 1, 0, 0),
+(49, NULL, 0, '', 'resources/assets/images/product_images/1502275397.pPOLO2-23742156_standard_v360x480.jpg', '500.00', '2017-08-09 10:43:17', '2018-11-19 12:10:44', NULL, '0.500', 'Kilogram', 1, 1, 0, 0, 1, 0, 0, 'bedford-jacquard-duvet-cover', 0, 1, 0, 0),
+(50, NULL, 0, '', 'resources/assets/images/product_images/1502275538.pPOLO2-25426632_alternate7_v400.jpg', '160.00', '2017-08-09 10:45:38', '2018-11-19 12:09:47', NULL, '0.500', 'Kilogram', 1, 0, 0, 0, 1, 0, 0, 'monaco-sateen-duvet-cover', 0, 1, 0, 0),
+(51, NULL, 0, '', 'resources/assets/images/product_images/1502276177.pPOLO2-18063379_mailer_v360x480.jpg', '130.00', '2017-08-09 10:56:17', '2018-11-19 12:09:25', NULL, '0.500', 'Kilogram', 1, 1, 0, 0, 1, 0, 0, 'pink-palmer-sham', 0, 1, 0, 0),
+(52, NULL, 0, '', 'resources/assets/images/product_images/1502278983.pPOLO2-16519324_lifestyle_v400.jpg', '255.00', '2017-08-09 11:43:03', '2018-11-19 12:09:01', NULL, '0.500', 'Kilogram', 1, 1, 0, 0, 1, 0, 0, 'rl-beaded-dylan-pillow', 0, 1, 0, 0),
+(53, NULL, 0, '', 'resources/assets/images/product_images/1502279135.pPOLO2-13318847_lifestyle_v400.jpg', '595.00', '2017-08-09 11:45:35', '2018-11-19 12:08:39', NULL, '0.500', 'Kilogram', 1, 1, 0, 0, 1, 0, 0, 'great-basin-throw-pillow', 0, 1, 0, 0),
+(54, NULL, 0, '', 'resources/assets/images/product_images/1502279578.pPOLO2-18086941_lifestyle_v400.jpg', '395.00', '2017-08-09 11:52:58', '2018-11-19 12:08:18', NULL, '0.500', 'Kilogram', 1, 0, 0, 0, 1, 0, 0, 'cabled-cashmere-travel-set', 0, 1, 0, 0),
+(55, NULL, 0, '', 'resources/assets/images/product_images/1502282050.pPOLO2-18177063_lifestyle_v360x480.jpg', '5.00', '2017-08-09 12:34:10', '2018-11-19 12:06:28', NULL, '0.500', 'Kilogram', 1, 0, 0, 0, 1, 0, 0, 'langdon-embroidered-bathrobe', 0, 1, 0, 0),
+(56, NULL, 0, '', 'resources/assets/images/product_images/1502347627.pPOLO2-25995642_standard_v400.jpg', '49.50', '2017-08-10 06:47:07', '2018-11-19 12:06:01', NULL, '0.500', 'Kilogram', 1, 0, 0, 0, 1, 0, 0, 'cotton-mesh-polo-shirt-1', 0, 1, 0, 0),
+(57, NULL, 0, '', 'resources/assets/images/product_images/1502348404.pPOLO2-23625768_standard_v400.jpg', '29.50', '2017-08-10 07:00:04', '2018-11-19 12:05:29', NULL, '0.500', 'Kilogram', 1, 0, 0, 0, 1, 0, 0, 'cotton-mesh-polo-shirt', 0, 1, 0, 0),
+(58, NULL, 0, '', 'resources/assets/images/product_images/1502349078.pPOLO2-25961612_standard_v400.jpg', '55.00', '2017-08-10 07:11:18', '2018-11-19 12:04:28', NULL, '0.500', 'Kilogram', 1, 0, 0, 0, 1, 0, 0, 'banner-cotton-mesh-polo', 0, 1, 0, 0),
+(59, NULL, 0, '', 'resources/assets/images/product_images/1502349501.pPOLO2-25563187_standard_v400.jpg', '45.00', '2017-08-10 07:18:21', '2018-11-19 12:04:05', NULL, '0.500', 'Kilogram', 1, 1, 0, 0, 2, 0, 0, 'cotton-mesh-long-sleeve-polo', 0, 1, 0, 0),
+(60, NULL, 0, '', 'resources/assets/images/product_images/1502350673.pPOLO2-25961171_standard_v400.jpg', '45.00', '2017-08-10 07:37:53', '2018-11-19 12:03:09', NULL, '0.500', 'Kilogram', 1, 1, 0, 0, 1, 0, 0, 'plaid-cotton-twill-workshirt', 0, 1, 0, 0),
+(61, NULL, 0, '', 'resources/assets/images/product_images/1502351678.pPOLO2-25961083_standard_v400.jpg', '45.00', '2017-08-10 07:54:38', '2018-11-19 12:02:16', NULL, '0.500', 'Kilogram', 1, 1, 0, 0, 1, 0, 0, 'cotton-oxford-sport-shirt', 0, 1, 0, 0),
+(62, NULL, -1, '', 'resources/assets/images/product_images/1502351882.pPOLO2-24921004_standard_v400.jpg', '55.00', '2017-08-10 07:58:02', '2018-11-19 12:01:47', NULL, '0.500', 'Kilogram', 1, 1, 0, 1, 4, 0, 0, 'cotton-mesh-workshirt', 0, 1, 0, 0),
+(63, NULL, 0, '', 'resources/assets/images/product_images/1502352055.pPOLO2-25363631_standard_v400.jpg', '50.00', '2017-08-10 08:00:55', '2018-11-19 12:01:16', NULL, '0.500', 'Kilogram', 1, 0, 0, 0, 1, 0, 0, 'striped-cotton-shirt-1', 0, 1, 0, 0),
+(64, NULL, 0, '', 'resources/assets/images/product_images/1502352545.pPOLO2-25363631_standard_v400.jpg', '55.00', '2017-08-10 08:09:05', '2018-11-19 12:00:20', NULL, '0.500', 'Kilogram', 1, 1, 0, 0, 1, 0, 0, 'striped-cotton-shirt', 0, 1, 0, 0),
+(65, NULL, -1, '', 'resources/assets/images/product_images/1502353123.pPOLO2-10531663_standard_v400.jpg', '45.00', '2017-08-10 08:18:43', '2018-11-19 11:59:52', NULL, '0.500', 'Kilogram', 1, 1, 0, 1, 3, 0, 0, 'slim-mott-wash-jean', 0, 1, 0, 0),
+(66, NULL, 0, '', 'resources/assets/images/product_images/1502359349.pPOLO2-25961644_lifestyle_v400.jpg', '39.50', '2017-08-10 10:02:29', '2018-11-19 11:59:27', NULL, '0.500', 'Kilogram', 1, 1, 0, 0, 1, 0, 0, 'eldridge-stretch-skinny-jean', 0, 1, 0, 0),
+(67, NULL, 0, '', 'resources/assets/images/product_images/1502362089.pPOLO2-14689748_standard_v400.jpg', '550.00', '2017-08-10 10:48:09', '2018-11-19 11:58:39', NULL, '0.500', 'Kilogram', 1, 1, 0, 0, 3, 0, 0, 'polo-i-wool-twill-suit', 0, 1, 0, 0),
+(68, NULL, 0, '', 'resources/assets/images/product_images/1502362408.pPOLO2-24922918_standard_v400.jpg', '49.50', '2017-08-10 10:53:28', '2018-11-19 11:58:04', NULL, '0.500', 'Kilogram', 1, 1, 0, 0, 1, 0, 0, 'belted-stretch-cotton-chino', 0, 1, 0, 0),
+(69, NULL, 0, '', 'resources/assets/images/product_images/1502362738.pPOLO2-25464515_lifestyle_v400.jpg', '40.00', '2017-08-10 10:58:58', '2018-11-19 11:57:11', NULL, '0.500', 'Kilogram', 1, 1, 0, 0, 0, 0, 0, 'batten-canvas-ez-boat-shoe', 0, 1, 0, 0),
+(70, NULL, 0, '', 'resources/assets/images/product_images/1502363119.pPOLO2-25464682_standard_v400.jpg', '45.00', '2017-08-10 11:05:19', '2018-11-19 08:39:03', NULL, '0.500', 'Gram', 1, 1, 0, 0, 4, 0, 0, 'propell-ii-sneaker', 0, 1, 0, 0),
+(71, NULL, 0, '', 'resources/assets/images/product_images/1502363378.pPOLO2-25464575_standard_v400.jpg', '30.00', '2017-08-10 11:09:38', '2018-11-19 08:38:37', NULL, '0.500', 'Kilogram', 1, 1, 0, 0, 1, 0, 0, 'banks-sandal', 0, 1, 0, 0),
+(72, NULL, 0, '', 'resources/assets/images/product_images/1502364150.pPOLO2-26091141_standard_v400.jpg', '59.00', '2017-08-10 11:22:30', '2018-11-19 08:38:03', NULL, '0.500', 'Kilogram', 1, 1, 0, 0, 2, 0, 0, 'madras-cotton-shirtdress', 0, 1, 0, 0),
+(73, NULL, 0, '', 'resources/assets/images/product_images/1502364697.pPOLO2-23643008_standard_v400.jpg', '55.00', '2017-08-10 11:31:37', '2018-11-19 08:37:32', NULL, '0.500', 'Kilogram', 1, 1, 0, 0, 5, 0, 0, 'cotton-chino-belted-shirtdress', 0, 1, 0, 0),
+(74, NULL, 0, '', 'resources/assets/images/product_images/1502364932.pPOLO2-25835439_standard_v400.jpg', '45.00', '2017-08-10 11:35:32', '2018-11-19 08:35:49', NULL, '0.500', 'Kilogram', 1, 1, 0, 0, 3, 0, 0, 'striped-off-the-shoulder-dress', 1, 1, 0, 0),
+(75, NULL, 0, '', 'resources/assets/images/product_images/1502365189.pPOLO2-26091856_standard_v400.jpg', '49.50', '2017-08-10 11:39:49', '2018-11-19 08:33:37', NULL, '0.500', 'Kilogram', 1, 1, 0, 0, 3, 0, 0, 'button-front-denim-skirt', 1, 1, 5, 0),
+(76, NULL, 0, '', 'resources/assets/images/product_images/1502365515.pPOLO2-26091862_alternate1_v400.jpg', '49.50', '2017-08-10 11:45:15', '2018-11-19 08:33:01', NULL, '0.500', 'Kilogram', 1, 1, 0, 0, 6, 0, 0, 'floral-skirt', 0, 1, 5, 0),
+(77, NULL, -18, '', 'resources/assets/images/product_images/1502366105.pPOLO2-26091049_alternate1_v400.jpg', '56.50', '2017-08-10 11:55:05', '2018-11-19 08:31:40', NULL, '0.500', 'Kilogram', 1, 1, 0, 5, 5, 0, 0, 'pleated-madras-skirt', 1, 2, 8, 0),
+(78, NULL, 0, '', 'resources/assets/images/product_images/1502366342.pPOLO2-26090785_standard_v400.jpg', '195.00', '2017-08-10 11:59:02', '2018-11-19 08:30:45', NULL, '0.500', 'Kilogram', 1, 1, 0, 0, 8, 0, 0, 'cable-knit-cashmere-sweater', 0, 1, 0, 0),
+(79, NULL, 0, '', 'resources/assets/images/product_images/1502366462.pPOLO2-26090829_standard_v400.jpg', '45.00', '2017-08-10 12:01:02', '2018-11-19 08:27:53', NULL, '0.500', 'Kilogram', 1, 1, 0, 0, 4, 0, 0, 'fair-isle-hooded-sweater', 1, 1, 0, 0),
+(80, NULL, 0, '', 'resources/assets/images/product_images/1502366586.pPOLO2-25834797_standard_v400.jpg', '125.00', '2017-08-10 12:03:06', '2019-03-20 08:30:31', NULL, '0.500', 'Kilogram', 1, 1, 0, 0, 4, 0, 0, 'flag-combed-cotton-sweater', 1, 1, 0, 0),
+(81, 1, 0, '', 'resources/assets/images/product_images/1502366686.pPOLO2-25207761_standard_v400.jpg', '49.50', '2017-08-10 12:04:46', '2019-12-15 01:23:44', NULL, '0.500', 'Kilogram', 1, 0, 0, 1, 4, 0, 0, 'ruffled-cotton-cardigan', 0, 1, 0, 0),
+(82, 0, 0, '', 'resources/assets/images/product_images/1576416306.Screenshot from 2019-12-15 12-39-02.png', '100.00', '2019-12-15 01:25:06', '2019-12-16 10:57:22', NULL, '100', 'Gram', 1, 0, 0, 0, 0, 0, 0, 'yousry-product', 1, 1, 0, 0),
+(83, NULL, 0, 'للل', 'resources/assets/images/product_images/1576504525.1502174868.pPOLO2-26314826_alternate2_v360x480.jpg', '1000.00', '2019-12-16 01:55:25', NULL, NULL, '10', 'Gram', 1, 1, 0, 0, 0, 0, 0, 'product', 1, 1, 5, 12),
+(84, NULL, 0, 'ر', 'resources/assets/images/product_images/1576507488.1502176808.pPOLO2-26316348_alternate3_v360x480.jpg', '100.00', '2019-12-16 02:44:47', NULL, NULL, '20', 'Gram', 1, 1, 0, 0, 0, 0, 0, 'dcd', 1, 1, 3, 1),
+(85, NULL, 0, 'ي', 'resources/assets/images/product_images/1576507650.1502174889.pPOLO2-26314766_standard_v400.jpg', '2000.00', '2019-12-16 02:47:30', NULL, NULL, '120', 'Gram', 1, 1, 0, 0, 0, 0, 0, '', 0, 1, 12, 12),
+(86, NULL, 0, 'ي', 'resources/assets/images/product_images/1576507688.1502174889.pPOLO2-26314766_standard_v400.jpg', '2000.00', '2019-12-16 02:48:08', '2019-12-18 10:38:29', NULL, '120', 'Gram', 1, 1, 0, 0, 0, 0, 0, 'ghnhj', 0, 1, 12, 12),
+(87, NULL, 0, '', 'resources/assets/images/product_images/1576508053.1502174868.pPOLO2-26314826_alternate2_v360x480.jpg', '200.00', '2019-12-16 02:54:13', NULL, NULL, '1', 'Kilogram', 1, 0, 0, 0, 0, 0, 0, 'hj', 2, 1, 20, 1);
 
 -- --------------------------------------------------------
 
@@ -2868,7 +2924,7 @@ CREATE TABLE `products_attributes` (
   `options_values_id` int(11) NOT NULL,
   `options_values_price` decimal(15,2) NOT NULL,
   `price_prefix` char(1) COLLATE utf8_unicode_ci NOT NULL,
-  `is_default` tinyint(1) NOT NULL DEFAULT '0'
+  `is_default` tinyint(1) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
@@ -2888,7 +2944,11 @@ INSERT INTO `products_attributes` (`products_attributes_id`, `products_id`, `opt
 (15, 75, 1, 1, '0.00', '+', 1),
 (16, 75, 1, 2, '10.00', '+', 0),
 (17, 75, 3, 154, '0.00', '+', 1),
-(18, 75, 3, 155, '5.00', '-', 0);
+(18, 75, 3, 155, '5.00', '-', 0),
+(19, 83, 3, 156, '0.00', '+', 1),
+(20, 83, 14, 168, '0.00', '+', 0),
+(21, 84, 1, 1, '0.00', '+', 1),
+(22, 84, 3, 155, '0.00', '+', 0);
 
 -- --------------------------------------------------------
 
@@ -2899,8 +2959,8 @@ INSERT INTO `products_attributes` (`products_attributes_id`, `products_id`, `opt
 CREATE TABLE `products_attributes_download` (
   `products_attributes_id` int(11) NOT NULL,
   `products_attributes_filename` varchar(255) COLLATE utf8_unicode_ci NOT NULL DEFAULT '',
-  `products_attributes_maxdays` int(2) DEFAULT '0',
-  `products_attributes_maxcount` int(2) DEFAULT '0'
+  `products_attributes_maxdays` int(2) DEFAULT 0,
+  `products_attributes_maxcount` int(2) DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
@@ -2911,15 +2971,15 @@ CREATE TABLE `products_attributes_download` (
 
 CREATE TABLE `products_description` (
   `products_id` int(11) NOT NULL,
-  `language_id` int(11) NOT NULL DEFAULT '1',
+  `language_id` int(11) NOT NULL DEFAULT 1,
   `products_name` varchar(64) COLLATE utf8_unicode_ci NOT NULL DEFAULT '',
-  `products_description` text COLLATE utf8_unicode_ci,
+  `products_description` text COLLATE utf8_unicode_ci DEFAULT NULL,
   `products_url` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `products_viewed` int(5) DEFAULT '0',
-  `products_left_banner` mediumtext COLLATE utf8_unicode_ci,
+  `products_viewed` int(5) DEFAULT 0,
+  `products_left_banner` mediumtext COLLATE utf8_unicode_ci DEFAULT NULL,
   `products_left_banner_start_date` int(30) DEFAULT NULL,
   `products_left_banner_expire_date` int(30) DEFAULT NULL,
-  `products_right_banner` mediumtext COLLATE utf8_unicode_ci,
+  `products_right_banner` mediumtext COLLATE utf8_unicode_ci DEFAULT NULL,
   `products_right_banner_start_date` int(30) DEFAULT NULL,
   `products_right_banner_expire_date` int(30) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
@@ -3092,8 +3152,16 @@ INSERT INTO `products_description` (`products_id`, `language_id`, `products_name
 (80, 4, 'بطة، قطن، البلوز', '<ul>\r\n	<li>100٪ قطن.</li>\r\n	<li>غسل اليد.</li>\r\n	<li>حجم المتوسطة لديها 18 &quot;طول الجسم و 19&frac12;&quot; طول الأكمام.</li>\r\n	<li>الضلع متماسكة. إغلاق زر على الكتف الأيسر.</li>\r\n	<li>أكمام طويلة مع الأصفاد متماسكة ضلع.</li>\r\n	<li>إنتارسيا متماسكة العلم الأمريكي مع اليد-- مطرزة النجوم و &quot;رل&quot; التطريز في وسط الجبهة.</li>\r\n	<li>الضلع متماسكة.</li>\r\n	<li>مصبوغة مع النيلي، والتي قد تفرك على الأقمشة والجلود، والمفروشات.</li>\r\n	<li>مستورد.</li>\r\n</ul>', '', 0, NULL, 0, 0, NULL, 1541462400, 1574899200),
 (81, 1, 'RUFFLED COTTON CARDIGAN', '<ul>\r\n	<li>100% cotton.</li>\r\n	<li>Machine washable.</li>\r\n	<li>Size medium has a 17&frac34;&quot; body length.</li>\r\n	<li>Signature embroidered pony at the left chest.</li>\r\n	<li>Rib-knit crewneck. Buttoned placket.</li>\r\n	<li>Puffed long sleeves with rib-knit cuffs.</li>\r\n	<li>Ruffled hem.</li>\r\n	<li>Imported.</li>\r\n</ul>', '', 0, NULL, 0, 0, 'resources/assets/images/products_banners/11538580934.160x600.png', 0, 0),
 (81, 4, 'روفلد كوتن كارديغان', '<ul>\r\n	<li>100٪ قطن.</li>\r\n	<li>آلة قابل للغسل.</li>\r\n	<li>حجم المتوسطة لديه 17&frac34; &quot;طول الجسم.</li>\r\n	<li>التوقيع، مطرزة، ترجمة حرفية، إلى، ال التعريف، اليسار، تشيست.</li>\r\n	<li>الضلع متماسكة. زر بلاكيت.</li>\r\n	<li>الأكمام الطويلة منتفخة مع الأصفاد متماسكة ضلع.</li>\r\n	<li>تكدرت تنحنح.</li>\r\n	<li>مستورد.</li>\r\n</ul>', '', 0, NULL, 0, 0, NULL, 0, 0),
-(82, 1, 'yousry Product', '<p>yousry Product</p>', '', 0, '', 0, 0, '', 0, 0),
-(82, 4, 'يسرى  برودكت', '<p>yousry Product</p>', '', 0, '', 0, 0, '', 0, 0);
+(82, 1, 'yousry Product', '<p>yousry Product</p>', '', 0, NULL, 0, 0, NULL, 0, 0),
+(82, 4, 'يسرى  برودكت', '<p>yousry Product</p>', '', 0, NULL, 0, 0, NULL, 0, 0),
+(83, 1, 'product', '<p>dfvdvd</p>', '', 0, 'resources/assets/images/products_banners/left_11576504525.1502174874.pPOLO2-26314826_alternate3_v360x480.jpg', 1576540800, 1576627200, 'resources/assets/images/products_banners/right_11576504525.1502107411.pPOLO2-26314766_alternate3_v360x480.jpg', 1575417600, 1575504000),
+(83, 4, 'تلت', '<p>بلبيلاب</p>', '', 0, 'resources/assets/images/products_banners/left_41576504525.1502174868.pPOLO2-26314826_alternate2_v360x480.jpg', 1574640000, 1576108800, 'resources/assets/images/products_banners/right_41576504525.1502174874.pPOLO2-26314826_alternate3_v360x480.jpg', 1575417600, 1575331200),
+(84, 1, 'dcd', '<p>df</p>', '', 0, 'resources/assets/images/products_banners/left_11576507488.1502174346.pPOLO2-26314826_standard_v400.jpg', 1574812800, 1574985600, 'resources/assets/images/products_banners/right_11576507488.1502176579.pPOLO2-26316348_standard_v400.jpg', 1576022400, 1575676800),
+(84, 4, 'يسمب', '<p>ررر</p>', '', 0, 'resources/assets/images/products_banners/left_41576507488.1502107411.pPOLO2-26314766_alternate3_v360x480.jpg', 1576022400, 1575504000, 'resources/assets/images/products_banners/right_41576507488.1502107411.pPOLO2-26314766_alternate3_v360x480.jpg', 1574726400, 1577318400),
+(86, 1, 'ghnhj', '<p>ؤبسيؤ&nbsp;</p>', '', 0, 'resources/assets/images/products_banners/left_11576507688.1502107411.pPOLO2-26314766_alternate3_v360x480 - Copy.jpg', 1575244800, 1574812800, 'resources/assets/images/products_banners/right_11576507688.1502174868.pPOLO2-26314826_alternate2_v360x480.jpg', 1578009600, 1576800000),
+(86, 4, 'عفاف', '<p>ؤ يءؤ&nbsp;</p>', '', 0, 'resources/assets/images/products_banners/left_41576507688.1502114036.pPOLO2-26316336_standard_v400.jpg', 1575331200, 1577318400, 'resources/assets/images/products_banners/right_41576507688.1502174889.pPOLO2-26314766_standard_v400.jpg', 1574812800, 1576108800),
+(87, 1, 'hj', '<p>hjhjk</p>', 'fhg', 0, 'resources/assets/images/products_banners/left_11576508053.1502107411.pPOLO2-26314766_alternate3_v360x480 - Copy.jpg', 1575417600, 1577232000, 'resources/assets/images/products_banners/right_11576508053.1502107411.pPOLO2-26314766_alternate3_v360x480.jpg', 1574812800, 1575936000),
+(87, 4, 'hk', '<p>hjhk</p>', 'h', 0, 'resources/assets/images/products_banners/left_41576508053.1502174868.pPOLO2-26314826_alternate2_v360x480.jpg', 1575417600, 1577232000, 'resources/assets/images/products_banners/right_41576508053.1502174889.pPOLO2-26314766_standard_v400.jpg', 1576540800, 1576627200);
 
 -- --------------------------------------------------------
 
@@ -3104,8 +3172,8 @@ INSERT INTO `products_description` (`products_id`, `language_id`, `products_name
 CREATE TABLE `products_images` (
   `id` int(11) NOT NULL,
   `products_id` int(11) NOT NULL,
-  `image` mediumtext COLLATE utf8_unicode_ci,
-  `htmlcontent` mediumtext COLLATE utf8_unicode_ci,
+  `image` mediumtext COLLATE utf8_unicode_ci DEFAULT NULL,
+  `htmlcontent` mediumtext COLLATE utf8_unicode_ci DEFAULT NULL,
   `sort_order` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
@@ -3211,7 +3279,8 @@ INSERT INTO `products_images` (`id`, `products_id`, `image`, `htmlcontent`, `sor
 (103, 97, 'resources/assets/images/product_images/1542635255.pexels-photo-236047.jpeg', 'test test', 1),
 (104, 98, 'resources/assets/images/product_images/1542638256.pexels-photo-236047.jpeg', 'test', 1),
 (105, 99, 'resources/assets/images/product_images/1542638405.pexels-photo-236047.jpeg', 'tset', 1),
-(106, 98, 'resources/assets/images/product_images/1542703742.00306.gif', 'tes test etst', 2);
+(106, 98, 'resources/assets/images/product_images/1542703742.00306.gif', 'tes test etst', 2),
+(107, 84, 'resources/assets/images/product_images/1576507551.1502107411.pPOLO2-26314766_alternate3_v360x480.jpg', '', 1);
 
 -- --------------------------------------------------------
 
@@ -3403,7 +3472,7 @@ CREATE TABLE `products_shipping_rates` (
   `weight_to` varchar(100) DEFAULT NULL,
   `weight_price` int(100) NOT NULL,
   `unit_id` int(100) NOT NULL,
-  `products_shipping_status` tinyint(1) NOT NULL DEFAULT '1'
+  `products_shipping_status` tinyint(1) NOT NULL DEFAULT 1
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 --
@@ -3597,7 +3666,15 @@ INSERT INTO `products_to_categories` (`products_id`, `categories_id`) VALUES
 (80, 28),
 (81, 4),
 (81, 28),
-(82, 1);
+(82, 1),
+(83, 1),
+(83, 8),
+(84, 1),
+(84, 10),
+(86, 2),
+(86, 13),
+(87, 1),
+(87, 11);
 
 -- --------------------------------------------------------
 
@@ -3613,8 +3690,8 @@ CREATE TABLE `reviews` (
   `reviews_rating` int(1) DEFAULT NULL,
   `date_added` datetime DEFAULT NULL,
   `last_modified` datetime DEFAULT NULL,
-  `reviews_status` tinyint(1) NOT NULL DEFAULT '0',
-  `reviews_read` int(5) NOT NULL DEFAULT '0'
+  `reviews_status` tinyint(1) NOT NULL DEFAULT 0,
+  `reviews_read` int(5) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
@@ -3661,7 +3738,7 @@ CREATE TABLE `sessions` (
 CREATE TABLE `settings` (
   `id` int(10) UNSIGNED NOT NULL,
   `name` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `value` text COLLATE utf8_unicode_ci,
+  `value` text COLLATE utf8_unicode_ci DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
@@ -3801,8 +3878,8 @@ INSERT INTO `shipping_description` (`id`, `name`, `language_id`, `table_name`, `
 CREATE TABLE `shipping_methods` (
   `shipping_methods_id` int(100) NOT NULL,
   `methods_type_link` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
-  `isDefault` tinyint(1) NOT NULL DEFAULT '0',
-  `status` tinyint(1) NOT NULL DEFAULT '0',
+  `isDefault` tinyint(1) NOT NULL DEFAULT 0,
+  `status` tinyint(1) NOT NULL DEFAULT 0,
   `table_name` varchar(255) COLLATE utf8_unicode_ci NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
@@ -3866,7 +3943,7 @@ CREATE TABLE `specials` (
   `specials_last_modified` int(100) NOT NULL,
   `expires_date` int(100) NOT NULL,
   `date_status_change` int(100) NOT NULL,
-  `status` int(1) NOT NULL DEFAULT '1'
+  `status` int(1) NOT NULL DEFAULT 1
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
@@ -3913,7 +3990,8 @@ INSERT INTO `specials` (`specials_id`, `products_id`, `specials_new_products_pri
 (44, 44, '23.55', 1542629964, 0, 1640995200, 0, 1),
 (45, 43, '21.99', 1542629989, 0, 1640995200, 0, 1),
 (46, 39, '27.85', 1542630111, 0, 1640995200, 0, 1),
-(47, 25, '150.00', 1542632897, 0, 1667174400, 0, 1);
+(47, 25, '150.00', 1542632897, 0, 1667174400, 0, 1),
+(48, 83, '200.00', 1576504525, 0, 1575331200, 0, 1);
 
 -- --------------------------------------------------------
 
@@ -3928,13 +4006,7 @@ CREATE TABLE `tax_class` (
   `last_modified` datetime DEFAULT NULL,
   `date_added` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-
---
--- Dumping data for table `tax_class`
---
-
-INSERT INTO `tax_class` (`tax_class_id`, `tax_class_title`, `tax_class_description`, `last_modified`, `date_added`) VALUES
-(1, 'Sale Tax', 'This tax apply on products related to USA item.', NULL, '2017-08-07 07:06:53');
+-- Error reading data for table store_db.tax_class: #1064 - You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'FROM `store_db`.`tax_class`' at line 1
 
 -- --------------------------------------------------------
 
@@ -3946,7 +4018,7 @@ CREATE TABLE `tax_rates` (
   `tax_rates_id` int(11) NOT NULL,
   `tax_zone_id` int(11) NOT NULL,
   `tax_class_id` int(11) NOT NULL,
-  `tax_priority` int(5) DEFAULT '1',
+  `tax_priority` int(5) DEFAULT 1,
   `tax_rate` decimal(7,2) NOT NULL,
   `tax_description` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `last_modified` datetime DEFAULT NULL,
@@ -3971,7 +4043,7 @@ CREATE TABLE `units` (
   `unit_name` varchar(255) NOT NULL,
   `date_added` datetime DEFAULT NULL,
   `last_modified` datetime DEFAULT NULL,
-  `is_active` tinyint(1) NOT NULL DEFAULT '1',
+  `is_active` tinyint(1) NOT NULL DEFAULT 1,
   `languages_id` int(100) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
@@ -4032,7 +4104,7 @@ CREATE TABLE `users` (
   `email` varchar(250) COLLATE utf8_unicode_ci NOT NULL,
   `password` varchar(250) COLLATE utf8_unicode_ci NOT NULL,
   `rememberToken` int(100) NOT NULL,
-  `timestamps` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+  `timestamps` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
@@ -4042,7 +4114,7 @@ CREATE TABLE `users` (
 --
 
 CREATE TABLE `whos_online` (
-  `customer_id` int(11) NOT NULL DEFAULT '0',
+  `customer_id` int(11) NOT NULL DEFAULT 0,
   `full_name` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `session_id` varchar(128) COLLATE utf8_unicode_ci NOT NULL,
   `ip_address` varchar(15) COLLATE utf8_unicode_ci NOT NULL,
@@ -4850,356 +4922,428 @@ ALTER TABLE `zones_to_geo_zones`
 --
 ALTER TABLE `action_recorder`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
 --
 -- AUTO_INCREMENT for table `address_book`
 --
 ALTER TABLE `address_book`
   MODIFY `address_book_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
 --
 -- AUTO_INCREMENT for table `address_format`
 --
 ALTER TABLE `address_format`
   MODIFY `address_format_id` int(11) NOT NULL AUTO_INCREMENT;
+
 --
 -- AUTO_INCREMENT for table `administrators`
 --
 ALTER TABLE `administrators`
-  MODIFY `myid` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `myid` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+
 --
 -- AUTO_INCREMENT for table `admin_types`
 --
 ALTER TABLE `admin_types`
-  MODIFY `admin_type_id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `admin_type_id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
 --
 -- AUTO_INCREMENT for table `alert_settings`
 --
 ALTER TABLE `alert_settings`
   MODIFY `alert_id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
 --
 -- AUTO_INCREMENT for table `api_calls_list`
 --
 ALTER TABLE `api_calls_list`
   MODIFY `id` int(100) NOT NULL AUTO_INCREMENT;
+
 --
 -- AUTO_INCREMENT for table `banners`
 --
 ALTER TABLE `banners`
   MODIFY `banners_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
 --
 -- AUTO_INCREMENT for table `banners_history`
 --
 ALTER TABLE `banners_history`
   MODIFY `banners_history_id` int(11) NOT NULL AUTO_INCREMENT;
+
 --
 -- AUTO_INCREMENT for table `categories`
 --
 ALTER TABLE `categories`
-  MODIFY `categories_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
+  MODIFY `categories_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=39;
+
 --
 -- AUTO_INCREMENT for table `categories_description`
 --
 ALTER TABLE `categories_description`
-  MODIFY `categories_description_id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=106;
+  MODIFY `categories_description_id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=118;
+
 --
 -- AUTO_INCREMENT for table `categories_role`
 --
 ALTER TABLE `categories_role`
   MODIFY `categories_role_id` int(11) NOT NULL AUTO_INCREMENT;
+
 --
 -- AUTO_INCREMENT for table `constant_banners`
 --
 ALTER TABLE `constant_banners`
   MODIFY `banners_id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+
 --
 -- AUTO_INCREMENT for table `countries`
 --
 ALTER TABLE `countries`
   MODIFY `countries_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=240;
+
 --
 -- AUTO_INCREMENT for table `coupons`
 --
 ALTER TABLE `coupons`
   MODIFY `coupans_id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+
 --
 -- AUTO_INCREMENT for table `currencies`
 --
 ALTER TABLE `currencies`
   MODIFY `currencies_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
 --
 -- AUTO_INCREMENT for table `customers`
 --
 ALTER TABLE `customers`
-  MODIFY `customers_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `customers_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
 --
 -- AUTO_INCREMENT for table `customers_basket`
 --
 ALTER TABLE `customers_basket`
-  MODIFY `customers_basket_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `customers_basket_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
 --
 -- AUTO_INCREMENT for table `customers_basket_attributes`
 --
 ALTER TABLE `customers_basket_attributes`
-  MODIFY `customers_basket_attributes_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `customers_basket_attributes_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
 --
 -- AUTO_INCREMENT for table `devices`
 --
 ALTER TABLE `devices`
   MODIFY `id` int(100) NOT NULL AUTO_INCREMENT;
+
 --
 -- AUTO_INCREMENT for table `fedex_shipping`
 --
 ALTER TABLE `fedex_shipping`
   MODIFY `fedex_id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
 --
 -- AUTO_INCREMENT for table `flash_sale`
 --
 ALTER TABLE `flash_sale`
   MODIFY `flash_sale_id` int(100) NOT NULL AUTO_INCREMENT;
+
 --
 -- AUTO_INCREMENT for table `flate_rate`
 --
 ALTER TABLE `flate_rate`
   MODIFY `id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
 --
 -- AUTO_INCREMENT for table `geo_zones`
 --
 ALTER TABLE `geo_zones`
   MODIFY `geo_zone_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
 --
 -- AUTO_INCREMENT for table `inventory`
 --
 ALTER TABLE `inventory`
-  MODIFY `inventory_ref_id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=146;
+  MODIFY `inventory_ref_id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=147;
+
 --
 -- AUTO_INCREMENT for table `labels`
 --
 ALTER TABLE `labels`
   MODIFY `label_id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1057;
+
 --
 -- AUTO_INCREMENT for table `label_value`
 --
 ALTER TABLE `label_value`
   MODIFY `label_value_id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1521;
+
 --
 -- AUTO_INCREMENT for table `languages`
 --
 ALTER TABLE `languages`
-  MODIFY `languages_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `languages_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
 --
 -- AUTO_INCREMENT for table `liked_products`
 --
 ALTER TABLE `liked_products`
   MODIFY `like_id` int(11) NOT NULL AUTO_INCREMENT;
+
 --
 -- AUTO_INCREMENT for table `manage_min_max`
 --
 ALTER TABLE `manage_min_max`
   MODIFY `min_max_id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=91;
+
 --
 -- AUTO_INCREMENT for table `manage_role`
 --
 ALTER TABLE `manage_role`
-  MODIFY `manage_role_id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `manage_role_id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+
 --
 -- AUTO_INCREMENT for table `manufacturers`
 --
 ALTER TABLE `manufacturers`
   MODIFY `manufacturers_id` int(11) NOT NULL AUTO_INCREMENT;
+
 --
 -- AUTO_INCREMENT for table `news`
 --
 ALTER TABLE `news`
   MODIFY `news_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=55;
+
 --
 -- AUTO_INCREMENT for table `newsletters`
 --
 ALTER TABLE `newsletters`
   MODIFY `newsletters_id` int(11) NOT NULL AUTO_INCREMENT;
+
 --
 -- AUTO_INCREMENT for table `news_categories`
 --
 ALTER TABLE `news_categories`
   MODIFY `categories_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+
 --
 -- AUTO_INCREMENT for table `news_categories_description`
 --
 ALTER TABLE `news_categories_description`
   MODIFY `categories_description_id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
+
 --
 -- AUTO_INCREMENT for table `news_description`
 --
 ALTER TABLE `news_description`
   MODIFY `news_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=55;
+
 --
 -- AUTO_INCREMENT for table `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `orders_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `orders_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
 --
 -- AUTO_INCREMENT for table `orders_products`
 --
 ALTER TABLE `orders_products`
-  MODIFY `orders_products_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `orders_products_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
 --
 -- AUTO_INCREMENT for table `orders_products_attributes`
 --
 ALTER TABLE `orders_products_attributes`
-  MODIFY `orders_products_attributes_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `orders_products_attributes_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
 --
 -- AUTO_INCREMENT for table `orders_products_download`
 --
 ALTER TABLE `orders_products_download`
   MODIFY `orders_products_download_id` int(11) NOT NULL AUTO_INCREMENT;
+
 --
 -- AUTO_INCREMENT for table `orders_status_description`
 --
 ALTER TABLE `orders_status_description`
   MODIFY `orders_status_description_id` int(100) NOT NULL AUTO_INCREMENT;
+
 --
 -- AUTO_INCREMENT for table `orders_status_history`
 --
 ALTER TABLE `orders_status_history`
-  MODIFY `orders_status_history_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `orders_status_history_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
 --
 -- AUTO_INCREMENT for table `orders_total`
 --
 ALTER TABLE `orders_total`
   MODIFY `orders_total_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+
 --
 -- AUTO_INCREMENT for table `pages`
 --
 ALTER TABLE `pages`
   MODIFY `page_id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+
 --
 -- AUTO_INCREMENT for table `pages_description`
 --
 ALTER TABLE `pages_description`
   MODIFY `page_description_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
+
 --
 -- AUTO_INCREMENT for table `payments_setting`
 --
 ALTER TABLE `payments_setting`
   MODIFY `payments_id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
 --
 -- AUTO_INCREMENT for table `payment_description`
 --
 ALTER TABLE `payment_description`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
+
 --
 -- AUTO_INCREMENT for table `products`
 --
 ALTER TABLE `products`
-  MODIFY `products_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=83;
+  MODIFY `products_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=88;
+
 --
 -- AUTO_INCREMENT for table `products_attributes`
 --
 ALTER TABLE `products_attributes`
-  MODIFY `products_attributes_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `products_attributes_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+
 --
 -- AUTO_INCREMENT for table `products_description`
 --
 ALTER TABLE `products_description`
-  MODIFY `products_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=83;
+  MODIFY `products_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=88;
+
 --
 -- AUTO_INCREMENT for table `products_images`
 --
 ALTER TABLE `products_images`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=107;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=108;
+
 --
 -- AUTO_INCREMENT for table `products_options`
 --
 ALTER TABLE `products_options`
   MODIFY `products_options_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+
 --
 -- AUTO_INCREMENT for table `products_options_descriptions`
 --
 ALTER TABLE `products_options_descriptions`
   MODIFY `products_options_descriptions_id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+
 --
 -- AUTO_INCREMENT for table `products_options_values`
 --
 ALTER TABLE `products_options_values`
   MODIFY `products_options_values_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=182;
+
 --
 -- AUTO_INCREMENT for table `products_options_values_descriptions`
 --
 ALTER TABLE `products_options_values_descriptions`
   MODIFY `products_options_values_descriptions_id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=69;
+
 --
 -- AUTO_INCREMENT for table `products_shipping_rates`
 --
 ALTER TABLE `products_shipping_rates`
   MODIFY `products_shipping_rates_id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
 --
 -- AUTO_INCREMENT for table `reviews`
 --
 ALTER TABLE `reviews`
   MODIFY `reviews_id` int(11) NOT NULL AUTO_INCREMENT;
+
 --
 -- AUTO_INCREMENT for table `sec_directory_whitelist`
 --
 ALTER TABLE `sec_directory_whitelist`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
 --
 -- AUTO_INCREMENT for table `settings`
 --
 ALTER TABLE `settings`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=91;
+
 --
 -- AUTO_INCREMENT for table `shipping_description`
 --
 ALTER TABLE `shipping_description`
   MODIFY `id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+
 --
 -- AUTO_INCREMENT for table `shipping_methods`
 --
 ALTER TABLE `shipping_methods`
   MODIFY `shipping_methods_id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
 --
 -- AUTO_INCREMENT for table `sliders_images`
 --
 ALTER TABLE `sliders_images`
   MODIFY `sliders_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+
 --
 -- AUTO_INCREMENT for table `specials`
 --
 ALTER TABLE `specials`
-  MODIFY `specials_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=48;
+  MODIFY `specials_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=49;
+
 --
 -- AUTO_INCREMENT for table `tax_class`
 --
 ALTER TABLE `tax_class`
   MODIFY `tax_class_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
 --
 -- AUTO_INCREMENT for table `tax_rates`
 --
 ALTER TABLE `tax_rates`
   MODIFY `tax_rates_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
 --
 -- AUTO_INCREMENT for table `units`
 --
 ALTER TABLE `units`
   MODIFY `unit_id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
 --
 -- AUTO_INCREMENT for table `ups_shipping`
 --
 ALTER TABLE `ups_shipping`
   MODIFY `ups_id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
 --
 -- AUTO_INCREMENT for table `zones`
 --
 ALTER TABLE `zones`
   MODIFY `zone_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=182;
+
 --
 -- AUTO_INCREMENT for table `zones_to_geo_zones`
 --
 ALTER TABLE `zones_to_geo_zones`
   MODIFY `association_id` int(11) NOT NULL AUTO_INCREMENT;
+COMMIT;
+
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

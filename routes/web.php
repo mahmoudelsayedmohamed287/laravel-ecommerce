@@ -90,6 +90,7 @@ Route::group(['prefix' => 'admin'], function () {
 			//products
 			Route::get('/products', 'AdminProductsController@products');
 			Route::get('/addproduct', 'AdminProductsController@addproduct');
+			Route::get('/feature', 'AdminProductsController@feature');
 			Route::post('/addnewproduct', 'AdminProductsController@addnewproduct');
 
 			//add attribute against newly added product
@@ -120,6 +121,7 @@ Route::group(['prefix' => 'admin'], function () {
 			Route::post('/deleteproductimagemodal', 'AdminProductsController@deleteproductimagemodal');
 			Route::post('/deleteproductimage', 'AdminProductsController@deleteproductimage');
 			Route::get('/editproduct/{id}', 'AdminProductsController@editproduct');
+			Route::get('/feature/{id}', 'AdminProductsController@feature');
 			Route::post('/updateproduct', 'AdminProductsController@updateproduct');	
 			Route::post('/getOptions', 'AdminProductsController@getOptions');	
 			Route::post('/getOptionsValue', 'AdminProductsController@getOptionsValue');	
@@ -525,6 +527,7 @@ Route::post('/language/', array(
 	Route::get('/login', 'CustomersController@login');
 	Route::get('/signup', 'CustomersController@signup');
 	Route::get('/signupAsSeller', 'CustomersController@signupAsSeller');
+	Route::post('signupAsSeller/addnewadmin','CustomersController@addnewadmin');
 	Route::post('/process-login', 'CustomersController@processLogin');
 	Route::get('/logout', 'CustomersController@logout');
 	Route::post('/signupProcess', 'CustomersController@signupProcess');

@@ -36,6 +36,8 @@ return [
 	'MostLiked'=>'Most Liked',
 		
 	'New'=>'New',
+
+	'singasseller' => 'Sing Up Sa Seller ',
 		
 	'Likes'=>'Likes',
 		
