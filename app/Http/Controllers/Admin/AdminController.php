@@ -236,7 +236,8 @@ class AdminController extends Controller
 				$admin = auth()->guard('admin')->user();
 				
 				$administrators = DB::table('administrators')->where('myid', $admin->myid)->get();	
-				session(['admin_id' => $admin->myid]);				
+				session(['admin_id' => $admin->myid]);
+								
 				if(!empty(auth()->guard('admin')->user()->adminType)){	
 					if(auth()->guard('admin')->user()->adminType != '1'){
 					$roles = DB::table('manage_role')->where('admin_type_id', auth()->guard('admin')->user()->adminType)->get();

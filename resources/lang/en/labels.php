@@ -414,6 +414,7 @@ return [
 	'Male' => 'Male',
 	'Female' => 'Female',
 	'PictureText' => 'Please upload small size image.',
+	'msg waiting fro abrove' => 'Your Membership is Waiting For Abrove!',
 	
 	'DOBText' => 'Please enter date of birth.',
 	'Telephone' => 'Telephone',

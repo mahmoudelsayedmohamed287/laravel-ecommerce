@@ -1338,6 +1338,7 @@ return [
 	'Zip/Postal Code Text'=>'Please enter Zip/Postal Code.',
 	'Email address already exist'=>'Email address already exist.',
 	'New admin has been added successfully'=>'New admin has been added successfully!',
+	'msg waiting fro abrove' => 'طلبك فى  انتظار الموافقة !',
 	'EditAdmin'=>'Edit Admin',
 	'Admin has been updated successfully'=>'Admin has been updated successfully!',
 	'DeleteAdminMessage'=>'Admin has been deleted successfully!',

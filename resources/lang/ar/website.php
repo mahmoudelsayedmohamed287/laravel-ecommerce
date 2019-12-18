@@ -122,7 +122,10 @@ return [
 	'Special'=>'خاص',
 		
 	'items'=>'العناصر',
+	
 	'item'=>'بند',	
+
+	'singasseller' => 'سجل كبائع',
 		
 	'SubTotal'=>'المجموع الفرعي',		
 		
