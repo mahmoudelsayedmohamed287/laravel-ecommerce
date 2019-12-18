@@ -236,7 +236,8 @@ class AdminController extends Controller
 				$admin = auth()->guard('admin')->user();
 				
 				$administrators = DB::table('administrators')->where('myid', $admin->myid)->get();	
-				session(['admin_id' => $admin->myid]);				
+				session(['admin_id' => $admin->myid]);	
+                session(['activation' => $admin->isActive]);
 				if(!empty(auth()->guard('admin')->user()->adminType)){	
 					if(auth()->guard('admin')->user()->adminType != '1'){
 					$roles = DB::table('manage_role')->where('admin_type_id', auth()->guard('admin')->user()->adminType)->get();
@@ -579,8 +580,10 @@ class AdminController extends Controller
 					}
 				}
 				
-				session(['categories_id' => $categories_id]);	
-				return redirect()->intended('admin/dashboard/this_month')->with('administrators', $administrators);
+				session(['categories_id' => $categories_id]);
+              
+                if(session('activation') !== 0){return redirect()->intended('admin/dashboard/this_month')->with('administrators', $administrators);}
+               
 			}else{
 				return redirect('admin/login')->with('loginError',Lang::get("labels.EmailPasswordIncorrectText"));
 			}
@@ -688,7 +691,7 @@ class AdminController extends Controller
 			->leftJoin('countries','countries.countries_id','=', 'administrators.country')
 			->leftJoin('zones','zones.zone_id','=', 'administrators.state')
 			->leftJoin('admin_types','admin_types.admin_type_id','=','administrators.adminType')
-			->select('administrators.*', 'countries.*', 'zones.*','admin_types.*')
+			->select('administrators.*', 'countries.*', 'zones.*','admin_types.admin_type_id','admin_types.admin_type_name','admin_types.created_at')
 			->where('email','!=','vectorcoder@gmail.com')
 			->where('adminType','!=','1')
 			->paginate(50);

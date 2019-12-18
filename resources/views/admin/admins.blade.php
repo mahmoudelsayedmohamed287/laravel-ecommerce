@@ -103,7 +103,9 @@
                                 	{{$admin->admin_type_name}}</strong>
                                 </td>
                                 <td>
-                                  @if($admin->isActive==1)
+                                    
+                                  @if($admin->isActive==1) 
+                                   
                                     <strong class="badge bg-green">{{trans('labels.Active')}} </strong>
                                	  @else
                                 	<strong class="badge bg-light-grey">{{trans('labels.InActive')}} </strong>
