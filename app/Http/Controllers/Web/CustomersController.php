@@ -80,9 +80,73 @@ class CustomersController extends DataController
 	}
 	//signUp as Seller
 	public function signupAsSeller(Request $request){	
-		echo 'skfh';
+					
+		$title = array('pageTitle' => Lang::get("website.Login"));
+		$result = array();				
+		$result['commonContent'] = $this->commonContent();	
+		$getCountries = new \App\Http\Controllers\Admin\AddressController();
+		$result['countries'] = $getCountries->getAllCountries();	
+ 
+		return view("addadminfromout", $title)->with('result', $result);   
+
+
+
+
 				
 	}
+
+		//addnewadmin from out 
+		public function addnewadmin(Request $request){ 
+			
+			//get function from other controller
+			$myVar = new \App\Http\Controllers\Admin\AdminSiteSettingController();	
+			$extensions = $myVar->imageType();			
+			
+			$result = array();
+			$message = array();
+			$errorMessage = array();
+			
+			//check email already exists
+			$existEmail = DB::table('administrators')->where('email', '=', $request->email)->get();
+			if(count($existEmail)>0){
+				$errorMessage = Lang::get("labels.Email address already exist");
+				return redirect()->back()->with('errorMessage', $errorMessage);
+			}else{
+				if($request->hasFile('newImage') and in_array($request->newImage->extension(), $extensions)){
+					$image = $request->newImage;
+					$fileName = time().'.'.$image->getClientOriginalName();
+					$image->move('resources/views/admin/images/admin_profile/', $fileName);
+					$uploadImage = 'resources/views/admin/images/admin_profile/'.$fileName; 
+				}	else{
+					$uploadImage = '';
+				}		
+				
+				$customers_id = DB::table('administrators')->insertGetId([
+							'user_name'		 		    =>   $request->first_name.'_'.$request->last_name.time(),
+							'first_name'		 		=>   $request->first_name,
+							'last_name'			 		=>   $request->last_name,
+							'phone'	 					=>	 $request->phone,
+							'address'   				=>   $request->address,
+							'city'		   				=>   $request->city,
+							'state'		   				=>   $request->state,
+							'address'   				=>   $request->address,
+							'country'		   			=>   $request->country,
+							'zip'   					=>   $request->zip,
+							'email'	 					=>   $request->email,
+							'password'		 			=>   Hash::make($request->password),
+							'isActive'		 	 		=>   0,
+							'image'	 					=>	 $uploadImage,
+							'adminType'					=>	 6
+							]);
+						
+				
+				$message = Lang::get("labels.msg waiting fro abrove");
+				return redirect()->back()->with('message', $message);
+			}
+			
+		}
+
+
 	
 	//login
 	public function processLogin(Request $request){		

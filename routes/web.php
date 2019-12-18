@@ -525,6 +525,7 @@ Route::post('/language/', array(
 	Route::get('/login', 'CustomersController@login');
 	Route::get('/signup', 'CustomersController@signup');
 	Route::get('/signupAsSeller', 'CustomersController@signupAsSeller');
+	Route::post('signupAsSeller/addnewadmin','CustomersController@addnewadmin');
 	Route::post('/process-login', 'CustomersController@processLogin');
 	Route::get('/logout', 'CustomersController@logout');
 	Route::post('/signupProcess', 'CustomersController@signupProcess');
