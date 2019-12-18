@@ -90,6 +90,7 @@ Route::group(['prefix' => 'admin'], function () {
 			//products
 			Route::get('/products', 'AdminProductsController@products');
 			Route::get('/addproduct', 'AdminProductsController@addproduct');
+			Route::get('/feature', 'AdminProductsController@feature');
 			Route::post('/addnewproduct', 'AdminProductsController@addnewproduct');
 
 			//add attribute against newly added product
@@ -120,6 +121,7 @@ Route::group(['prefix' => 'admin'], function () {
 			Route::post('/deleteproductimagemodal', 'AdminProductsController@deleteproductimagemodal');
 			Route::post('/deleteproductimage', 'AdminProductsController@deleteproductimage');
 			Route::get('/editproduct/{id}', 'AdminProductsController@editproduct');
+			Route::get('/feature/{id}', 'AdminProductsController@feature');
 			Route::post('/updateproduct', 'AdminProductsController@updateproduct');	
 			Route::post('/getOptions', 'AdminProductsController@getOptions');	
 			Route::post('/getOptionsValue', 'AdminProductsController@getOptionsValue');	
