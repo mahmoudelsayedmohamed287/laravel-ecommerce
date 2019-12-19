@@ -135,11 +135,13 @@
                             </td>
                             <td>
                              	<?php if(	$product->feature > 0){ ?> 
+                                 
                                 <li role="presentation"><a role="menuitem" tabindex="-1" href="feature?id={{ $product->products_id }}&stat=1">feature</a></li>
                                <?php }else{?>
+                                
                                  <li role="presentation"><a role="menuitem" tabindex="-1" href="feature?id={{ $product->products_id }}&stat=0">make it feature</a></li>
 
-                               <?php }?>
+                             <?php }?>
                             </td>
                            
                             <td>
