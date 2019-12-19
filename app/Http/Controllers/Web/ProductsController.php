@@ -61,6 +61,14 @@ class ProductsController extends DataController
 		}else{
 			$limit = 15;
 		}
+		//seller
+		if(!empty($request->seller)){
+			$seller = $request->seller;
+			// dd($seller);
+		}else{
+			$seller = null;
+			// dd($seller);
+		}
 		
 		if(!empty($request->type)){
 			$type = $request->type;
@@ -163,9 +171,10 @@ class ProductsController extends DataController
 		}
 		
 		$myVar = new DataController();	
-		$data = array('page_number'=>$page_number, 'type'=>$type, 'limit'=>$limit, 'categories_id'=>$categories_id, 'search'=>$search, 'filters'=>$filters, 'limit'=>$limit, 'min_price'=>$min_price, 'max_price'=>$max_price );	
+		$data = array('page_number'=>$page_number, 'type'=>$type, 'limit'=>$limit, 'categories_id'=>$categories_id, 'search'=>$search, 'filters'=>$filters, 'limit'=>$limit, 'min_price'=>$min_price, 'max_price'=>$max_price ,'seller' => $seller );	
 		
 		$products = $myVar->products($data);
+		
 		$result['products'] = $products;
 		
 		$data = array('limit'=>$limit, 'categories_id'=>$categories_id );
@@ -280,8 +289,11 @@ class ProductsController extends DataController
 		
 		//liked products
 		$result['liked_products'] = $this->likedProducts();	
+		$seller = DB::table('administrators')->where('myid',$products[0]->admin_id)->get();
 		
-		return view("product-detail", $title)->with('result', $result); 
+		return view("product-detail", $title)->with(['result' => $result, 
+												     'seller_name' => $seller[0]->first_name, 
+												     'seller_id' =>  $seller[0]->myid]); 
 	}
 	
 	
@@ -352,7 +364,7 @@ class ProductsController extends DataController
 		}	
 						
 		$myVar = new DataController();
-		$data = array('page_number'=>$request->page_number, 'type'=>$type, 'limit'=>$limit, 'categories_id'=>$categories_id, 'search'=>$search, 'filters'=>$filters, 'limit'=>$limit, 'min_price'=>$min_price, 'max_price'=>$max_price );
+		$data = array('page_number'=>$request->page_number, 'type'=>$type, 'limit'=>$limit, 'categories_id'=>$categories_id, 'search'=>$search, 'filters'=>$filters, 'limit'=>$limit, 'min_price'=>$min_price, 'max_price'=>$max_price);
 		$products = $myVar->products($data);
 		$result['products'] = $products;	
 			
