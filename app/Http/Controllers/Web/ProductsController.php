@@ -42,7 +42,18 @@ class ProductsController extends DataController
      *
      * @return \Illuminate\Http\Response
      */
-			
+		
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
 	//shop 
 	public function shop(Request $request){
 		
@@ -154,11 +165,10 @@ class ProductsController extends DataController
 			
 			$filters['options'] = implode($options,',');
 			$filters['option_value'] = implode($option_values, ',');
-			
-                        $filters['filter_attribute']['options'] = $options;
+			$filters['filter_attribute']['options'] = $options;
 			$filters['filter_attribute']['option_values'] = $option_values;
 
-                        $result['filter_attribute']['options'] = $options;
+             $result['filter_attribute']['options'] = $options;
 			$result['filter_attribute']['option_values'] = $option_values;
 		}
 		
@@ -194,6 +204,23 @@ class ProductsController extends DataController
 		return view("shop", $title)->with('result', $result); 
 		
 	}
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
 	
 	//access object for custom pagination
 	function accessObjectArray($var){
@@ -241,6 +268,8 @@ class ProductsController extends DataController
 		}
 		$sub_category = DB::table('categories')->leftJoin('categories_description','categories_description.categories_id','=','categories.categories_id')->leftJoin('products_to_categories','products_to_categories.categories_id','=','categories.categories_id')->where('products_to_categories.products_id',$products[0]->products_id)->where('categories.parent_id','>',0)->where('language_id',Session::get('language_id'))->get();
 		
+//        die($sub_category);
+        
 		if(!empty($sub_category) and count($sub_category)>0){
 			$sub_category_name = $sub_category[0]->categories_name;
 			$sub_category_slug = $sub_category[0]->categories_slug;		

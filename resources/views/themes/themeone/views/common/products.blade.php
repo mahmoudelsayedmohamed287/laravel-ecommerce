@@ -196,9 +196,12 @@
            		@if(count($result['commonContent']['homeBanners'])>0)
                     @foreach(($result['commonContent']['homeBanners']) as $homeBanners)                
                         @if($homeBanners->type==6)
+                @if($homeBanners->status==1)
+                
                         <div class="banner-image en">
                             <a title="Banner Image" href="{{ $homeBanners->banners_url}}"><img class="img-fluid" src="{{asset('').$homeBanners->banners_image}}" alt="Banner Image"></a>
                         </div>
+                       @endif
                         @endif                
                     @endforeach
                 @endif 
@@ -318,9 +321,11 @@
                 @if(count($result['commonContent']['homeBanners'])>0)
                     @foreach(($result['commonContent']['homeBanners']) as $homeBanners)                
                         @if($homeBanners->type==7)
+                @if($homeBanners->status==1)
                         <div class="banner-image">
                             <a title="Banner Image" href="{{ $homeBanners->banners_url}}"><img class="img-fluid" src="{{asset('').$homeBanners->banners_image}}" alt="Banner Image"></a>
                         </div>
+                @endif
                         @endif                
                     @endforeach
                 @endif                 

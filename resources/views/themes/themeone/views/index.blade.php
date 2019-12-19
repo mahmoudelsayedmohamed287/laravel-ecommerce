@@ -7,13 +7,27 @@
     	<div class="row">
         	@if(count($result['commonContent']['homeBanners'])>0)
                 @foreach(($result['commonContent']['homeBanners']) as $homeBanners)                
-                    @if($homeBanners->type==3 or $homeBanners->type==4 or $homeBanners->type==5)
+                    @if($homeBanners->type==3 and $homeBanners->status==1 )
                     <div class="col-12 col-sm-4">
                         <div class="banner-image">
                             <a title="Banner Image" href="{{ $homeBanners->banners_url}}"><img class="img-fluid" src="{{asset('').$homeBanners->banners_image}}" alt="Banner Image"></a>
                         </div>
                     </div>
-                    @endif                
+                    @endif
+            @if($homeBanners->type==4 and $homeBanners->status==1 )
+                    <div class="col-12 col-sm-4">
+                        <div class="banner-image">
+                            <a title="Banner Image" href="{{ $homeBanners->banners_url}}"><img class="img-fluid" src="{{asset('').$homeBanners->banners_image}}" alt="Banner Image"></a>
+                        </div>
+                    </div>
+                    @endif 
+            @if($homeBanners->type==5 and $homeBanners->status==1 )
+                    <div class="col-12 col-sm-4">
+                        <div class="banner-image">
+                            <a title="Banner Image" href="{{ $homeBanners->banners_url}}"><img class="img-fluid" src="{{asset('').$homeBanners->banners_image}}" alt="Banner Image"></a>
+                        </div>
+                    </div>
+                    @endif 
                 @endforeach
             @endif            
         </div>
