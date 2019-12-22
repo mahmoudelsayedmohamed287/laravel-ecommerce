@@ -237,7 +237,7 @@ class DataController extends Controller
 	
 	//products 
 	public function products($data){
-		
+	
 		if(empty($data['page_number']) or $data['page_number'] == 0 ){
 			$skip								=   $data['page_number'].'0';
 		}else{
@@ -249,6 +249,7 @@ class DataController extends Controller
 		$take									=   $data['limit'];
 		$currentDate 							=   time();	
 		$type									=	$data['type'];
+		$seller                                 =   isset($data['seller'])? $data['seller'] : null;
 		
 		if($type=="atoz"){
 			$sortby								=	"products_name";
@@ -276,7 +277,7 @@ class DataController extends Controller
 			$sortby = "flash_sale.flash_start_date";
 			$order = "asc";
 		}else{
-			$sortby = "products.products_id";
+			$sortby = "products.is_feature";
 			$order = "desc";
 		}	
 				
@@ -287,12 +288,17 @@ class DataController extends Controller
 				->leftJoin('manufacturers','manufacturers.manufacturers_id','=','products.manufacturers_id')
 				->leftJoin('manufacturers_info','manufacturers.manufacturers_id','=','manufacturers_info.manufacturers_id')
 				->leftJoin('products_description','products_description.products_id','=','products.products_id');
+
+			if($seller !== null){
+				$categories->where('products.admin_id',$seller);
+			}
 				
 			if(!empty($data['categories_id'])){
 				$categories->LeftJoin('products_to_categories', 'products.products_id', '=', 'products_to_categories.products_id')
 						->leftJoin('categories','categories.categories_id','=','products_to_categories.categories_id')
 						->LeftJoin('categories_description','categories_description.categories_id','=','products_to_categories.categories_id');
 			}
+			
 			
 			
 			if(!empty($data['filters']) and empty($data['search'])){			
@@ -546,7 +552,10 @@ class DataController extends Controller
 				
 			//count
 			$total_record = $categories->get();
+			//to get all products
 			$products  = $categories->skip($skip)->take($take)->get();
+			//to get all products
+			
 			
 			$result = array();
 			$result2 = array();
@@ -654,6 +663,16 @@ class DataController extends Controller
 		return($responseData);
 	
 	}	
+
+
+	// make function to get all products affter features
+
+	public function products2(){
+		$feature = DB::table('products')->where('is_feature',1)->get();
+		return $feature;
+
+
+	}
 	
 	//getCart
 	public function cart($request){

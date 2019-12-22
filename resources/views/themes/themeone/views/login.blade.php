@@ -12,7 +12,8 @@
             </ol>
         </div>
     </div>
-    
+	
+	
 <div class="registration-area">
 	<div class="heading">
         <h2>@lang('website.Login Or Create An Account')</h2>

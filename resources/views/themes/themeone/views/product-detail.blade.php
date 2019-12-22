@@ -294,6 +294,12 @@
                                                 {{$web_setting[19]->value}}{{$product_price}}
                                                 </span>				
                                             </div>  
+                                            <div class="price-box" style="display: block">
+                                                 <span>@lang('website.Seller Name')&nbsp;:</span>
+                                                 <a href="{{ URL::to('/shop')}}?seller={{$seller_id}}">
+                                                   {{$seller_name}}
+                                                </a>
+                                            </div>
                                            
                                             
                                             <div class="buttons" style="margin-top: 30px;">    

@@ -243,10 +243,13 @@ class AdminController extends Controller
                  session(['activation' => $admin->isActive]);
                 if(session('activation')==0){return redirect('admin/login')->withErrors($validator)->withInput();}
                 else{
+<<<<<<< HEAD
                     DB::table('administrators')
             ->where('myid', $admin->myid)
             ->update(['last_login' => date('Y-m-d H:i:s')]);
                       
+=======
+>>>>>>> 24364531a30444f11bd202c7bbcf75b80a67ce2c
 				session(['admin_id' => $admin->myid]);	
               
 //=======
@@ -878,12 +881,20 @@ class AdminController extends Controller
 				'image'	 					=>	 $uploadImage,
 				'adminType'	 				=>	 $request->adminType,
 			);
+		
+
+			if( $request->isActive == 0){
+				DB::table('products')->where('admin_id',$myid)->update(['products_status'=> 0]);
+			
+				
+			}
 			
 			if($request->changePassword == 'yes'){
 				$admin_data['password'] = Hash::make($request->password);
 			}
 			
 			$customers_id = DB::table('administrators')->where('myid', '=', $myid)->update($admin_data);
+			
 					
 			
 			$message = Lang::get("labels.Admin has been updated successfully");

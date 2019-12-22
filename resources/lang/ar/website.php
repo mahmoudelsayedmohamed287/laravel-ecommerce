@@ -711,7 +711,7 @@ return [
 	'Product is disliked'=>'المنتج غير محبوب.',
 	'Password has been updated successfully'=>'تم تحديث كلمة المرور بنجاح.',
 	
-	
+	'Seller Name' => 'أسم البائع',
 	'Record not found'=>'سجل ملاحظة الخطوط!',
 	'contact us title'=>'التجارة الإلكترونية اتصل بنا',
 	'Follow Us'=>'تابعنا',

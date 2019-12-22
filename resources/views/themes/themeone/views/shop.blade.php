@@ -147,7 +147,20 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            
+                                            <!-- <?php foreach($result['feature'] as $feature){?>
+                                               <div class="product-hover">
+                                                <div class="icons">
+                                                <div class="icon-liked">
+                                                
+                                                        <span products_id = '{{$feature->products_id}}' class="fa @if($products->isLiked==1) fa-heart @else fa-heart-o @endif is_liked"><span class="badge badge-secondary">{{$products->products_liked}}</span></span>
+                                                    
+                                                    </div>           
+                                                    @if($feature->products_type!=2)
+                                                        <a href="{{ URL::to('/product-detail/'.$feature->products_slug)}}" class="fa fa-eye"></a>
+                                                    @endif
+                                            <?php }?>
+                                                </div> -->
+                                       
                                             <div class="product-hover">
                                                 <div class="icons">
                                                     <div class="icon-liked">

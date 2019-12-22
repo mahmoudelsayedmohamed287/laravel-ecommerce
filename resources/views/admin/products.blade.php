@@ -1,6 +1,9 @@
+
 @extends('admin.layout')
 @section('content')
-<div class="content-wrapper"> 
+
+<div class="content-wrapper">
+
   <!-- Content Header (Page header) -->
   <section class="content-header">
     <h1> {{ trans('labels.Products') }} <small>{{ trans('labels.ListingAllProducts') }}...</small> </h1>
@@ -78,19 +81,27 @@
               <div class="col-xs-12">
                 <table id="example1" class="table table-bordered table-striped">
                   <thead>
+                    
                     <tr>
                       <th>{{ trans('labels.ID') }}</th>
                       <th>{{ trans('labels.Image') }}</th>
                       <th>{{ trans('labels.ProductDescription') }}</th>
                       <th>{{ trans('labels.AddedLastModifiedDate') }}</th>
+<<<<<<< HEAD
                         @if(session('admin_type')==1) 
                       <th>feature status</th>
                         @endif
+=======
+                      <?php if(session('admin_type')==1){?>
+                      <th>feature status</th>
+                      <?php } ?>
+>>>>>>> 24364531a30444f11bd202c7bbcf75b80a67ce2c
                       <th></th>
-                      
+                     
                     </tr>
                   </thead>
                    <tbody>
+                     
                    @if(count($results['products'])>0)
                     @foreach ($results['products'] as  $key=>$product)
                     	<tr>
@@ -137,6 +148,7 @@
                             </td>
                              @if(session('admin_type')==1) 
                             <td>
+
                                 
                              	<?php if(	$product->feature > 0){ ?> 
                                 
@@ -146,6 +158,7 @@
                                  <li role="presentation"><a role="menuitem" tabindex="-1" href="feature?id={{ $product->products_id }}&stat=0">make it feature</a></li>
 
                              <?php }?>@endif
+
                             </td>
                            
                             <td>
@@ -156,7 +169,7 @@
                                 </a>
                                 <ul class="dropdown-menu">
                                     <li role="presentation"><a role="menuitem" tabindex="-1" href="editproduct/{{ $product->products_id }}">{{ trans('labels.EditProduct') }}</a></li>
-                                   
+
                                     @if($product->products_type==1)
                                     <li role="presentation" class="divider"></li>
                                     <li role="presentation"><a role="menuitem" tabindex="-1" href="addproductattribute/{{ $product->products_id }}">{{ trans('labels.ProductAttributes') }}</a></li>
@@ -223,5 +236,8 @@
     <!-- /.row --> 
   </section>
   <!-- /.content --> 
+ 
 </div>
+
 @endsection 
+ 
