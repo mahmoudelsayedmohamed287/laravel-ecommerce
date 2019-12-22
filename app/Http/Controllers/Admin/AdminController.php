@@ -239,23 +239,21 @@ class AdminController extends Controller
 				$admin = auth()->guard('admin')->user();
 				
 				$administrators = DB::table('administrators')->where('myid', $admin->myid)->get();	
-//<<<<<<< HEAD
+
                  session(['activation' => $admin->isActive]);
                 if(session('activation')==0){return redirect('admin/login')->withErrors($validator)->withInput();}
                 else{
-<<<<<<< HEAD
+
                     DB::table('administrators')
             ->where('myid', $admin->myid)
             ->update(['last_login' => date('Y-m-d H:i:s')]);
-                      
-=======
->>>>>>> 24364531a30444f11bd202c7bbcf75b80a67ce2c
+                    
 				session(['admin_id' => $admin->myid]);	
               
-//=======
+
 				session(['admin_type' => $admin->adminType]);
 								
-//>>>>>>> 6e8e05cf2b09280d50a2a95bf11e3155237e0425
+
 				if(!empty(auth()->guard('admin')->user()->adminType)){	
 					if(auth()->guard('admin')->user()->adminType != '1'){
 					$roles = DB::table('manage_role')->where('admin_type_id', auth()->guard('admin')->user()->adminType)->get();

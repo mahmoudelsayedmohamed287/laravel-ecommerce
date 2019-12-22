@@ -89,7 +89,7 @@
                       <th>{{ trans('labels.AddedLastModifiedDate') }}</th>
 
                         @if(session('admin_type')==1) 
-                      <th>feature status</th>
+                           <th>feature status</th>
                         @endif
 
                    
@@ -152,8 +152,8 @@
                                 <a role="presentation"><a role="menuitem" tabindex="-1" href="feature?id={{ $product->products_id }}&stat=1">feature</a>
                                <?php }else{?>
                                  <a role="presentation"><a role="menuitem" tabindex="-1" href="feature?id={{ $product->products_id }}&stat=0">make it feature</a>
-
-                                 
+                               <?php }?>
+                              @endif   
                      
 
                             </td>
