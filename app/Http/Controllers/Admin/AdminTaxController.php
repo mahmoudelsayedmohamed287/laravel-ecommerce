@@ -148,6 +148,7 @@ class AdminTaxController extends Controller
 		
 		return view("admin.addZone", $title)->with('result', $result);
 	}
+    
 	
 	//addNewZone	
 	public function addNewZone(Request $request){

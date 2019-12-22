@@ -246,7 +246,11 @@
           </ul>
         </li>
          @endif
-               
+         @if(session('admin_type')==1) 
+         <li class="">
+          <a href="{{ URL::to('admin/history')}}" ><i class="fa fa-tablet" aria-hidden="true"></i> <span>Admin History</span></a>
+        </li>  
+          @endif
       </ul>
     </section>
     <!-- /.sidebar -->

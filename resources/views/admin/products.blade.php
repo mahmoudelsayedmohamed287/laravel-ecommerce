@@ -83,7 +83,9 @@
                       <th>{{ trans('labels.Image') }}</th>
                       <th>{{ trans('labels.ProductDescription') }}</th>
                       <th>{{ trans('labels.AddedLastModifiedDate') }}</th>
+                        @if(session('admin_type')==1) 
                       <th>feature status</th>
+                        @endif
                       <th></th>
                       
                     </tr>
@@ -133,15 +135,17 @@
                              	<strong>{{ trans('labels.AddedDate') }}: </strong> {{ $product->products_date_added }}<br>
                            		<strong>{{ trans('labels.ModifiedDate') }}: </strong>{{ $product->products_last_modified }}
                             </td>
+                             @if(session('admin_type')==1) 
                             <td>
+                                
                              	<?php if(	$product->feature > 0){ ?> 
-                                 
+                                
                                 <li role="presentation"><a role="menuitem" tabindex="-1" href="feature?id={{ $product->products_id }}&stat=1">feature</a></li>
                                <?php }else{?>
                                 
                                  <li role="presentation"><a role="menuitem" tabindex="-1" href="feature?id={{ $product->products_id }}&stat=0">make it feature</a></li>
 
-                             <?php }?>
+                             <?php }?>@endif
                             </td>
                            
                             <td>
@@ -152,7 +156,7 @@
                                 </a>
                                 <ul class="dropdown-menu">
                                     <li role="presentation"><a role="menuitem" tabindex="-1" href="editproduct/{{ $product->products_id }}">{{ trans('labels.EditProduct') }}</a></li>
-                                    <li role="presentation"><a role="menuitem" tabindex="-1" href="feature/{{ $product->products_id }}">make it feature</a></li>
+                                   
                                     @if($product->products_type==1)
                                     <li role="presentation" class="divider"></li>
                                     <li role="presentation"><a role="menuitem" tabindex="-1" href="addproductattribute/{{ $product->products_id }}">{{ trans('labels.ProductAttributes') }}</a></li>
