@@ -237,7 +237,7 @@ class DataController extends Controller
 	
 	//products 
 	public function products($data){
-		
+	
 		if(empty($data['page_number']) or $data['page_number'] == 0 ){
 			$skip								=   $data['page_number'].'0';
 		}else{
@@ -249,6 +249,7 @@ class DataController extends Controller
 		$take									=   $data['limit'];
 		$currentDate 							=   time();	
 		$type									=	$data['type'];
+		$seller                                 =   isset($data['seller'])? $data['seller'] : null;
 		
 		if($type=="atoz"){
 			$sortby								=	"products_name";
@@ -287,12 +288,17 @@ class DataController extends Controller
 				->leftJoin('manufacturers','manufacturers.manufacturers_id','=','products.manufacturers_id')
 				->leftJoin('manufacturers_info','manufacturers.manufacturers_id','=','manufacturers_info.manufacturers_id')
 				->leftJoin('products_description','products_description.products_id','=','products.products_id');
+
+			if($seller !== null){
+				$categories->where('products.admin_id',$seller);
+			}
 				
 			if(!empty($data['categories_id'])){
 				$categories->LeftJoin('products_to_categories', 'products.products_id', '=', 'products_to_categories.products_id')
 						->leftJoin('categories','categories.categories_id','=','products_to_categories.categories_id')
 						->LeftJoin('categories_description','categories_description.categories_id','=','products_to_categories.categories_id');
 			}
+			
 			
 			
 			if(!empty($data['filters']) and empty($data['search'])){			
