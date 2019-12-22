@@ -235,14 +235,21 @@ class DataController extends Controller
 		return Session::getId();
 	}
 	
+
+
+
+
 	//products 
 	public function products($data){
 	
 		if(empty($data['page_number']) or $data['page_number'] == 0 ){
 			$skip								=   $data['page_number'].'0';
+			
 		}else{
 			$skip								=   $data['limit']*$data['page_number'];
+			
 		}		
+		
 		
 		$min_price	 							=   $data['min_price'];	
 		$max_price	 							=   $data['max_price'];	
@@ -660,6 +667,9 @@ class DataController extends Controller
 		return($responseData);
 	
 	}	
+
+
+
 	
 	//getCart
 	public function cart($request){

@@ -14,6 +14,8 @@
     
  	<form enctype="multipart/form-data" name="filters" method="get">
         <input type="hidden" name="min_price" id="min_price" value="0">
+        <?php $seller =  isset($_REQUEST['seller']) ? $_REQUEST['seller'] : null ?>
+        <input type="hidden" name="seller" id="seller" value="{{$seller}}">
         <input type="hidden" name="max_price" id="max_price" value="{{$result['filters']['maxPrice']}}">
         @if(app('request')->input('filters_applied')==1)
         <input type="hidden" name="filters_applied" id="filters_applied" value="1">
@@ -75,6 +77,10 @@
 					$sign = '&';
 				}else{
 					$sign = '?';					
+                }
+                if(isset($_REQUEST['seller'])){
+                    $url.=  $sign."seller=".$_REQUEST['seller'];
+                    
 				}
 				if(isset($_REQUEST['search'])){
 					$url.= $sign."search=".$_REQUEST['search'];

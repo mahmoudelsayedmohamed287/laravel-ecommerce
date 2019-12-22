@@ -555,7 +555,7 @@ return [
 		
 	'Product is added'=>' المنتج مضاف!',
 		
-	'Special products of the Week'=>'منتجات خاصة من الأسبوع',
+	'Special products of the Week'=>'العروض',
 		
 	'Forgot Password'=>'نسيت كلمة المرور',
 		
