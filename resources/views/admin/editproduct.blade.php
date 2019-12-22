@@ -513,6 +513,7 @@
                                 </div>
                                 
                                 <div class="form-group">
+                                  <?php if(session('admin_type')==1){?>
                                   <label for="name" class="col-sm-2 col-md-3 control-label">{{ trans('labels.IsFeature') }} </label>
                                   <div class="col-sm-10 col-md-4">
                                       <select class="form-control" name="is_feature">
@@ -522,6 +523,7 @@
                                       <span class="help-block" style="font-weight: normal;font-size: 11px;margin-bottom: 0;">
                                       {{ trans('labels.IsFeatureProuctsText') }}</span>
                                   </div>
+                                  <?php }?>
                                 </div>
                                 
                                                                
@@ -536,18 +538,7 @@
                                   </div>
                                 </div>
 
-                                <div class="form-group">
-                                  <label for="name" class="col-sm-2 col-md-3 control-label">feature</label>
-                                  <div class="col-sm-10 col-md-4">
-                                      <select class="form-control" name="products_status">
-                                      <option value="2">select one</option>
-                                          <option value="1">feature </option>
-                                          <option value="0">non feature</option>
-                                         </select>
-                                      <span class="help-block" style="font-weight: normal;font-size: 11px;margin-bottom: 0;">
-                                      do you like to make this product is afeature</span>
-                                  </div>
-                                </div>
+                       
 
                                 
                               <!-- /.box-body -->

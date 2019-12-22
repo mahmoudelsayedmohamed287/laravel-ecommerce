@@ -192,12 +192,10 @@ class ProductsController extends DataController
 			$result['limit'] = $limit;
 		}
 
-		$features = DB::table('products')
-		->where('feature',1)->get();
+		$feature = new DataController();
+		$result['feature'] = $feature->products2();		
 		
 		
-				   
-		$result['feature'] = $features;
 		
 		//liked products
 		$result['liked_products'] = $this->likedProducts();	

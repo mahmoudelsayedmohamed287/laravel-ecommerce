@@ -14,6 +14,7 @@ use Validator;
 use App;
 use Lang;
 use DB;
+use Session; 
 
 //for password encryption or hash protected
 use Hash;
@@ -86,7 +87,9 @@ class AdminProductsController extends Controller
 		
 		//get function from other controller
 		$myVar = new AdminCategoriesController();
-		$subCategories = $myVar->getSubCategories($language_id);		
+		$subCategories = $myVar->getSubCategories($language_id);
+		
+		
 		
 		$data = DB::table('products')
 			->leftJoin('products_description','products_description.products_id','=','products.products_id')
@@ -131,7 +134,9 @@ class AdminProductsController extends Controller
 				$data->where('products_name', 'like', '%' . $_REQUEST['product'] . '%');
 			}
 				
-			$products = $data->orderBy('products.products_id', 'DESC')->paginate(40);
+			$products = $data->orderBy('products.products_id','DESC')->paginate(40);
+		
+		
 		
 			
 
@@ -3500,13 +3505,13 @@ class AdminProductsController extends Controller
 	if($stat == 0){
 
 	DB::table('products')->where('products_id',$id)->update([
-		'feature'	 =>   "1"
+		'is_feature'	 =>   "1"
 		]);
 		
 	}else if($stat == 1){
 		
 		DB::table('products')->where('products_id',$id)->update([
-			'feature'	 =>   "0"
+			'is_feature'	 =>   "0"
 			]);
 	}
 		return redirect()->back();

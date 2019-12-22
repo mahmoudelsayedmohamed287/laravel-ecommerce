@@ -276,7 +276,7 @@ class DataController extends Controller
 			$sortby = "flash_sale.flash_start_date";
 			$order = "asc";
 		}else{
-			$sortby = "products.products_id";
+			$sortby = "products.is_feature";
 			$order = "desc";
 		}	
 				
@@ -546,7 +546,10 @@ class DataController extends Controller
 				
 			//count
 			$total_record = $categories->get();
+			//to get all products
 			$products  = $categories->skip($skip)->take($take)->get();
+			//to get all products
+			
 			
 			$result = array();
 			$result2 = array();
@@ -654,6 +657,16 @@ class DataController extends Controller
 		return($responseData);
 	
 	}	
+
+
+	// make function to get all products affter features
+
+	public function products2(){
+		$feature = DB::table('products')->where('is_feature',1)->get();
+		return $feature;
+
+
+	}
 	
 	//getCart
 	public function cart($request){
