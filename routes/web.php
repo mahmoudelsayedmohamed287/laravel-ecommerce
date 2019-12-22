@@ -61,6 +61,9 @@ Route::group(['prefix' => 'admin'], function () {
 		| 
 		|
 		*/
+            
+            // admin history
+            Route::get('/history', 'AdminhistoryController@index');
 			//main listingManufacturer
 			Route::get('/manufacturers', 'AdminManufacturerController@manufacturers');
 			Route::get('/addmanufacturer', 'AdminManufacturerController@addmanufacturer');
@@ -497,6 +500,7 @@ Route::post('/language/', array(
 	*/
 
 	Route::get('/getCart', 'DataController@getCart');
+    
 	
 	//getquantity
 	Route::post('/getquantity', 'ProductsController@getquantity');

@@ -37,7 +37,7 @@
 						  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 						 {{ $result['message'] }}
 						</div>						
-						@endif 
+					@endif 
 						
                         <!--<div class="box-header with-border">
                           <h3 class="box-title">Edit category</h3>

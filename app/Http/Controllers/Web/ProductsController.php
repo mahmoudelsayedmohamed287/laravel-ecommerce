@@ -133,7 +133,7 @@ class ProductsController extends DataController
 		//search value
 		if(!empty($request->search)){
 			$search = $request->search;
-			
+
 		}else{
 			$search = '';
 		}	
@@ -201,12 +201,6 @@ class ProductsController extends DataController
 			$result['limit'] = $limit;
 		}
 
-		// $features = DB::table('products')
-		// ->where('feature',1)->get();
-		
-		
-				   
-		// $result['feature'] = $features;
 		
 		//liked products
 		$result['liked_products'] = $this->likedProducts();	

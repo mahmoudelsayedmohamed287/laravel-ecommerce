@@ -147,8 +147,6 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                           
-                                                
                                        
                                             <div class="product-hover">
                                                 <div class="icons">

@@ -199,8 +199,8 @@ class AdminController extends Controller
 	
 	public function login(){
 		if (Auth::check()) {
-		  return redirect('/admin/dashboard/this_month');
-		}else{
+		 if(session('activation') !== 0){ return redirect('/admin/dashboard/this_month');
+		}}else{
 			$title = array('pageTitle' => Lang::get("labels.login_page_name"));
 			return view("admin.login",$title);
 		}
@@ -227,7 +227,10 @@ class AdminController extends Controller
 		//check validation
 		if($validator->fails()){
 			return redirect('admin/login')->withErrors($validator)->withInput();
-		}else{
+		}
+       
+        
+        else{
 		
 			//check authentication of email and password
 			$adminInfo = array("email" => $request->email, "password" => $request->password);
@@ -237,10 +240,20 @@ class AdminController extends Controller
 				
 				$administrators = DB::table('administrators')->where('myid', $admin->myid)->get();	
 //<<<<<<< HEAD
+                 session(['activation' => $admin->isActive]);
+                if(session('activation')==0){return redirect('admin/login')->withErrors($validator)->withInput();}
+                else{
+<<<<<<< HEAD
+                    DB::table('administrators')
+            ->where('myid', $admin->myid)
+            ->update(['last_login' => date('Y-m-d H:i:s')]);
+                      
+=======
+>>>>>>> 24364531a30444f11bd202c7bbcf75b80a67ce2c
 				session(['admin_id' => $admin->myid]);	
-                session(['activation' => $admin->isActive]);
+              
 //=======
-				session(['admin_id' => $admin->myid]);
+				session(['admin_type' => $admin->adminType]);
 								
 //>>>>>>> 6e8e05cf2b09280d50a2a95bf11e3155237e0425
 				if(!empty(auth()->guard('admin')->user()->adminType)){	
@@ -587,9 +600,9 @@ class AdminController extends Controller
 				
 				session(['categories_id' => $categories_id]);
               
-                if(session('activation') !== 0){return redirect()->intended('admin/dashboard/this_month')->with('administrators', $administrators);}
+                return redirect()->intended('admin/dashboard/this_month')->with('administrators', $administrators);
                
-			}else{
+			}}else{
 				return redirect('admin/login')->with('loginError',Lang::get("labels.EmailPasswordIncorrectText"));
 			}
 			
@@ -600,7 +613,11 @@ class AdminController extends Controller
 	
 	//logout
 	public function logout(){
+        DB::table('administrators')
+            ->where('myid', session('admin_id'))
+            ->update(['last_logout' => date('Y-m-d H:i:s')]);
 		Auth::guard('admin')->logout();
+         
 		return redirect()->intended('admin/login');
 	}
 	
@@ -864,12 +881,20 @@ class AdminController extends Controller
 				'image'	 					=>	 $uploadImage,
 				'adminType'	 				=>	 $request->adminType,
 			);
+		
+
+			if( $request->isActive == 0){
+				DB::table('products')->where('admin_id',$myid)->update(['products_status'=> 0]);
+			
+				
+			}
 			
 			if($request->changePassword == 'yes'){
 				$admin_data['password'] = Hash::make($request->password);
 			}
 			
 			$customers_id = DB::table('administrators')->where('myid', '=', $myid)->update($admin_data);
+			
 					
 			
 			$message = Lang::get("labels.Admin has been updated successfully");
