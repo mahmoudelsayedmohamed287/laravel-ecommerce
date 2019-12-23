@@ -31,7 +31,7 @@ return [
 		
 	'TopSales'=>'Top Sales',
 		
-	'Special'=>'Special',
+	'Special'=>'Hot Deals',
 		
 	'MostLiked'=>'Most Liked',
 		
@@ -123,7 +123,6 @@ return [
 		
 	'View All'=>'View All',
 	
-	'Special'=>'Special',
 		
 	'items'=>'Item(s)',
 	'item'=>'Item',	
@@ -178,7 +177,6 @@ return [
 		
 	'Item Total'=>'Item Total',
 		
-	'Special'=>'Special',
 		
 	'Coupon Code'=>'Coupon Code',
 		

@@ -89,13 +89,17 @@
                       <th>{{ trans('labels.AddedLastModifiedDate') }}</th>
 
                         @if(session('admin_type')==1) 
-                      <th>feature status</th>
+                           <th>feature status</th>
                         @endif
 
+<<<<<<< HEAD
                       <?php if(session('admin_type')==1){?>
                       <th>feature status</th>
                       <?php } ?>
 
+=======
+                   
+>>>>>>> 59aa3fbf0cb26acca24459523d33a12b2c8ffd8c
                       <th></th>
                      
                     </tr>
@@ -151,13 +155,13 @@
 
                                 
                              	<?php if(	$product->feature > 0){ ?> 
-                                
-                                <li role="presentation"><a role="menuitem" tabindex="-1" href="feature?id={{ $product->products_id }}&stat=1">feature</a></li>
-                               <?php }else{?>
-                                
-                                 <li role="presentation"><a role="menuitem" tabindex="-1" href="feature?id={{ $product->products_id }}&stat=0">make it feature</a></li>
 
-                             <?php }?>@endif
+                                <a role="presentation"><a role="menuitem" tabindex="-1" href="feature?id={{ $product->products_id }}&stat=1">feature</a>
+                               <?php }else{?>
+                                 <a role="presentation"><a role="menuitem" tabindex="-1" href="feature?id={{ $product->products_id }}&stat=0">make it feature</a>
+                               <?php }?>
+                              @endif   
+                     
 
                             </td>
                            

@@ -75,10 +75,9 @@ class ProductsController extends DataController
 		//seller
 		if(!empty($request->seller)){
 			$seller = $request->seller;
-			// dd($seller);
+		
 		}else{
 			$seller = null;
-			// dd($seller);
 		}
 		
 		if(!empty($request->type)){
@@ -134,6 +133,7 @@ class ProductsController extends DataController
 		//search value
 		if(!empty($request->search)){
 			$search = $request->search;
+
 		}else{
 			$search = '';
 		}	
@@ -201,10 +201,6 @@ class ProductsController extends DataController
 			$result['limit'] = $limit;
 		}
 
-		$feature = new DataController();
-		$result['feature'] = $feature->products2();		
-		
-		
 		
 		//liked products
 		$result['liked_products'] = $this->likedProducts();	
