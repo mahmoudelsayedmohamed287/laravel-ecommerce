@@ -106,9 +106,9 @@
                                     
                                   @if($admin->isActive==1) 
                                    
-                                    <strong class="badge bg-green">{{trans('labels.Active')}} </strong>
+                                    <strong class="badge bg-green">UnBlock </strong>
                                	  @else
-                                	<strong class="badge bg-light-grey">{{trans('labels.InActive')}} </strong>
+                                	<strong class="badge bg-light-grey">Block </strong>
                                   @endif
                                   
                                 </td>

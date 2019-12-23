@@ -10,7 +10,9 @@
         <div class="collapse block" id="collapseAccordian1" role="tabpanel" aria-labelledby="headingOne" data-parent="#accordion">
             @include('common.categories')
         </div>
-    </div>   
+    </div> 
+     <div class=" card">
+     <div class=" card-header"><a style="color:black;" href="{{ URL::to('/shop?type=special')}}">hotdeals</a></div></div>
     
  	<form enctype="multipart/form-data" name="filters" method="get">
         <input type="hidden" name="min_price" id="min_price" value="0">
