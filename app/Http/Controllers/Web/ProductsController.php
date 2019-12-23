@@ -103,7 +103,6 @@ class ProductsController extends DataController
 		//category		
 		if(!empty($request->category) and $request->category!='all'){
 			$category = DB::table('categories')->leftJoin('categories_description','categories_description.categories_id','=','categories.categories_id')->where('categories_slug',$request->category)->where('language_id',Session::get('language_id'))->get();
-			
 			$categories_id = $category[0]->categories_id;
 			//for main
 			if($category[0]->parent_id==0){
@@ -204,7 +203,7 @@ class ProductsController extends DataController
 		
 		//liked products
 		$result['liked_products'] = $this->likedProducts();	
-		return view("shop", $title)->with('result', $result); 
+		return view("shop", $title)->with(['result'=> $result]); 
 		
 	}
     

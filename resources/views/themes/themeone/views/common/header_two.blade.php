@@ -3,7 +3,7 @@
     	<div class="container">
             <div class="row align-items-center">
                 <div class="col-12">
-                
+                <?php ini_set('memory_limit', '-1');?>
                 	<nav id="navbar_0" class="navbar navbar-expand-md navbar-dark navbar-0 p-0">
                         <div class="navbar-brand">
                             <select name="change_language" id="change_language" class="change-language">
