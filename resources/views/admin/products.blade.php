@@ -87,15 +87,15 @@
                       <th>{{ trans('labels.Image') }}</th>
                       <th>{{ trans('labels.ProductDescription') }}</th>
                       <th>{{ trans('labels.AddedLastModifiedDate') }}</th>
-<<<<<<< HEAD
+
                         @if(session('admin_type')==1) 
                       <th>feature status</th>
                         @endif
-=======
+
                       <?php if(session('admin_type')==1){?>
                       <th>feature status</th>
                       <?php } ?>
->>>>>>> 24364531a30444f11bd202c7bbcf75b80a67ce2c
+
                       <th></th>
                      
                     </tr>

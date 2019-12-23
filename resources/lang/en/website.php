@@ -85,6 +85,7 @@ return [
 	'About Us'=>'About Us',
 		
 	'Contact Us'=>'Contact Us',
+    'sell'=>'sell',
 		
 	'Terms & Condtions'=>'Terms & Condtions',
 		

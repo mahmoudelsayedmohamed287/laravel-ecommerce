@@ -243,13 +243,13 @@ class AdminController extends Controller
                  session(['activation' => $admin->isActive]);
                 if(session('activation')==0){return redirect('admin/login')->withErrors($validator)->withInput();}
                 else{
-<<<<<<< HEAD
+//<<<<<<< HEAD
                     DB::table('administrators')
             ->where('myid', $admin->myid)
             ->update(['last_login' => date('Y-m-d H:i:s')]);
-                      
-=======
->>>>>>> 24364531a30444f11bd202c7bbcf75b80a67ce2c
+//                      
+//=======
+//>>>>>>> 24364531a30444f11bd202c7bbcf75b80a67ce2c
 				session(['admin_id' => $admin->myid]);	
               
 //=======

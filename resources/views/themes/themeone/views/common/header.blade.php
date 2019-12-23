@@ -201,7 +201,7 @@
                                 </ul>
                             </li>                            
                             <li class="nav-item"> <a class="nav-link" href="{{ URL::to('/contact-us')}}">@lang('website.Contact Us')</a> </li>
-                            <li class="nav-item last"><a class="nav-link"><span>@lang('website.hotline')</span>({{$result['commonContent']['setting'][11]->value}})</a></li>
+                            <li class="nav-item last"><a href="{{ URL::to('/shop?type=special')}}" class="nav-link"><span>hotdeals</span>({{$result['commonContent']['setting'][11]->value}})</a></li>
                           </ul>
                         </div>
                     </nav>
@@ -317,8 +317,10 @@
                             </li>
                             
                             <li class="nav-item"> <a class="nav-link" href="{{ URL::to('/contact-us')}}">@lang('website.Contact Us')</a> </li>
-                            <li class="nav-item last"><a class="nav-link"><span>@lang('website.hotline')</span>({{$result['commonContent']['setting'][11]->value}})</a></li>
+                             <li class="nav-item last"><a href="{{ URL::to('/shop?type=special')}}" class="nav-link"><span>hotdeals</span>({{$result['commonContent']['setting'][11]->value}})</a></li>
+                        <li class="nav-item"> <a class="nav-link" href="{{ URL::to('/admin/login')}}">@lang('website.sell')</a> </li>
                           </ul>
+           
                         </div>
                     </nav>
                 </div>
