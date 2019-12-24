@@ -87,6 +87,7 @@
                                 <!--products-list for list-->
                                 <div class="products products-3x" id="listing-products">
                                     @if($result['products']['success']==1)
+                                     
                                     @foreach($result['products']['product_data'] as $key=>$products)
                                     
                                     <div class="product">

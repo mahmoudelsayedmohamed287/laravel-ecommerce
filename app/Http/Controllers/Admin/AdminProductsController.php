@@ -1559,10 +1559,7 @@ class AdminProductsController extends Controller
 		$products_id      =   $request->id;	
 
 		$products_last_modified	= date('Y-m-d h:i:s');
-
-		
-
-		$expiryDate = str_replace('/', '-', $request->expires_date);
+       $expiryDate = str_replace('/', '-', $request->expires_date);
 
 		$expiryDateFormate = strtotime($expiryDate);
 

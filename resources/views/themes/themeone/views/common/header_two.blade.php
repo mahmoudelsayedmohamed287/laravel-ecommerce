@@ -3,7 +3,7 @@
     	<div class="container">
             <div class="row align-items-center">
                 <div class="col-12">
-                
+                <?php ini_set('memory_limit', '-1');?>
                 	<nav id="navbar_0" class="navbar navbar-expand-md navbar-dark navbar-0 p-0">
                         <div class="navbar-brand">
                             <select name="change_language" id="change_language" class="change-language">
@@ -174,7 +174,8 @@
                                 </ul>
                             </li>
                             <li class="nav-item"> <a class="nav-link" href="{{ URL::to('/contact-us')}}">@lang('website.Contact Us')</a> </li>
-                           <li class="nav-item last"><a class="nav-link"><span>@lang('website.hotline')</span>({{$result['commonContent']['setting'][11]->value}})</a></li>
+                              <li class="nav-item"> <a class="nav-link" href="{{ URL::to('/admin/login')}}">@lang('website.sell')</a> </li>
+                            <li class="nav-item last"><a href="{{ URL::to('/shop?type=special')}}" class="nav-link"><span style="text-align: center;width: 200px;">hotdeals</span></a></li>
                           </ul>
                         </div>
                     </nav>
@@ -291,6 +292,7 @@
                             </li>
                             
                             <li class="nav-item"> <a class="nav-link" href="{{ URL::to('/contact-us')}}">@lang('website.Contact Us')</a> </li>
+                              <li class="nav-item"> <a class="nav-link" href="{{ URL::to('/admin/login')}}">@lang('website.sell')</a> </li>
                             <li class="nav-item last"><a class="nav-link"><span>@lang('website.hotline')</span>({{$result['commonContent']['setting'][11]->value}})</a></li>
                           </ul>
                         </div>

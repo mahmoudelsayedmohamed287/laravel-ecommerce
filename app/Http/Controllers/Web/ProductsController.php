@@ -10,6 +10,8 @@ namespace App\Http\Controllers\Web;
 //validator is builtin class in laravel
 use Validator;
 
+use Cookie;
+
 use DB;
 //for password encryption or hash protected
 use Hash;
@@ -103,7 +105,6 @@ class ProductsController extends DataController
 		//category		
 		if(!empty($request->category) and $request->category!='all'){
 			$category = DB::table('categories')->leftJoin('categories_description','categories_description.categories_id','=','categories.categories_id')->where('categories_slug',$request->category)->where('language_id',Session::get('language_id'))->get();
-			
 			$categories_id = $category[0]->categories_id;
 			//for main
 			if($category[0]->parent_id==0){
@@ -204,7 +205,7 @@ class ProductsController extends DataController
 		
 		//liked products
 		$result['liked_products'] = $this->likedProducts();	
-		return view("shop", $title)->with('result', $result); 
+		return view("shop", $title)->with(['result'=> $result]); 
 		
 	}
     
@@ -324,8 +325,28 @@ class ProductsController extends DataController
 		//liked products
 		$result['liked_products'] = $this->likedProducts();	
 		$seller = DB::table('administrators')->where('myid',$products[0]->admin_id)->get();
+        
+        
+        
+        
+        //yousry  code
+		$code = app('request')->input('u-a');
+		$product_id = app('request')->input('pro-d');
+    $data = array('code' =>$code,'product_id'=>$product_id );
+		if (isset($code)) {
+
+			$cookie = Session::put('affilate_code', $data, 60);
+
+	 \DB::table('affilate_product_link')->where('product_id', $product_id)
+	 ->where('affilate_code', '=', $code)
+	 ->increment('click');
+
+//			$get_session = Session::get('affilate_code');
+			
+}
+        //end  yousry  code  
 		
-		return view("product-detail", $title)->with(['result' => $result, 
+		return view("product-detail", $title)->with(['result' => $result ,
 												     'seller_name' => $seller[0]->first_name, 
 												     'seller_id' =>  $seller[0]->myid]); 
 	}

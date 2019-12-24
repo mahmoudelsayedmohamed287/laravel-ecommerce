@@ -295,7 +295,6 @@ class DataController extends Controller
 				->leftJoin('manufacturers','manufacturers.manufacturers_id','=','products.manufacturers_id')
 				->leftJoin('manufacturers_info','manufacturers.manufacturers_id','=','manufacturers_info.manufacturers_id')
 				->leftJoin('products_description','products_description.products_id','=','products.products_id');
-
 			if($seller !== null){
 				$categories->where('products.admin_id',$seller);
 			}
@@ -443,32 +442,7 @@ class DataController extends Controller
 					$categories->where('products_to_categories.categories_id','=', $data['categories_id']);
 				}
 				
-				if(!empty($data['filters'])){
-				 $temp_key = 0;
-				 foreach($data['filters']['filter_attribute']['option_values'] as $option_id_temp){
-
-					  if($temp_key == 0){
-
-						$categories->whereIn('products_attributes.options_id', [$data['filters']['options']])
-						->where('products_attributes.options_values_id', $option_id_temp);
-						if(count($data['filters']['filter_attribute']['options'])>1){
-						
-							$categories->where(DB::raw('(select count(*) from `products_attributes` where `products_attributes`.`products_id` = `products`.`products_id` and `products_attributes`.`options_id` in ('.$data['filters']['options'].') and `products_attributes`.`options_values_id` in ('.$data['filters']['option_value'].'))'),'>=',$data['filters']['options_count']);
-						}
-
-					  }else{
-						$categories->orwhereIn('products_attributes.options_id', [$data['filters']['options']])
-						->where('products_attributes.options_values_id', $option_id_temp);
-						
-						if(count($data['filters']['filter_attribute']['options'])>1){
-							$categories->where(DB::raw('(select count(*) from `products_attributes` where `products_attributes`.`products_id` = `products`.`products_id` and `products_attributes`.`options_id` in ('.$data['filters']['options'].') and `products_attributes`.`options_values_id` in ('.$data['filters']['option_value'].'))'),'>=',$data['filters']['options_count']);
-							}
-												
-						}
-							$temp_key++;
-					 }
-									
-				}	
+				
 				
 				
 				if(!empty($max_price)){
@@ -509,32 +483,7 @@ class DataController extends Controller
 				}					
 			}
 						
-			if(!empty($data['filters'])){
-				 $temp_key = 0;
-				 foreach($data['filters']['filter_attribute']['option_values'] as $option_id_temp){
-
-					  if($temp_key == 0){
-
-						$categories->whereIn('products_attributes.options_id', [$data['filters']['options']])
-						->where('products_attributes.options_values_id', $option_id_temp);
-						if(count($data['filters']['filter_attribute']['options'])>1){
-						
-							$categories->where(DB::raw('(select count(*) from `products_attributes` where `products_attributes`.`products_id` = `products`.`products_id` and `products_attributes`.`options_id` in ('.$data['filters']['options'].') and `products_attributes`.`options_values_id` in ('.$data['filters']['option_value'].'))'),'>=',$data['filters']['options_count']);
-						}
-
-					  }else{
-						$categories->orwhereIn('products_attributes.options_id', [$data['filters']['options']])
-						->where('products_attributes.options_values_id', $option_id_temp);
-						
-						if(count($data['filters']['filter_attribute']['options'])>1){
-							$categories->where(DB::raw('(select count(*) from `products_attributes` where `products_attributes`.`products_id` = `products`.`products_id` and `products_attributes`.`options_id` in ('.$data['filters']['options'].') and `products_attributes`.`options_values_id` in ('.$data['filters']['option_value'].'))'),'>=',$data['filters']['options_count']);
-							}
-												
-						}
-							$temp_key++;
-					 }
-									
-			}	
+				
 			
 			//wishlist customer id
 			if($type == "wishlist"){
@@ -659,6 +608,8 @@ class DataController extends Controller
 				}else{
 					$result[$index]->attributes = 	array();	
 				}
+				
+				
 					$index++;
 				}
 					$responseData = array('success'=>'1', 'product_data'=>$result,  'message'=>Lang::get('website.Returned all products'), 'total_record'=>count($total_record));
@@ -666,7 +617,7 @@ class DataController extends Controller
 				}else{
 					$responseData = array('success'=>'0', 'product_data'=>$result,  'message'=>Lang::get('website.Empty record'), 'total_record'=>count($total_record));
 				}	
-				
+					
 		return($responseData);
 	
 	}	

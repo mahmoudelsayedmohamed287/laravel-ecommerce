@@ -191,8 +191,8 @@
                                   <label for="name" class="col-sm-2 col-md-3 control-label">{{ trans('labels.Status') }} </label>
                                   <div class="col-sm-10 col-md-4">
                                     <select class="form-control" name="isActive">
-                                          <option value="1" @if($result['admins'][0]->isActive==1) selected @endif>{{ trans('labels.Active') }}</option>
-                                          <option value="0" @if($result['admins'][0]->isActive==0) selected @endif>{{ trans('labels.Inactive') }}</option>
+                                          <option value="1" @if($result['admins'][0]->isActive==1) selected @endif>UnBlock</option>
+                                          <option value="0" @if($result['admins'][0]->isActive==0) selected @endif>Block</option>
 									</select>
                                   <span class="help-block" style="font-weight: normal;font-size: 11px;margin-bottom: 0;">
                                   {{ trans('labels.StatusText') }}</span>

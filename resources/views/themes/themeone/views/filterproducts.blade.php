@@ -1,4 +1,5 @@
 @if($result['products']['success']==1)
+fgggg
 	@foreach($result['products']['product_data'] as $key=>$products)
         <div class="product">
             <article>
