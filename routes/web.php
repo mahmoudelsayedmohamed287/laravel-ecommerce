@@ -167,7 +167,23 @@ Route::group(['prefix' => 'admin'], function () {
 			Route::get('/addcustomers', 'AdminCustomersController@addcustomers');
 			Route::post('/addnewcustomers', 'AdminCustomersController@addnewcustomers');
 
+            
+            
+            
+            
+            
+            
+            //Register Affilate program
+			Route::get('/register/affilate', 'AdminRegisterAffilateController@index');
+			Route::post('/register/affilate/add', 'AdminRegisterAffilateController@add');
 
+			Route::get('/generate/affilate/prouduct/link', 'AdminAffilateProuductLinkController@index');
+			Route::post('/generate/affilate/prouduct/link/add', 'AdminAffilateProuductLinkController@add');
+
+            
+            
+            
+            
 			//add adddresses against customers
 			Route::get('/addaddress/{id}/', 'AdminCustomersController@addaddress');
 			Route::post('/addNewCustomerAddress', 'AdminCustomersController@addNewCustomerAddress');

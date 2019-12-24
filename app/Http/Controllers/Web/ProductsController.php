@@ -10,6 +10,8 @@ namespace App\Http\Controllers\Web;
 //validator is builtin class in laravel
 use Validator;
 
+use Cookie;
+
 use DB;
 //for password encryption or hash protected
 use Hash;
@@ -319,8 +321,28 @@ class ProductsController extends DataController
 		//liked products
 		$result['liked_products'] = $this->likedProducts();	
 		$seller = DB::table('administrators')->where('myid',$products[0]->admin_id)->get();
+        
+        
+        
+        
+        //yousry  code
+		$code = app('request')->input('u-a');
+		$product_id = app('request')->input('pro-d');
+    $data = array('code' =>$code,'product_id'=>$product_id );
+		if (isset($code)) {
+
+			$cookie = Session::put('affilate_code', $data, 60);
+
+	 \DB::table('affilate_product_link')->where('product_id', $product_id)
+	 ->where('affilate_code', '=', $code)
+	 ->increment('click');
+
+			$get_session = Session::get('affilate_code');
+			dd($get_session);
+}
+        //end  yousry  code  
 		
-		return view("product-detail", $title)->with(['result' => $result, 
+		return view("product-detail", $title)->with(['result' => $result ,
 												     'seller_name' => $seller[0]->first_name, 
 												     'seller_id' =>  $seller[0]->myid]); 
 	}
