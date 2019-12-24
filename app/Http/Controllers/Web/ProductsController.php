@@ -337,8 +337,8 @@ class ProductsController extends DataController
 	 ->where('affilate_code', '=', $code)
 	 ->increment('click');
 
-			$get_session = Session::get('affilate_code');
-			dd($get_session);
+//			$get_session = Session::get('affilate_code');
+			
 }
         //end  yousry  code  
 		
