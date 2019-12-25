@@ -48,6 +48,9 @@
           </ul>
         </li>
         @endif
+          
+          
+          
         @if(session('products_view')==1  or auth()->guard('admin')->user()->adminType=='1')
         <li class="treeview {{ Request::is('admin/products') ? 'active' : '' }} {{ Request::is('admin/addproduct') ? 'active' : '' }} {{ Request::is('admin/editattributes/*') ? 'active' : '' }} {{ Request::is('admin/attributes') ? 'active' : '' }}  {{ Request::is('admin/addattributes') ? 'active' : '' }} {{ Request::is('admin/addproductattribute/*') ? 'active' : '' }} {{ Request::is('admin/addinventory/*') ? 'active' : '' }} {{ Request::is('admin/addproductimages/*') ? 'active' : '' }} ">
           <a href="#">
@@ -60,6 +63,10 @@
           </ul>
         </li>
          @endif
+          
+           <li class="">
+          <a href="{{ URL::to('admin/register/affilate')}}" ><i class="fa fa-tablet" aria-hidden="true"></i> <span>{{ trans('labels.affilate') }}</span></a>
+        </li>
         @if(session('news_view')==1  or auth()->guard('admin')->user()->adminType=='1')
         <li class="treeview {{ Request::is('admin/newscategories') ? 'active' : '' }} {{ Request::is('admin/addnewscategory') ? 'active' : '' }} {{ Request::is('admin/editnewscategory/*') ? 'active' : '' }} {{ Request::is('admin/news') ? 'active' : '' }}  {{ Request::is('admin/addsubnews') ? 'active' : '' }}  {{ Request::is('admin/editsubnews/*') ? 'active' : '' }}">
           <a href="#">
