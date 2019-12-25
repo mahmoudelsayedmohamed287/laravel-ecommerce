@@ -42,7 +42,7 @@ Route::get('/clear-cache', function() {
 	$exitCode = Artisan::call('cache:clear');
 });
 
-Route::get('/key-genrate', function() {
+Route::get('/key-genrffte', function() {
 	$exitCode = Artisan::call('key:generate');
 });
 
