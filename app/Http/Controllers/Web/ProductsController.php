@@ -10,6 +10,8 @@ namespace App\Http\Controllers\Web;
 //validator is builtin class in laravel
 use Validator;
 
+use Cookie;
+
 use DB;
 //for password encryption or hash protected
 use Hash;
@@ -288,12 +290,15 @@ class ProductsController extends DataController
 		$isFlash = DB::table('flash_sale')->where('products_id',$products[0]->products_id)
 					->where('flash_expires_date','>=',  time())->where('flash_status','=',  1)
 					->get();
+					
+				
 		
 		if(!empty($isFlash) and count($isFlash)>0){
 			$type = "flashsale";
 		}else{
 			$type = "";
-		}		
+		}
+			
 				
 		$myVar = new DataController();
 		$data = array('page_number'=>'0', 'type'=>$type, 'products_id'=>$products[0]->products_id, 'limit'=>$limit, 'min_price'=>$min_price, 'max_price'=>$max_price);
@@ -316,12 +321,31 @@ class ProductsController extends DataController
 		$myVar = new CartController();
 		$result['cartArray'] = $myVar->cartIdArray($cart);
 		
+		
 		//liked products
 		$result['liked_products'] = $this->likedProducts();	
 		$seller = DB::table('administrators')->where('myid',$products[0]->admin_id)->get();
-
 		
-		return view("product-detail", $title)->with(['result' => $result, 
+		        //yousry  code
+				$code = app('request')->input('u-a');
+				$product_id = app('request')->input('pro-d');
+			$data = array('code' =>$code,'product_id'=>$product_id );
+				if (isset($code)) {
+		
+					$cookie = Session::put('affilate_code', $data, 60);
+		
+			 \DB::table('affilate_product_link')->where('product_id', $product_id)
+			 ->where('affilate_code', '=', $code)
+			 ->increment('click');
+		
+				$get_session = Session::get('affilate_code');
+
+				//dd($get_session);
+		}
+
+				//end  yousry  code  
+		
+		return view("product-detail", $title)->with(['result' => $result ,
 												     'seller_name' => $seller[0]->first_name, 
 												     'seller_id' =>  $seller[0]->myid]); 
 	}

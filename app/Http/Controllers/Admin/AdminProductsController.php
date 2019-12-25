@@ -224,7 +224,7 @@ class AdminProductsController extends Controller
 					'products_weight_unit'	 =>	  $request->products_weight_unit,
 					'low_limit'				 =>   0,
 					'products_type'			 =>	  $request->products_type,
-					'is_feature'			 =>	  $request->is_feature,
+								 
 					'products_min_order'	 =>	  $request->products_min_order,
 					'products_max_stock'	 =>	  $request->products_max_stock,
 					'admin_id'               =>   session('admin_id')
@@ -1559,10 +1559,7 @@ class AdminProductsController extends Controller
 		$products_id      =   $request->id;	
 
 		$products_last_modified	= date('Y-m-d h:i:s');
-
-		
-
-		$expiryDate = str_replace('/', '-', $request->expires_date);
+       $expiryDate = str_replace('/', '-', $request->expires_date);
 
 		$expiryDateFormate = strtotime($expiryDate);
 
@@ -3500,18 +3497,20 @@ class AdminProductsController extends Controller
 	 
 	public function feature(Request $request){
 		$stat = $request->stat;
+	
 
 	$id = $request->id;
+	
 	if($stat == 0){
 
 	DB::table('products')->where('products_id',$id)->update([
-		'is_feature'	 =>   "1"
+		'is_feature'	 =>   1
 		]);
 		
 	}else if($stat == 1){
 		
 		DB::table('products')->where('products_id',$id)->update([
-			'is_feature'	 =>   "0"
+			'is_feature'	 =>   0
 			]);
 	}
 		return redirect()->back();

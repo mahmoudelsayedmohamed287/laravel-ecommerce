@@ -586,8 +586,28 @@ class OrdersController extends DataController
 		} 
 		
 		//check if order is verified
+
+		
 		if($payment_status=='success'){
 			
+			$get_session = Session::get('affilate_code');
+			$code505 = $get_session['code'];
+				$product_id = $get_session['product_id'];
+				
+				
+				if(isset($get_session)  ){
+					\DB::table('affilate_product_link')->where('product_id', $product_id)
+					->where('affilate_code', '=', $code505)
+					->increment('confirmed-order');  
+							
+							session()->forget('affilate_code');
+							 Session::flush('affilate_code');
+							session()->forget('affilate_code');
+	
+	
+				}
+
+
 			$orders_id = DB::table('orders')->insertGetId(
 				[	 'customers_id' => $customers_id,
 					 'customers_name'  => $delivery_firstname.' '.$delivery_lastname,
