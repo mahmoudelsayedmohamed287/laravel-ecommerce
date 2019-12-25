@@ -290,12 +290,15 @@ class ProductsController extends DataController
 		$isFlash = DB::table('flash_sale')->where('products_id',$products[0]->products_id)
 					->where('flash_expires_date','>=',  time())->where('flash_status','=',  1)
 					->get();
+					
+				
 		
 		if(!empty($isFlash) and count($isFlash)>0){
 			$type = "flashsale";
 		}else{
 			$type = "";
-		}		
+		}
+			
 				
 		$myVar = new DataController();
 		$data = array('page_number'=>'0', 'type'=>$type, 'products_id'=>$products[0]->products_id, 'limit'=>$limit, 'min_price'=>$min_price, 'max_price'=>$max_price);
@@ -317,6 +320,7 @@ class ProductsController extends DataController
 		$cart = '';
 		$myVar = new CartController();
 		$result['cartArray'] = $myVar->cartIdArray($cart);
+		
 		
 		//liked products
 		$result['liked_products'] = $this->likedProducts();	

@@ -153,6 +153,9 @@
                                                 <div class="icons">
                                                     <div class="icon-liked">
                                                         <span products_id = '{{$products->products_id}}' class="fa @if($products->isLiked==1) fa-heart @else fa-heart-o @endif is_liked"><span class="badge badge-secondary">{{$products->products_liked}}</span></span>
+                                                        
+                                                        <span>added date : {{$products->products_date_added}}</span>
+                                                        <span>modified date : {{$products->products_last_modified}}</span>
                                                     </div>          
                                                     @if($products->products_type!=2)
                                                         <a href="{{ URL::to('/product-detail/'.$products->products_slug)}}" class="fa fa-eye"></a>

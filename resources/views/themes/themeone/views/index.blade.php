@@ -33,7 +33,8 @@
         </div>
     </div>
     
-   @if($result['flash_sale']['success']==1)
+    @if($result['flash_sale']['success']==1)
+
     <!-- dynamic content -->
    <div class="products-area">
       <div class="row">

@@ -156,11 +156,11 @@
                             <td>
 
                                 
-                             	<?php if(	$product->feature > 0){ ?> 
+                             	<?php if(	$product->is_feature > 0){ ?> 
 
                                 <a role="presentation"><a role="menuitem" tabindex="-1" href="feature?id={{ $product->products_id }}&stat=1">feature</a>
                                <?php }else{?>
-                                 <a role="presentation"><a role="menuitem" tabindex="-1" href="feature?id={{ $product->products_id }}&stat=0">make it feature</a>
+                                 <a role="presentation"><a role="menuitem" tabindex="-1" href="feature?id={{ $product->products_id }}&stat=0">non feature</a>
                                <?php }?>
                               @endif   
                      
