@@ -319,6 +319,7 @@ class ProductsController extends DataController
 		//liked products
 		$result['liked_products'] = $this->likedProducts();	
 		$seller = DB::table('administrators')->where('myid',$products[0]->admin_id)->get();
+
 		
 		return view("product-detail", $title)->with(['result' => $result, 
 												     'seller_name' => $seller[0]->first_name, 

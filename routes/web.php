@@ -160,12 +160,15 @@ Route::group(['prefix' => 'admin'], function () {
 			Route::get('/editAppLabel/{id}', 'AdminAppLabelsController@editAppLabel');
 			Route::post('/updateAppLabel/', 'AdminAppLabelsController@updateAppLabel');
 			Route::get('/applabel', 'AdminAppLabelsController@manageAppLabel');
-
-
+  
+   
 			//customers
 			Route::get('/customers', 'AdminCustomersController@customers');
 			Route::get('/addcustomers', 'AdminCustomersController@addcustomers');
 			Route::post('/addnewcustomers', 'AdminCustomersController@addnewcustomers');
+
+
+
 
 
 			//add adddresses against customers
