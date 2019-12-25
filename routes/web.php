@@ -34,11 +34,15 @@ header('Access-Control-Allow-Headers:  Content-Type, X-Auth-Token, Origin, Autho
 |
 */
 
+/*   sara    */
+
+
+
 Route::get('/clear-cache', function() {
 	$exitCode = Artisan::call('cache:clear');
 });
 
-Route::get('/key-genrate', function() {
+Route::get('/key-genrffte', function() {
 	$exitCode = Artisan::call('key:generate');
 });
 
@@ -167,12 +171,19 @@ Route::group(['prefix' => 'admin'], function () {
 			Route::get('/addcustomers', 'AdminCustomersController@addcustomers');
 			Route::post('/addnewcustomers', 'AdminCustomersController@addnewcustomers');
 
+<<<<<<< HEAD
 
 
 
 
 
 
+=======
+            
+            
+            
+            
+>>>>>>> d8cc28c250c3f9d3b6e745888ea7d02649b6b5ae
             //Register Affilate program
 			Route::get('/register/affilate', 'AdminRegisterAffilateController@index');
 
@@ -186,6 +197,12 @@ Route::group(['prefix' => 'admin'], function () {
 
 
 
+<<<<<<< HEAD
+=======
+            
+         
+            
+>>>>>>> d8cc28c250c3f9d3b6e745888ea7d02649b6b5ae
 			//add adddresses against customers
 			Route::get('/addaddress/{id}/', 'AdminCustomersController@addaddress');
 			Route::post('/addNewCustomerAddress', 'AdminCustomersController@addNewCustomerAddress');

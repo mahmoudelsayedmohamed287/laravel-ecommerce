@@ -19,6 +19,9 @@ return [
 	'welcome_message_to'=>'To Admin Panel',
 	'login'=>'Login',
 	'login_page_name'=>'Login',
+    'affilate'=>'affilate',
+    'start affilate'=>'start affilate',
+     'add link'=>'add link',
 	
 	
 	//login page

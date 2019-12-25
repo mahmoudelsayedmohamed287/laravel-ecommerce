@@ -3,11 +3,11 @@
 <div class="content-wrapper">
   <!-- Content Header (Page header) -->
   <section class="content-header">
-    <h1> {{ trans('labels.AddCustomer') }} <small>{{ trans('labels.AddCustomer') }}...</small> </h1>
+    <h1> {{ trans('labels.affilate') }} <small>{{ trans('labels.affilate') }}...</small> </h1>
     <ol class="breadcrumb">
       <li><a href="{{ URL::to('admin/dashboard/this_month')}}"><i class="fa fa-dashboard"></i> {{ trans('labels.breadcrumb_dashboard') }}</a></li>
       <li><a href="{{ URL::to('admin/customers')}}"><i class="fa fa-users"></i> {{ trans('labels.ListingAllCustomers') }}</a></li>
-      <li class="active">{{ trans('labels.AddCustomer') }}</li>
+      <li class="active">{{ trans('labels.affilate') }}</li>
     </ol>
   </section>
 
@@ -21,7 +21,7 @@
       <div class="col-md-12">
         <div class="box">
           <div class="box-header">
-            <h3 class="box-title">{{ trans('labels.AddCustomer') }} </h3>
+            <h3 class="box-title">{{ trans('labels.affilate') }} </h3>
           </div>
 
           <!-- /.box-header -->
@@ -56,8 +56,8 @@
 
                               <!-- /.box-body -->
                               <div class="box-footer text-center">
-                                <button type="submit" class="btn btn-primary">{{ trans('labels.AddCustomer') }}</button>
-                                <a href="{{ URL::to('admin/customers')}}" type="button" class="btn btn-default">{{ trans('labels.back') }}</a>
+                                <button type="submit" class="btn btn-primary">{{ trans('labels.add link') }}</button>
+                                
                               </div>
                               <!-- /.box-footer -->
                             {!! Form::close() !!}
