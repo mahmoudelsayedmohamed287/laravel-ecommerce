@@ -34,6 +34,10 @@ header('Access-Control-Allow-Headers:  Content-Type, X-Auth-Token, Origin, Autho
 |
 */
 
+/*   sara    */
+
+
+
 Route::get('/clear-cache', function() {
 	$exitCode = Artisan::call('cache:clear');
 });
