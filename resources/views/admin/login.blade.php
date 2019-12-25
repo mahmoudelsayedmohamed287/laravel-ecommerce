@@ -7,21 +7,13 @@
 </style>
 <div class="login-box">
   <div class="login-logo">
-<<<<<<< HEAD
-  
-  	@if(empty($web_setting[15]->value) or !file_exists(asset('').$web_setting[15]->value))
-=======
-  @if(empty($web_setting[15]->value) or !file_exists(asset('').$web_setting[15]->value))
->>>>>>> 14df01230d1b5220fdb907a75b2910c40f7f7852
         @if($web_setting[66]->value=='1' and $web_setting[67]->value=='0')
       		<img src="{{asset('/resources/views/admin/images/admin_logo/logo-android-blue-v1.png')}}" class="ionic-hide"> 
         	<img src="{{asset('/resources/views/admin/images/admin_logo/logo-ionic-blue-v1.png')}}" class="android-hide"> 
         @elseif($web_setting[66]->value=='1' and $web_setting[67]->value=='1' or $web_setting[66]->value=='0' and $web_setting[67]->value=='1') 
    			<img src="{{asset('/resources/views/admin/images/admin_logo/logo-laravel-blue-v1.png')}}" class="website-hide"> 
     	@endif
-    @else
-    	<img style="width: 60%" src="{{asset('').$web_setting[15]->value}}">
-    @endif
+  
     
     <div style="
     font-size: 25px;
