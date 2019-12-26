@@ -325,26 +325,25 @@ class ProductsController extends DataController
 		//liked products
 		$result['liked_products'] = $this->likedProducts();	
 		$seller = DB::table('administrators')->where('myid',$products[0]->admin_id)->get();
-        
-        
-        
-        
-        //yousry  code
-		$code = app('request')->input('u-a');
-		$product_id = app('request')->input('pro-d');
-    $data = array('code' =>$code,'product_id'=>$product_id );
-		if (isset($code)) {
+		
+		        //yousry  code
+				$code = app('request')->input('u-a');
+				$product_id = app('request')->input('pro-d');
+			$data = array('code' =>$code,'product_id'=>$product_id );
+				if (isset($code)) {
+		
+					$cookie = Session::put('affilate_code', $data, 60);
+		
+			 \DB::table('affilate_product_link')->where('product_id', $product_id)
+			 ->where('affilate_code', '=', $code)
+			 ->increment('click');
+		
+				$get_session = Session::get('affilate_code');
 
-			$cookie = Session::put('affilate_code', $data, 60);
+				//dd($get_session);
+		}
 
-	 \DB::table('affilate_product_link')->where('product_id', $product_id)
-	 ->where('affilate_code', '=', $code)
-	 ->increment('click');
-
-//			$get_session = Session::get('affilate_code');
-			
-}
-        //end  yousry  code  
+				//end  yousry  code  
 		
 		return view("product-detail", $title)->with(['result' => $result ,
 												     'seller_name' => $seller[0]->first_name, 
