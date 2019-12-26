@@ -235,28 +235,20 @@ class DataController extends Controller
 		return Session::getId();
 	}
 	
-
-
-
-
 	//products 
 	public function products($data){
-	
+		
 		if(empty($data['page_number']) or $data['page_number'] == 0 ){
 			$skip								=   $data['page_number'].'0';
-			
 		}else{
 			$skip								=   $data['limit']*$data['page_number'];
-			
 		}		
 		
-
 		$min_price	 							=   $data['min_price'];	
 		$max_price	 							=   $data['max_price'];	
 		$take									=   $data['limit'];
 		$currentDate 							=   time();	
 		$type									=	$data['type'];
-		$seller                                 =   isset($data['seller'])? $data['seller'] : null;
 		
 		if($type=="atoz"){
 			$sortby								=	"products_name";
@@ -284,7 +276,7 @@ class DataController extends Controller
 			$sortby = "flash_sale.flash_start_date";
 			$order = "asc";
 		}else{
-			$sortby = "products.is_feature";
+			$sortby = "products.products_id";
 			$order = "desc";
 		}	
 				
@@ -295,16 +287,12 @@ class DataController extends Controller
 				->leftJoin('manufacturers','manufacturers.manufacturers_id','=','products.manufacturers_id')
 				->leftJoin('manufacturers_info','manufacturers.manufacturers_id','=','manufacturers_info.manufacturers_id')
 				->leftJoin('products_description','products_description.products_id','=','products.products_id');
-			if($seller !== null){
-				$categories->where('products.admin_id',$seller);
-			}
 				
 			if(!empty($data['categories_id'])){
 				$categories->LeftJoin('products_to_categories', 'products.products_id', '=', 'products_to_categories.products_id')
 						->leftJoin('categories','categories.categories_id','=','products_to_categories.categories_id')
 						->LeftJoin('categories_description','categories_description.categories_id','=','products_to_categories.categories_id');
 			}
-			
 			
 			
 			if(!empty($data['filters']) and empty($data['search'])){			
@@ -442,7 +430,32 @@ class DataController extends Controller
 					$categories->where('products_to_categories.categories_id','=', $data['categories_id']);
 				}
 				
-				
+				if(!empty($data['filters'])){
+				 $temp_key = 0;
+				 foreach($data['filters']['filter_attribute']['option_values'] as $option_id_temp){
+
+					  if($temp_key == 0){
+
+						$categories->whereIn('products_attributes.options_id', [$data['filters']['options']])
+						->where('products_attributes.options_values_id', $option_id_temp);
+						if(count($data['filters']['filter_attribute']['options'])>1){
+						
+							$categories->where(DB::raw('(select count(*) from `products_attributes` where `products_attributes`.`products_id` = `products`.`products_id` and `products_attributes`.`options_id` in ('.$data['filters']['options'].') and `products_attributes`.`options_values_id` in ('.$data['filters']['option_value'].'))'),'>=',$data['filters']['options_count']);
+						}
+
+					  }else{
+						$categories->orwhereIn('products_attributes.options_id', [$data['filters']['options']])
+						->where('products_attributes.options_values_id', $option_id_temp);
+						
+						if(count($data['filters']['filter_attribute']['options'])>1){
+							$categories->where(DB::raw('(select count(*) from `products_attributes` where `products_attributes`.`products_id` = `products`.`products_id` and `products_attributes`.`options_id` in ('.$data['filters']['options'].') and `products_attributes`.`options_values_id` in ('.$data['filters']['option_value'].'))'),'>=',$data['filters']['options_count']);
+							}
+												
+						}
+							$temp_key++;
+					 }
+									
+				}	
 				
 				
 				if(!empty($max_price)){
@@ -483,7 +496,32 @@ class DataController extends Controller
 				}					
 			}
 						
-				
+			if(!empty($data['filters'])){
+				 $temp_key = 0;
+				 foreach($data['filters']['filter_attribute']['option_values'] as $option_id_temp){
+
+					  if($temp_key == 0){
+
+						$categories->whereIn('products_attributes.options_id', [$data['filters']['options']])
+						->where('products_attributes.options_values_id', $option_id_temp);
+						if(count($data['filters']['filter_attribute']['options'])>1){
+						
+							$categories->where(DB::raw('(select count(*) from `products_attributes` where `products_attributes`.`products_id` = `products`.`products_id` and `products_attributes`.`options_id` in ('.$data['filters']['options'].') and `products_attributes`.`options_values_id` in ('.$data['filters']['option_value'].'))'),'>=',$data['filters']['options_count']);
+						}
+
+					  }else{
+						$categories->orwhereIn('products_attributes.options_id', [$data['filters']['options']])
+						->where('products_attributes.options_values_id', $option_id_temp);
+						
+						if(count($data['filters']['filter_attribute']['options'])>1){
+							$categories->where(DB::raw('(select count(*) from `products_attributes` where `products_attributes`.`products_id` = `products`.`products_id` and `products_attributes`.`options_id` in ('.$data['filters']['options'].') and `products_attributes`.`options_values_id` in ('.$data['filters']['option_value'].'))'),'>=',$data['filters']['options_count']);
+							}
+												
+						}
+							$temp_key++;
+					 }
+									
+			}	
 			
 			//wishlist customer id
 			if($type == "wishlist"){
@@ -508,10 +546,7 @@ class DataController extends Controller
 				
 			//count
 			$total_record = $categories->get();
-			//to get all products
 			$products  = $categories->skip($skip)->take($take)->get();
-			//to get all products
-			
 			
 			$result = array();
 			$result2 = array();
@@ -608,8 +643,6 @@ class DataController extends Controller
 				}else{
 					$result[$index]->attributes = 	array();	
 				}
-				
-				
 					$index++;
 				}
 					$responseData = array('success'=>'1', 'product_data'=>$result,  'message'=>Lang::get('website.Returned all products'), 'total_record'=>count($total_record));
@@ -617,13 +650,11 @@ class DataController extends Controller
 				}else{
 					$responseData = array('success'=>'0', 'product_data'=>$result,  'message'=>Lang::get('website.Empty record'), 'total_record'=>count($total_record));
 				}	
-					
+				
 		return($responseData);
 	
 	}	
-
-
-
+	
 	//getCart
 	public function cart($request){
 		

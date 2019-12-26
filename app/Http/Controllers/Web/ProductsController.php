@@ -10,8 +10,6 @@ namespace App\Http\Controllers\Web;
 //validator is builtin class in laravel
 use Validator;
 
-use Cookie;
-
 use DB;
 //for password encryption or hash protected
 use Hash;
@@ -44,18 +42,7 @@ class ProductsController extends DataController
      *
      * @return \Illuminate\Http\Response
      */
-		
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
+			
 	//shop 
 	public function shop(Request $request){
 		
@@ -73,13 +60,6 @@ class ProductsController extends DataController
 			$limit = $request->limit;
 		}else{
 			$limit = 15;
-		}
-		//seller
-		if(!empty($request->seller)){
-			$seller = $request->seller;
-		
-		}else{
-			$seller = null;
 		}
 		
 		if(!empty($request->type)){
@@ -105,6 +85,7 @@ class ProductsController extends DataController
 		//category		
 		if(!empty($request->category) and $request->category!='all'){
 			$category = DB::table('categories')->leftJoin('categories_description','categories_description.categories_id','=','categories.categories_id')->where('categories_slug',$request->category)->where('language_id',Session::get('language_id'))->get();
+			
 			$categories_id = $category[0]->categories_id;
 			//for main
 			if($category[0]->parent_id==0){
@@ -134,7 +115,6 @@ class ProductsController extends DataController
 		//search value
 		if(!empty($request->search)){
 			$search = $request->search;
-
 		}else{
 			$search = '';
 		}	
@@ -174,18 +154,18 @@ class ProductsController extends DataController
 			
 			$filters['options'] = implode($options,',');
 			$filters['option_value'] = implode($option_values, ',');
-			$filters['filter_attribute']['options'] = $options;
+			
+                        $filters['filter_attribute']['options'] = $options;
 			$filters['filter_attribute']['option_values'] = $option_values;
 
-             $result['filter_attribute']['options'] = $options;
+                        $result['filter_attribute']['options'] = $options;
 			$result['filter_attribute']['option_values'] = $option_values;
 		}
 		
 		$myVar = new DataController();	
-		$data = array('page_number'=>$page_number, 'type'=>$type, 'limit'=>$limit, 'categories_id'=>$categories_id, 'search'=>$search, 'filters'=>$filters, 'limit'=>$limit, 'min_price'=>$min_price, 'max_price'=>$max_price ,'seller' => $seller );	
+		$data = array('page_number'=>$page_number, 'type'=>$type, 'limit'=>$limit, 'categories_id'=>$categories_id, 'search'=>$search, 'filters'=>$filters, 'limit'=>$limit, 'min_price'=>$min_price, 'max_price'=>$max_price );	
 		
 		$products = $myVar->products($data);
-		
 		$result['products'] = $products;
 		
 		$data = array('limit'=>$limit, 'categories_id'=>$categories_id );
@@ -201,30 +181,12 @@ class ProductsController extends DataController
 		}else{
 			$result['limit'] = $limit;
 		}
-
 		
 		//liked products
 		$result['liked_products'] = $this->likedProducts();	
-		return view("shop", $title)->with(['result'=> $result]); 
+		return view("shop", $title)->with('result', $result); 
 		
 	}
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
 	
 	//access object for custom pagination
 	function accessObjectArray($var){
@@ -272,8 +234,6 @@ class ProductsController extends DataController
 		}
 		$sub_category = DB::table('categories')->leftJoin('categories_description','categories_description.categories_id','=','categories.categories_id')->leftJoin('products_to_categories','products_to_categories.categories_id','=','categories.categories_id')->where('products_to_categories.products_id',$products[0]->products_id)->where('categories.parent_id','>',0)->where('language_id',Session::get('language_id'))->get();
 		
-//        die($sub_category);
-        
 		if(!empty($sub_category) and count($sub_category)>0){
 			$sub_category_name = $sub_category[0]->categories_name;
 			$sub_category_slug = $sub_category[0]->categories_slug;		
@@ -290,15 +250,12 @@ class ProductsController extends DataController
 		$isFlash = DB::table('flash_sale')->where('products_id',$products[0]->products_id)
 					->where('flash_expires_date','>=',  time())->where('flash_status','=',  1)
 					->get();
-					
-				
 		
 		if(!empty($isFlash) and count($isFlash)>0){
 			$type = "flashsale";
 		}else{
 			$type = "";
-		}
-			
+		}		
 				
 		$myVar = new DataController();
 		$data = array('page_number'=>'0', 'type'=>$type, 'products_id'=>$products[0]->products_id, 'limit'=>$limit, 'min_price'=>$min_price, 'max_price'=>$max_price);
@@ -321,33 +278,12 @@ class ProductsController extends DataController
 		$myVar = new CartController();
 		$result['cartArray'] = $myVar->cartIdArray($cart);
 		
-		
 		//liked products
 		$result['liked_products'] = $this->likedProducts();	
 		$seller = DB::table('administrators')->where('myid',$products[0]->admin_id)->get();
-		
-		        //yousry  code
-				$code = app('request')->input('u-a');
-				$product_id = app('request')->input('pro-d');
-			$data = array('code' =>$code,'product_id'=>$product_id );
-				if (isset($code)) {
-		
-					$cookie = Session::put('affilate_code', $data, 60);
-		
-			 \DB::table('affilate_product_link')->where('product_id', $product_id)
-			 ->where('affilate_code', '=', $code)
-			 ->increment('click');
-		
-				$get_session = Session::get('affilate_code');
-
-				//dd($get_session);
-		}
-
-				//end  yousry  code  
-		
 		return view("product-detail", $title)->with(['result' => $result ,
-												     'seller_name' => $seller[0]->first_name, 
-												     'seller_id' =>  $seller[0]->myid]); 
+													'seller_name' => $seller[0]->first_name, 
+													'seller_id' =>  $seller[0]->myid]); 
 	}
 	
 	
@@ -418,7 +354,7 @@ class ProductsController extends DataController
 		}	
 						
 		$myVar = new DataController();
-		$data = array('page_number'=>$request->page_number, 'type'=>$type, 'limit'=>$limit, 'categories_id'=>$categories_id, 'search'=>$search, 'filters'=>$filters, 'limit'=>$limit, 'min_price'=>$min_price, 'max_price'=>$max_price);
+		$data = array('page_number'=>$request->page_number, 'type'=>$type, 'limit'=>$limit, 'categories_id'=>$categories_id, 'search'=>$search, 'filters'=>$filters, 'limit'=>$limit, 'min_price'=>$min_price, 'max_price'=>$max_price );
 		$products = $myVar->products($data);
 		$result['products'] = $products;	
 			
