@@ -32,7 +32,7 @@
   position: absolute;
   left:0;
   top:64px;
-  width:100%;
+  width:300px;
   background: #fff;
   z-index: 2;
   border:1px solid darkgray;
@@ -44,12 +44,15 @@
  .requ input,
  .requ select,
  .requ select option{
-  height: 42px;
-  margin-top:4px;
-  padding: 0;
-  font-size:1.1em;
-  color: #3B3B3B;
+    height: 34px;
+    margin-top: 4px;
+    padding: 0;
+    font-size: 1.1em;
+    color: #3B3B3B;
+    width: 300px;
+    width: 300px;
 }
+
 
 .requ .ACC-BTNS {
   width:100%;

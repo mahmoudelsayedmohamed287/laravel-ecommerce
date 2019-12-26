@@ -10,12 +10,14 @@ use Session;
 use App\Http\Controllers\Controller;
 class AdminRegisterAffilateController extends Controller
 {
-    //
+  
     public  function index () {
-      $title = array('pageTitle' => Lang::get("labels.AddCustomer"));
+      $user_id= auth()->guard('admin')->user()->myid;
+       $title = array('pageTitle' => Lang::get("labels.AddCustomer"));
+       $affaliateDeatils = \DB::table('affilate_product_link')->where('user_id','=',$user_id)->get(); 
+$clicks = [];
 
-
-      return view("affilate.RegisterAffilate",$title);
+      return view("affilate.RegisterAffilate",$title)->with(['affaliateDeatils' => $affaliateDeatils]);
     }
 
 

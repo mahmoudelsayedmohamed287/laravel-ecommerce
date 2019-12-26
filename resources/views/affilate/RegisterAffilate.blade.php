@@ -43,7 +43,7 @@
                                                     <div class="affilateDashBoard-leftpart-period">
                                                         <div>
                                                             <div class="requ">
-                        <label for="">Date Range:</label>
+                        <label for="">Period:</label>
                         <input type="text" name="" id="" value="" class="dateMenu">
                         <div class="dateRangeTol">
 
@@ -71,7 +71,7 @@
                                                                 <span>{{ trans('labels.clicks') }}</span>
                                                             </div>
                                                             <div class="flex-item-body">
-                                                                <span>{{ trans('labels.0') }}</span>
+                                                                <span>{{  $affaliateDeatils[0]->click }}</span>
                                                             </div>
                                                         </div>
                                                         <div class="affilateDashBoard-flex-item">
