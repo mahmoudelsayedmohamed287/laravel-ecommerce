@@ -5,6 +5,7 @@
   <div class="container"> 
      <div class="group-banners">
     	<div class="row">
+    
         	@if(count($result['commonContent']['homeBanners'])>0)
                 @foreach(($result['commonContent']['homeBanners']) as $homeBanners)                
                     @if($homeBanners->type==3 and $homeBanners->status==1 )
@@ -33,194 +34,198 @@
         </div>
     </div>
     
-    @if($result['flash_sale']['success']==1)
+<!-- strat flash product  -->
+@if($result['flash_sale']['success']==1)
 
-    <!-- dynamic content -->
-   <div class="products-area">
-      <div class="row">
-        <div class="col-md-12">
-          <div class="nav nav-pills" role="tablist">
-            <a class="nav-link nav-item nav-index active" href="#special" id="flashsale-tab" data-toggle="pill" role="tab" aria-controls="flashsale" aria-selected="false">@lang('website.Flash Sale')</a> 
-          </div>          
-          <!-- Tab panes -->
-          <div class="tab-content">
-          	<div class="overlay" style="display:none;"><img src="{{asset('').'public/images/loader.gif'}}"></div>
+<!-- dynamic content -->
+<div class="products-area">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="nav nav-pills" role="tablist">
+        <a class="nav-link nav-item nav-index active" href="#special" id="flashsale-tab" data-toggle="pill" role="tab" aria-controls="flashsale" aria-selected="false">@lang('website.Flash Sale')</a> 
+      </div>          
+      <!-- Tab panes -->
+      <div class="tab-content">
+          <div class="overlay" style="display:none;"><img src="{{asset('').'public/images/loader.gif'}}"></div>
+        
+        <div role="tabpanel" class="tab-pane fade show active" id="flashsale" role="tabpanel" aria-labelledby="flashsale-tab">
+          <div id="owl_flashsale" class="owl-carousel"> 
+          
+            @foreach($result['flash_sale']['product_data'] as $key=>$products)
+           
+            @if( $products->server_time >= $products->flash_start_date)
+            <div class="product" id="product_div_{{$products->products_id}}">
+              <article>
+                  <div class="thumb"><img class="img-fluid" src="{{asset('').$products->products_image}}" alt="{{$products->products_name}}"></div>
+                <?php
+                    $current_date = date("Y-m-d", strtotime("now"));
+                    
+                    $string = substr($products->products_date_added, 0, strpos($products->products_date_added, ' '));
+                    $date=date_create($string);
+                    date_add($date,date_interval_create_from_date_string($web_setting[20]->value." days"));
+                    
+                    
+                    $after_date = date_format($date,"Y-m-d");
+                    
+                    if($after_date>=$current_date){
+                        print '<span class="new-tag">';
+                        print __('website.New');
+                        print '</span>';
+                    }
+                    
+                    if(!empty($products->flash_price)){
+                        $discount_price = $products->flash_price;	
+                        $orignal_price = $products->products_price;	
+                        
+                        if(($orignal_price+0)>0){
+                            $discounted_price = $orignal_price-$discount_price;
+                            $discount_percentage = $discounted_price/$orignal_price*100;
+                        }else{
+                            $discount_percentage = 0;
+                        }
+                        echo "<span class='discount-tag'>".(int)$discount_percentage."%</span>";
+                    }
+                     
+                   ?>
+                 <div class="sale-counter">
+                    <span  id="counter_{{$products->products_id}}"></span>
+                 </div>
+                
+                 <span class="tag text-center">
+                    @foreach($products->categories as $key=>$category)
+                        {{$category->categories_name}}@if(++$key === count($products->categories)) @else, @endif                              
+                    @endforeach
+                </span>
+                
+                <h2 class="title text-center wrap-dot-1">{{$products->products_name}}</h2>
+                
+                <div class="price text-center">                     
+                    {{$web_setting[19]->value}}{{$products->flash_price+0}}                   
+                    <span>{{$web_setting[19]->value}}{{$products->products_price+0}} </span>                        
+                </div>                   
+                
+                <div class="product-hover">
+                     
+                    
+                    <div class="buttons">
+                         @if($products->products_type==0)
+                            @if(!in_array($products->products_id,$result['cartArray']))
+                                @if($products->defaultStock==0)
+                                    <button type="button" class="btn btn-block btn-danger" products_id="{{$products->products_id}}">@lang('website.Out of Stock')</button>
+                                @else
+                                    <a class="btn btn-block btn-secondary" href="{{ URL::to('/product-detail/'.$products->products_slug)}}">@lang('website.View Detail')</a>
+                                @endif
+                            @else
+                                <button type="button" class="btn btn-block btn-secondary active">@lang('website.Added')</button>
+                            @endif
+                        @elseif($products->products_type==1)
+                            <a class="btn btn-block btn-secondary" href="{{ URL::to('/product-detail/'.$products->products_slug)}}">@lang('website.View Detail')</a>
+                        @elseif($products->products_type==2)
+                            <a href="{{$products->products_url}}" target="_blank" class="btn btn-block btn-secondary">@lang('website.External Link')</a>
+                        @endif
+                    </div>
+                 </div>
+     
+              </article>
+            </div>                
+            @endif
+            @endforeach
+                
             
-            <div role="tabpanel" class="tab-pane fade show active" id="flashsale" role="tabpanel" aria-labelledby="flashsale-tab">
-              <div id="owl_flashsale" class="owl-carousel"> 
-              
-                @foreach($result['flash_sale']['product_data'] as $key=>$products)
-               
-                @if( $products->server_time >= $products->flash_start_date)
-                <div class="product" id="product_div_{{$products->products_id}}">
-                  <article>
-                  	<div class="thumb"><img class="img-fluid" src="{{asset('').$products->products_image}}" alt="{{$products->products_name}}"></div>
-                    <?php
-						$current_date = date("Y-m-d", strtotime("now"));
-						
-						$string = substr($products->products_date_added, 0, strpos($products->products_date_added, ' '));
-						$date=date_create($string);
-						date_add($date,date_interval_create_from_date_string($web_setting[20]->value." days"));
-						
-						
-						$after_date = date_format($date,"Y-m-d");
-						
-						if($after_date>=$current_date){
-							print '<span class="new-tag">';
-							print __('website.New');
-							print '</span>';
-						}
-						
-						if(!empty($products->flash_price)){
-							$discount_price = $products->flash_price;	
-							$orignal_price = $products->products_price;	
-							
-							if(($orignal_price+0)>0){
-								$discounted_price = $orignal_price-$discount_price;
-								$discount_percentage = $discounted_price/$orignal_price*100;
-							}else{
-								$discount_percentage = 0;
-							}
-							echo "<span class='discount-tag'>".(int)$discount_percentage."%</span>";
-						}
-						 
-			  		 ?>
-                     <div class="sale-counter">
-                     <span  id="counter_{{$products->products_id}}"></span>
-                     </div>
+            
+            
+            @foreach($result['flash_sale']['product_data'] as $key=>$products)
+           
+            @if( $products->server_time < $products->flash_start_date)
+            
+            <div class="product">
+              <article>
+                  <div class="thumb"><img class="img-fluid" src="{{asset('').$products->products_image}}" alt="{{$products->products_name}}"></div>
+                <?php
+                    $current_date = date("Y-m-d", strtotime("now"));
                     
-                     <span class="tag text-center">
-                        @foreach($products->categories as $key=>$category)
-                            {{$category->categories_name}}@if(++$key === count($products->categories)) @else, @endif                              
-                        @endforeach
-                    </span>
+                    $string = substr($products->products_date_added, 0, strpos($products->products_date_added, ' '));
+                    $date=date_create($string);
+                    date_add($date,date_interval_create_from_date_string($web_setting[20]->value." days"));
                     
-                    <h2 class="title text-center wrap-dot-1">{{$products->products_name}}</h2>
+                    $after_date = date_format($date,"Y-m-d");
                     
-                    <div class="price text-center">                     
-                    	{{$web_setting[19]->value}}{{$products->flash_price+0}}                   
-                    	<span>{{$web_setting[19]->value}}{{$products->products_price+0}} </span>                        
-                    </div>                   
+                    if($after_date>=$current_date){
+                        print '<span class="new-tag">';
+                        print __('website.New');
+                        print '</span>';
+                    }
                     
-                    <div class="product-hover">
-                     	
+                    if(!empty($products->flash_price)){
+                        $discount_price = $products->flash_price;	
+                        $orignal_price = $products->products_price;	
                         
-                        <div class="buttons">
-                        	 @if($products->products_type==0)
-                                @if(!in_array($products->products_id,$result['cartArray']))
-                                    @if($products->defaultStock==0)
-                                        <button type="button" class="btn btn-block btn-danger" products_id="{{$products->products_id}}">@lang('website.Out of Stock')</button>
-                                    @else
-                                        <a class="btn btn-block btn-secondary" href="{{ URL::to('/product-detail/'.$products->products_slug)}}">@lang('website.View Detail')</a>
-                                    @endif
+                        if(($orignal_price+0)>0){
+                            $discounted_price = $orignal_price-$discount_price;
+                            $discount_percentage = $discounted_price/$orignal_price*100;
+                        }else{
+                            $discount_percentage = 0;
+                        }
+                        echo "<span class='discount-tag' >".(int)$discount_percentage."%</span>";
+                    }
+                     
+                   ?>
+                 <span class="discount-tag upcomming-tag" style='top :38px'>@lang('website.UP COMMING')</span>
+                
+                 <span class="tag text-center">
+                    @foreach($products->categories as $key=>$category)
+                        {{$category->categories_name}}@if(++$key === count($products->categories)) @else, @endif                              
+                    @endforeach
+                </span>
+                
+                <h2 class="title text-center wrap-dot-1">{{$products->products_name}}</h2>
+                
+                <div class="price text-center">                     
+                    {{$web_setting[19]->value}}{{$products->flash_price+0}}                   
+                    <span>{{$web_setting[19]->value}}{{$products->products_price+0}} </span>                        
+                </div>                   
+                
+                <div class="product-hover">
+                     
+                    
+                    <div class="buttons">
+                         @if($products->products_type==0)
+                            @if(!in_array($products->products_id,$result['cartArray']))
+                                @if($products->defaultStock==0)
+                                    <button type="button" class="btn btn-block btn-danger" products_id="{{$products->products_id}}">@lang('website.Out of Stock')</button>
                                 @else
-                                    <button type="button" class="btn btn-block btn-secondary active">@lang('website.Added')</button>
+                                    <a class="btn btn-block btn-secondary" href="{{ URL::to('/product-detail/'.$products->products_slug)}}">@lang('website.View Detail')</a>
                                 @endif
-                            @elseif($products->products_type==1)
-                                <a class="btn btn-block btn-secondary" href="{{ URL::to('/product-detail/'.$products->products_slug)}}">@lang('website.View Detail')</a>
-                            @elseif($products->products_type==2)
-                                <a href="{{$products->products_url}}" target="_blank" class="btn btn-block btn-secondary">@lang('website.External Link')</a>
+                            @else
+                                <button type="button" class="btn btn-block btn-secondary active">@lang('website.Added')</button>
                             @endif
-                        </div>
-                     </div>
-         
-                  </article>
-                </div>                
-                @endif
-                @endforeach
-                    
-                
-                
-                
-                @foreach($result['flash_sale']['product_data'] as $key=>$products)
-               
-                @if( $products->server_time < $products->flash_start_date)
-                
-                <div class="product">
-                  <article>
-                  	<div class="thumb"><img class="img-fluid" src="{{asset('').$products->products_image}}" alt="{{$products->products_name}}"></div>
-                    <?php
-						$current_date = date("Y-m-d", strtotime("now"));
-						
-						$string = substr($products->products_date_added, 0, strpos($products->products_date_added, ' '));
-						$date=date_create($string);
-						date_add($date,date_interval_create_from_date_string($web_setting[20]->value." days"));
-						
-						$after_date = date_format($date,"Y-m-d");
-						
-						if($after_date>=$current_date){
-							print '<span class="new-tag">';
-							print __('website.New');
-							print '</span>';
-						}
-						
-						if(!empty($products->flash_price)){
-							$discount_price = $products->flash_price;	
-							$orignal_price = $products->products_price;	
-							
-							if(($orignal_price+0)>0){
-								$discounted_price = $orignal_price-$discount_price;
-								$discount_percentage = $discounted_price/$orignal_price*100;
-							}else{
-								$discount_percentage = 0;
-							}
-							echo "<span class='discount-tag' >".(int)$discount_percentage."%</span>";
-						}
-						 
-			  		 ?>
-                     <span class="discount-tag upcomming-tag" style='top :38px'>@lang('website.UP COMMING')</span>
-                    
-                     <span class="tag text-center">
-                        @foreach($products->categories as $key=>$category)
-                            {{$category->categories_name}}@if(++$key === count($products->categories)) @else, @endif                              
-                        @endforeach
-                    </span>
-                    
-                    <h2 class="title text-center wrap-dot-1">{{$products->products_name}}</h2>
-                    
-                    <div class="price text-center">                     
-                    	{{$web_setting[19]->value}}{{$products->flash_price+0}}                   
-                    	<span>{{$web_setting[19]->value}}{{$products->products_price+0}} </span>                        
-                    </div>                   
-                    
-                    <div class="product-hover">
-                     	
-                        
-                        <div class="buttons">
-                        	 @if($products->products_type==0)
-                                @if(!in_array($products->products_id,$result['cartArray']))
-                                    @if($products->defaultStock==0)
-                                        <button type="button" class="btn btn-block btn-danger" products_id="{{$products->products_id}}">@lang('website.Out of Stock')</button>
-                                    @else
-                                        <a class="btn btn-block btn-secondary" href="{{ URL::to('/product-detail/'.$products->products_slug)}}">@lang('website.View Detail')</a>
-                                    @endif
-                                @else
-                                    <button type="button" class="btn btn-block btn-secondary active">@lang('website.Added')</button>
-                                @endif
-                            @elseif($products->products_type==1)
-                                <a class="btn btn-block btn-secondary" href="{{ URL::to('/product-detail/'.$products->products_slug)}}">@lang('website.View Detail')</a>
-                            @elseif($products->products_type==2)
-                                <a href="{{$products->products_url}}" target="_blank" class="btn btn-block btn-secondary">@lang('website.External Link')</a>
-                            @endif
-                        </div>
-                     </div>
-         
-                  </article>
-                </div>
-                @endif
-                @endforeach
-                    
-                
-                
-                </div>
+                        @elseif($products->products_type==1)
+                            <a class="btn btn-block btn-secondary" href="{{ URL::to('/product-detail/'.$products->products_slug)}}">@lang('website.View Detail')</a>
+                        @elseif($products->products_type==2)
+                            <a href="{{$products->products_url}}" target="_blank" class="btn btn-block btn-secondary">@lang('website.External Link')</a>
+                        @endif
+                    </div>
+                 </div>
+     
+              </article>
             </div>
+            @endif
+            @endforeach
+                
             
             
-          </div>
+            </div>
         </div>
+        
+        
       </div>
     </div>
-   @endif
+  </div>
+</div>
+@endif
+
+
+<!-- end flash product  -->
     <div class="products-area">
       <div class="row">
         <div class="col-md-12">

@@ -50,6 +50,7 @@ class ProductsController extends DataController
 		$result = array();
 		
 		$result['commonContent'] = $this->commonContent();
+		
 		if(!empty($request->page)){
 			$page_number = $request->page;
 		}else{
@@ -84,6 +85,7 @@ class ProductsController extends DataController
 		
 		//category		
 		if(!empty($request->category) and $request->category!='all'){
+			$result['featuresProducts'] = $this->productsFetures();
 			$category = DB::table('categories')->leftJoin('categories_description','categories_description.categories_id','=','categories.categories_id')->where('categories_slug',$request->category)->where('language_id',Session::get('language_id'))->get();
 			
 			$categories_id = $category[0]->categories_id;
@@ -102,6 +104,7 @@ class ProductsController extends DataController
 			}
 			
 		}else{
+			$result['featuresProducts'] = $this->productsFetures();
 			$categories_id = '';
 			$category_name = '';
 			$sub_category_name = '';
