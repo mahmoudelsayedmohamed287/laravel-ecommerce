@@ -335,4 +335,41 @@
     }
 
   }
+    $(".dateMenu").on("click",function(){
+			$('.dateRangeTol').toggle();
+		})
+    var lastWeek = new Date();
+		lastWeek.setDate(lastWeek.getDate() -7)
+		var aWeekBefore = lastWeek.toLocaleDateString();
+		
+		$(".lastWeek").on("click",function(){
+			$(".dateMenu").val(aWeekBefore);
+		});
+    var today = new Date();
+		today.setDate(today.getDate())
+		var aDay = today.toLocaleDateString();
+		
+		$(".today").on("click",function(){
+			$(".dateMenu").val(aDay);
+		});
+    var yesterday = new Date();
+		yesterday.setDate(yesterday.getDate()-1)
+		var aDayBefore = yesterday.toLocaleDateString();
+		
+		$(".yesterday").on("click",function(){
+			$(".dateMenu").val(aDayBefore);
+		});
+    var lastMonth = new Date();
+		lastMonth.setDate(lastMonth.getDate()-30)
+		var aMonthBefore = lastMonth.toLocaleDateString();
+		
+		$(".lastMonth").on("click",function(){
+			$(".dateMenu").val(aMonthBefore);
+		});
+    var thisMonth = new Date();
+		thisMonth.setDate(thisMonth.getDay())
+		var toMonth = thisMonth.toLocaleDateString();
+		$(".thisMonth").on("click",function(){
+			$(".dateMenu").val(toMonth + " - " + new Date().toLocaleDateString());
+		});
 })(jQuery, $.AdminLTE);
