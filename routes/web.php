@@ -34,7 +34,7 @@ header('Access-Control-Allow-Headers:  Content-Type, X-Auth-Token, Origin, Autho
 |
 */
 
-/*   sara    */
+
 
 
 
@@ -180,6 +180,10 @@ Route::group(['prefix' => 'admin'], function () {
 Route::get('/register/affilate', 'AdminRegisterAffilateController@index');
 
 Route::post('/register/affilate/add', 'AdminRegisterAffilateController@add');
+
+
+Route::post('/register/affilate/report', 'AdminRegisterAffilateController@report');
+
 
 
 Route::get('/generate/affilate/prouduct/link', 'AdminAffilateProuductLinkController@index');

@@ -598,7 +598,7 @@ class OrdersController extends DataController
 				if(isset($get_session)  ){
 					\DB::table('affilate_product_link')->where('product_id', $product_id)
 					->where('affilate_code', '=', $code505)
-					->increment('confirmed-order');  
+					->increment('confirmed');  
 							
 							session()->forget('affilate_code');
 							 Session::flush('affilate_code');
