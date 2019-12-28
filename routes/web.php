@@ -164,25 +164,20 @@ Route::group(['prefix' => 'admin'], function () {
 			Route::get('/editAppLabel/{id}', 'AdminAppLabelsController@editAppLabel');
 			Route::post('/updateAppLabel/', 'AdminAppLabelsController@updateAppLabel');
 			Route::get('/applabel', 'AdminAppLabelsController@manageAppLabel');
-  
-   
+
+
 			//customers
 			Route::get('/customers', 'AdminCustomersController@customers');
 			Route::get('/addcustomers', 'AdminCustomersController@addcustomers');
 			Route::post('/addnewcustomers', 'AdminCustomersController@addnewcustomers');
 
 
-<<<<<<< HEAD
-            //Register Affilate program
-			Route::get('/register/affilate', 'AdminRegisterAffilateController@index');
-=======
 
-
+  
 
 
 //Register Affilate program
 Route::get('/register/affilate', 'AdminRegisterAffilateController@index');
->>>>>>> bb0712ee0d2ea5a4e478b17befa1511e4388c741
 
 Route::post('/register/affilate/add', 'AdminRegisterAffilateController@add');
 
@@ -191,12 +186,10 @@ Route::get('/generate/affilate/prouduct/link', 'AdminAffilateProuductLinkControl
 Route::post('/generate/affilate/prouduct/link/add', 'AdminAffilateProuductLinkController@add');
 //end
 
-<<<<<<< HEAD
 
 
 
-=======
->>>>>>> bb0712ee0d2ea5a4e478b17befa1511e4388c741
+
 			//add adddresses against customers
 			Route::get('/addaddress/{id}/', 'AdminCustomersController@addaddress');
 			Route::post('/addNewCustomerAddress', 'AdminCustomersController@addNewCustomerAddress');
