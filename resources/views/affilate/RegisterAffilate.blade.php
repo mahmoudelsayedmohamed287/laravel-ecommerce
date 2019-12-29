@@ -84,7 +84,7 @@
                                                             <div class="flex-item-header">
                                                                 <span>{{ trans('labels.clicks') }}</span>
                                                             </div>
-          
+
                                                             <div class="flex-item-body">
                                                                 <span id="click"></span>
                                                             </div>

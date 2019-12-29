@@ -42,6 +42,7 @@
 }
 
 .requ .dateRangeTol {
+<<<<<<< HEAD
     position: absolute;
     left: 0;
     top: 64px;
@@ -52,6 +53,13 @@
     border-top: none;
     padding: 4px;
     display: none;
+=======
+    width: 300px;
+    background: #fff;
+    border: 1px solid darkgray;
+    border: none;
+    border-bottom: 1px solid #ccc padding;
+>>>>>>> 32b59f247107e58068368bc17f2f65089b47f36b
 }
 
 .requ input,
@@ -82,6 +90,17 @@
     font-weight: bold;
     color: #6b6b6b;
     cursor: pointer;
+<<<<<<< HEAD
+=======
+    -webkit-transition: all 0.5s ease-in-out;
+    -moz-transition: all 0.5s ease-in-out;
+    -ms-transition: all 0.5s ease-in-out;
+    -o-transition: all 0.5s ease-in-out;
+}
+
+.requ .dateMenu {
+    display: none;
+>>>>>>> 32b59f247107e58068368bc17f2f65089b47f36b
 }
 
 .requ .dateRangeTol ul li {

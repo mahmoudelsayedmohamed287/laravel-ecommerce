@@ -92,16 +92,7 @@
                            <th>feature status</th>
                         @endif
 
-<!--<<<<<<< HEAD-->
-                      <?php if(session('admin_type')==1){?>
-                      <th>feature status</th>
-                      <?php } ?>
 
-<!--
-=======
-                   
->>>>>>> 59aa3fbf0cb26acca24459523d33a12b2c8ffd8c
--->
                       <th></th>
                      
                     </tr>
