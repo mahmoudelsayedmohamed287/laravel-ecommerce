@@ -243,7 +243,7 @@ class AdminController extends Controller
                  session(['activation' => $admin->isActive]);
                 if(session('activation')==0){return redirect('admin/login')->withErrors($validator)->withInput();}
                 else{
-
+         date_default_timezone_set("Africa/Cairo");
                     DB::table('administrators')
             ->where('myid', $admin->myid)
             ->update(['last_login' => date('Y-m-d H:i:s')]);
@@ -614,6 +614,7 @@ class AdminController extends Controller
 	
 	//logout
 	public function logout(){
+        date_default_timezone_set("Africa/Cairo");
         DB::table('administrators')
             ->where('myid', session('admin_id'))
             ->update(['last_logout' => date('Y-m-d H:i:s')]);
