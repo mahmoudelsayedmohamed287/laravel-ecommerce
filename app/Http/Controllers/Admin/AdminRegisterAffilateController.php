@@ -45,12 +45,12 @@ for($i; $i < count($affaliateDeatils); $i++){
 
       $user_id= auth()->guard('admin')->user()->myid;
       $title = array('pageTitle' => Lang::get("labels.AddCustomer"));
-               //dd($request->Period);
+               // dd($request->Period);
       $date = $request->Period;
 
 $affilate_product_link = affilate_product_link::where('user_id', $user_id)
          ->with(['get_affilate_product_status' => function ($query)  use ($date) {
-             $query->where('date', $date);
+             $query->where('date','<=', $date);
              $query->orderBy('date', 'asc');
 
          }])->get();
