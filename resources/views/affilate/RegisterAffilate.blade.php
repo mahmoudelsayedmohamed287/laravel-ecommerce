@@ -43,18 +43,26 @@
                                                     <div class="affilateDashBoard-leftpart-period">
                                                         <div>
                                                             <div class="requ">
-                        <label for="">Date Range:</label>
+                        <label for="">Period:</label>
                         <input type="text" name="" id="" value="" class="dateMenu">
                         <div class="dateRangeTol">
 
-                            <ul>
+                        <select class="form-control" id="Period" >
+    <option class="today">today</option>
+    <option class="yesterday">yesterday</option>
+    <option class="lastWeek">last week</option>
+    <option class="thisWeek">this week</option>
+    <option class="lastMonth">last month</option>
+    <option class="thisMonth">this month</option>
+  </select>
+                            <!-- <ul>
                                 <li class="today">today</li>
                                 <li class="yesterday">yesterday</li>
                                 <li class="lastWeek">last week</li>
                                 <li class="thisWeek">this week</li>
                                 <li class="lastMonth">last month</li>
                                 <li class="thisMonth">this month</li>
-                            </ul>
+                            </ul> -->
                         </div>
                     </div>
 <!--
@@ -71,7 +79,7 @@
                                                                 <span>{{ trans('labels.clicks') }}</span>
                                                             </div>
                                                             <div class="flex-item-body">
-                                                                <span>{{ trans('labels.0') }}</span>
+                                                                <span>{{  $clicks }}</span>
                                                             </div>
                                                         </div>
                                                         <div class="affilateDashBoard-flex-item">
@@ -79,7 +87,7 @@
                                                                 <span>{{ trans('labels.confirmed orders') }}</span>
                                                             </div>
                                                             <div class="flex-item-body">
-                                                                <span>{{ trans('labels.0') }}</span>
+                                                                <span>{{ $confirmed }}</span>
                                                             </div>
                                                         </div>
                                                         <div class="affilateDashBoard-flex-item">

@@ -9,6 +9,7 @@
         </div>
         <div class="collapse block" id="collapseAccordian1" role="tabpanel" aria-labelledby="headingOne" data-parent="#accordion">
             @include('common.categories')
+        
         </div>
     </div> 
      <div class=" card">
@@ -19,8 +20,12 @@
 <!--
         <?php $seller =  isset($_REQUEST['seller']) ? $_REQUEST['seller'] : null ?>
         <input type="hidden" name="seller" id="seller" value="{{$seller}}">
+<<<<<<< HEAD
         <input type="hidden" name="type" value="is_feature">
 -->
+=======
+        
+>>>>>>> cd32db1b2b83a4e02db928065fa343d99c947ed6
         <input type="hidden" name="max_price" id="max_price" value="{{$result['filters']['maxPrice']}}">
         @if(app('request')->input('filters_applied')==1)
         <input type="hidden" name="filters_applied" id="filters_applied" value="1">

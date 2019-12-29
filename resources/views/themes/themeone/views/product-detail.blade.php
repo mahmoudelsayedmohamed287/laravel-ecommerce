@@ -294,26 +294,13 @@
                                                 {{$web_setting[19]->value}}{{$product_price}}
                                                 </span>				
                                             </div>  
-                                            <div class="price-box" style="display: block">
+                                          <div class="price-box" style="display: block">
                                                  <span>@lang('website.Seller Name')&nbsp;:</span>
                                                  <a href="{{ URL::to('/shop')}}?seller={{$seller_id}}">
                                                    {{$seller_name}} 
                                                 </a>
                                             </div>
-                                            <?php if(!empty($result['detail']['product_data'][0]->flash_start_date)){?>
-                                            <div class="price-box" style="display: block">
-                                                 <span>start date</span>
-                                                 <h7><?php echo $result['detail']['product_data'][0]->flash_start_date?></h7>
-                                                
-                                            </div>
-
                                            
-                                            <div class="price-box" style="display: block">
-                                                 <span>expire date</span>
-                                                 <h7><?php echo $result['detail']['product_data'][0]->flash_expires_date?></h7>
-                                                
-                                            </div>
-                                            <?php }?>
                                             
                                             <div class="buttons" style="margin-top: 30px;">    
                                              @if(!empty($result['detail']['product_data'][0]->flash_start_date) and $result['detail']['product_data'][0]->server_time < $result['detail']['product_data'][0]->flash_start_date )

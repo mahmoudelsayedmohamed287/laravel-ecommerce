@@ -343,14 +343,17 @@
 		var aWeekBefore = lastWeek.toLocaleDateString();
 		
 		$(".lastWeek").on("click",function(){
-			$(".dateMenu").val(aWeekBefore);
+      $(".dateMenu").val(aWeekBefore);
+     
 		});
     var today = new Date();
 		today.setDate(today.getDate())
 		var aDay = today.toLocaleDateString();
 		
 		$(".today").on("click",function(){
-			$(".dateMenu").val(aDay);
+      alert('ddddddddddddd');
+      $(".dateMenu").val(aDay);
+      $("#sel1").val(aDay);
 		});
     var yesterday = new Date();
 		yesterday.setDate(yesterday.getDate()-1)
@@ -373,3 +376,64 @@
 			$(".dateMenu").val(toMonth + " - " + new Date().toLocaleDateString());
 		});
 })(jQuery, $.AdminLTE);
+
+
+
+
+
+
+
+
+
+
+
+
+$.ajaxSetup({
+
+  headers: {
+
+      'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+
+  }
+
+});
+
+
+
+$("#Period").change(function(e){
+
+
+
+  e.preventDefault();
+
+
+
+  var Period = $("#Period").val();
+  
+
+
+
+  $.ajax({
+
+     type:'POST',
+
+     url:'/estore_afaf/admin/register/affilate/report',
+
+     data:{Period:Period},
+
+     success:function(data){
+
+        // alert(data.success);
+
+     }
+
+  });
+
+
+
+});
+
+
+
+
+
