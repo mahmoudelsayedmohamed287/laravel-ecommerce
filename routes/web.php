@@ -164,8 +164,8 @@ Route::group(['prefix' => 'admin'], function () {
 			Route::get('/editAppLabel/{id}', 'AdminAppLabelsController@editAppLabel');
 			Route::post('/updateAppLabel/', 'AdminAppLabelsController@updateAppLabel');
 			Route::get('/applabel', 'AdminAppLabelsController@manageAppLabel');
-  
-   
+
+
 			//customers
 			Route::get('/customers', 'AdminCustomersController@customers');
 			Route::get('/addcustomers', 'AdminCustomersController@addcustomers');
@@ -189,6 +189,10 @@ Route::post('/register/affilate/report', 'AdminRegisterAffilateController@report
 Route::get('/generate/affilate/prouduct/link', 'AdminAffilateProuductLinkController@index');
 Route::post('/generate/affilate/prouduct/link/add', 'AdminAffilateProuductLinkController@add');
 //end
+
+
+
+
 
 			//add adddresses against customers
 			Route::get('/addaddress/{id}/', 'AdminCustomersController@addaddress');

@@ -381,6 +381,9 @@
     // $(".thisMonth").on("click",function(){
     // 	$(".dateMenu").val(toMonth + " - " + new Date().toLocaleDateString());
     // });
+    $(".dateMenu").on("click", function() {
+        $('.dateRangeTol').toggle();
+    })
     var lastWeek = new Date();
     lastWeek.setDate(lastWeek.getDate() - 7)
     var aWeekBefore = lastWeek.toLocaleDateString();
@@ -443,13 +446,22 @@ $("#Period").change(function(e) {
 
         type: 'POST',
 
-        url: '/estore_afaf/admin/register/affilate/report',
+        url: '/estore_afaf/index.php/admin/register/affilate/report',
 
         data: { Period: Period },
+        dataType: 'json',
+
 
         success: function(data) {
+ console.log(data);
 
-            // alert(data.success);
+
+$('#click').html(data.click);
+$('#confirmed').html(data.confirmed);
+
+
+  // document.getElementById("ajax_data").innerHTML = ajax_data;
+
 
         }
 
