@@ -435,10 +435,12 @@ $("#Period").change(function(e) {
 
     e.preventDefault();
 
+    e.preventDefault();
 
 
     var Period = $("#Period").val();
 
+    var Period = $("#Period").val();
 
 
 
@@ -462,6 +464,7 @@ $('#confirmed').html(data.confirmed);
 
   // document.getElementById("ajax_data").innerHTML = ajax_data;
 
+        }
 
         }
 
