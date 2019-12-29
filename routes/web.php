@@ -510,6 +510,7 @@ Route::post('/language/', array(
 	Route::post('/shop', 'ProductsController@shop');
 	Route::get('/product-detail/{slug}', 'ProductsController@productDetail');
 	Route::post('/filterProducts', 'ProductsController@filterProducts');
+	Route::get('/feature-product-detail/{slug}','ProductsController@singleFeatureProductDetail');
 
 
 	/*

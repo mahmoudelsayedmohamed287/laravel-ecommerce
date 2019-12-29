@@ -86,6 +86,7 @@ class ShippingAddressController extends DataController
 		$result = array();		
 		$result['commonContent'] = $this->commonContent();
 		
+		
 		//print_r($request->update);
 		if(!empty($request->action)){
 			$result['action'] = $request->action;			

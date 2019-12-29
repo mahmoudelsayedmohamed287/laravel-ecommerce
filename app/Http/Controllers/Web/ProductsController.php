@@ -85,7 +85,7 @@ class ProductsController extends DataController
 		
 		//category		
 		if(!empty($request->category) and $request->category!='all'){
-			$result['featuresProducts'] = $this->productsFetures();
+			
 			$category = DB::table('categories')->leftJoin('categories_description','categories_description.categories_id','=','categories.categories_id')->where('categories_slug',$request->category)->where('language_id',Session::get('language_id'))->get();
 			
 			$categories_id = $category[0]->categories_id;
@@ -104,7 +104,7 @@ class ProductsController extends DataController
 			}
 			
 		}else{
-			$result['featuresProducts'] = $this->productsFetures();
+			
 			$categories_id = '';
 			$category_name = '';
 			$sub_category_name = '';
@@ -167,7 +167,7 @@ class ProductsController extends DataController
 		
 		$myVar = new DataController();	
 		$data = array('page_number'=>$page_number, 'type'=>$type, 'limit'=>$limit, 'categories_id'=>$categories_id, 'search'=>$search, 'filters'=>$filters, 'limit'=>$limit, 'min_price'=>$min_price, 'max_price'=>$max_price );	
-		
+		$result['featuresProducts'] = $this->productsFetures();
 		$products = $myVar->products($data);
 		$result['products'] = $products;
 		
@@ -199,10 +199,10 @@ class ProductsController extends DataController
 	//productDetail 
 	public function productDetail(Request $request){
 		
+		
 		$title 			= 	array('pageTitle' => Lang::get('website.Product Detail'));
 		$result 		= 	array();
 		$result['commonContent'] = $this->commonContent();
-		
 		//min_price
 		if(!empty($request->min_price)){
 			$min_price = $request->min_price;
@@ -224,6 +224,7 @@ class ProductsController extends DataController
 		}
 		
 		$products = DB::table('products')->where('products_slug',$request->slug)->get();
+		
 		
 		//category		
 		$category = DB::table('categories')->leftJoin('categories_description','categories_description.categories_id','=','categories.categories_id')->leftJoin('products_to_categories','products_to_categories.categories_id','=','categories.categories_id')->where('products_to_categories.products_id',$products[0]->products_id)->where('categories.parent_id',0)->where('language_id',Session::get('language_id'))->get();
@@ -261,11 +262,14 @@ class ProductsController extends DataController
 		}		
 				
 		$myVar = new DataController();
-		$data = array('page_number'=>'0', 'type'=>$type, 'products_id'=>$products[0]->products_id, 'limit'=>$limit, 'min_price'=>$min_price, 'max_price'=>$max_price);
+		$data = array('page_number'=>'0', 'type'=>$type, 'products_id'=>$products[0]->products_id, 
+		'limit'=>$limit, 'min_price'=>$min_price, 'max_price'=>$max_price);
+		
 		$detail = $myVar->products($data);
 		$result['detail'] = $detail;
 		$postCategoryId = array();
 		$i = 0;
+		
 		foreach($result['detail']['product_data'][0]->categories as $postCategory){
 			if($i==0){
 				$postCategoryId = $postCategory->categories_id;
@@ -287,6 +291,103 @@ class ProductsController extends DataController
 		return view("product-detail", $title)->with(['result' => $result ,
 													'seller_name' => $seller[0]->first_name, 
 													'seller_id' =>  $seller[0]->myid]); 
+	}
+
+
+	public function singleFeatureProductDetail($slug){
+		
+		
+		$title 			= 	array('pageTitle' => Lang::get('website.Product Detail'));
+		$result 		= 	array();
+		$result['commonContent'] = $this->commonContent();
+		// //min_price
+		// if(!empty($request->min_price)){
+		// 	$min_price = $request->min_price;
+		// }else{
+			$min_price = '';
+		// }
+		
+		// //max_price
+		// if(!empty($request->max_price)){
+		// 	$max_price = $request->max_price;
+		// }else{
+			$max_price = '';
+		// }	
+				
+		// if(!empty($request->limit)){
+		// 	$limit = $request->limit;
+		// }else{
+			$limit = 15;
+		// }
+		
+		$products = DB::table('products')->where('products_slug',$slug)->get();
+		
+		
+		// //category		
+		$category = DB::table('categories')->leftJoin('categories_description','categories_description.categories_id','=','categories.categories_id')->leftJoin('products_to_categories','products_to_categories.categories_id','=','categories.categories_id')->where('products_to_categories.products_id',$products[0]->products_id)->where('categories.parent_id',0)->where('language_id',Session::get('language_id'))->get();
+		
+		if(!empty($category) and count($category)>0){
+			$category_slug = $category[0]->categories_slug;
+			$category_name = $category[0]->categories_name;
+		}else{
+			$category_slug = '';
+			$category_name = '';
+		}
+		$sub_category = DB::table('categories')->leftJoin('categories_description','categories_description.categories_id','=','categories.categories_id')->leftJoin('products_to_categories','products_to_categories.categories_id','=','categories.categories_id')->where('products_to_categories.products_id',$products[0]->products_id)->where('categories.parent_id','>',0)->where('language_id',Session::get('language_id'))->get();
+		
+		if(!empty($sub_category) and count($sub_category)>0){
+			$sub_category_name = $sub_category[0]->categories_name;
+			$sub_category_slug = $sub_category[0]->categories_slug;		
+		}else{
+			$sub_category_name = '';
+			$sub_category_slug = '';	
+		}
+		
+		$result['category_name'] = $category_name;
+		$result['category_slug'] = $category_slug;
+		$result['sub_category_name'] = $sub_category_name;
+		$result['sub_category_slug'] = $sub_category_slug;
+		
+		$isFlash = DB::table('flash_sale')->where('products_id',$products[0]->products_id)
+					->where('flash_expires_date','>=',  time())->where('flash_status','=',  1)
+					->get();
+		
+		if(!empty($isFlash) and count($isFlash)>0){
+			$type = "flashsale";
+		}else{
+			$type = "";
+		}		
+				
+		$myVar = new DataController();
+		
+		$detail = $myVar->products1($slug);
+		$result['detail'] = $detail;
+		$postCategoryId = array();
+		$i = 0;
+		
+		foreach($result['detail']['product_data'][0]->categories as $postCategory){
+			if($i==0){
+				$postCategoryId = $postCategory->categories_id;
+				$i++;
+			}
+		}
+				
+		$data = array('page_number'=>'0', 'type'=>'', 'categories_id'=>$postCategoryId, 'limit'=>$limit, 'min_price'=>$min_price, 'max_price'=>$max_price);
+		$simliar_products = $myVar->products($data);
+		$result['simliar_products'] = $simliar_products;
+		
+		$cart = '';
+		$myVar = new CartController();
+		$result['cartArray'] = $myVar->cartIdArray($cart);
+		
+		//liked products
+		$result['liked_products'] = $this->likedProducts();	
+		$seller = DB::table('administrators')->where('myid',$products[0]->admin_id)->get();
+		return view("product-detail", $title)->with(['result' => $result ,
+													'seller_name' => $seller[0]->first_name, 
+													'seller_id' =>  $seller[0]->myid]); 
+
+		
 	}
 	
 	

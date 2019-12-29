@@ -89,7 +89,7 @@
                                 <div class="products products-3x" id="listing-products">
                                     @if($result['products']['success']==1)
                                      
-                                    @foreach($result['featuresProducts']['product_data'] as $key=>$products)
+                                    @foreach($result['featuresProducts']['product_data'] as $k=>$v)
                                     
                                     <div class="product">
                                         <article>
@@ -101,19 +101,19 @@
                                                 padding: 2px 10px;
                                                 border-radius: 0;
                                                 z-index: 9;"><i class="fa fa-flag-o" aria-hidden="true"></i>&nbsp;Featured</span>
-                                            <div class="thumb"><img class="img-fluid" src="{{asset('').$products->products_image}}" alt="{{$products->products_name}}"></div>
+                                            <div class="thumb"><img class="img-fluid" src="{{asset('').$v->products_image}}" alt="{{$v->products_name}}"></div>
                                             <?php
                                                 $current_date = date("Y-m-d", strtotime("now"));
-                                                $string = substr($products->products_date_added, 0, strpos($products->products_date_added, ' '));
+                                                $string = substr($v->products_date_added, 0, strpos($v->products_date_added, ' '));
                                                 $date=date_create($string);
                                                 date_add($date,date_interval_create_from_date_string($web_setting[20]->value." days"));
                                                 $after_date = date_format($date,"Y-m-d");                                        
                                                 if($after_date>=$current_date){
                                                     print '<span class="new-tag">New</span>';
                                                 }                                        
-                                                if(!empty($products->discount_price)){
-                                                    $discount_price = $products->discount_price;	
-                                                    $orignal_price = $products->products_price;	
+                                                if(!empty($v->discount_price)){
+                                                    $discount_price = $v->discount_price;	
+                                                    $orignal_price = $v->products_price;	
 													
                                                     if(($orignal_price+0)>0){
                                                     	$discounted_price = $orignal_price-$discount_price;
@@ -126,31 +126,31 @@
                                             ?>
                                             <div class="block-panel">
                                                 <span class="tag">
-                                                @foreach($products->categories as $key=>$category)
-                                                	{{$category->categories_name}}@if(++$key === count($products->categories)) @else, @endif                                                	
+                                                @foreach($v->categories as $key=>$category)
+                                                	{{$category->categories_name}}@if(++$key === count($v->categories)) @else, @endif                                                	
                                                 @endforeach
                                                 </span>
-                                                <h2 class="title wrap-dot-1">{{$products->products_name}}</h2>                                      
+                                                <h2 class="title wrap-dot-1">{{$v->products_name}}</h2>                                      
                                                 <div class="description">
-                                                    <?=stripslashes($products->products_description)?>
+                                                    <?=stripslashes($v->products_description)?>
                                                     <p class="read-more"></p>
                                                 </div>                                      
                                                 <div class="block-inner">
                                                     <div class="price">
                                                     
-                                                        @if(!empty($products->discount_price))
-                                                            {{$web_setting[19]->value}}{{$products->discount_price+0}}
-                                                            <span> {{$web_setting[19]->value}}{{$products->products_price+0}}</span>
+                                                        @if(!empty($v->discount_price))
+                                                            {{$web_setting[19]->value}}{{$v->discount_price+0}}
+                                                            <span> {{$web_setting[19]->value}}{{$v->products_price+0}}</span>
                                                         @else
-                                                            {{$web_setting[19]->value}}{{$products->products_price+0}}
+                                                            {{$web_setting[19]->value}}{{$v->products_price+0}}
                                                         @endif
                                                     </div>
                                                     
                                                     <div class="buttons">
-                                                        @if(!in_array($products->products_id,$result['cartArray']))
-                                                            <button type="button" class="btn btn-secondary btn-round cart" products_id="{{$products->products_id}}">@lang('website.Add to Cart')</button>
-                                                        @elseif($products->products_min_order>1)
-                                                             <a class="btn btn-block btn-secondary" href="{{ URL::to('/product-detail/'.$products->products_slug)}}">@lang('website.View Detail')</a>
+                                                        @if(!in_array($v->products_id,$result['cartArray']))
+                                                            <button type="button" class="btn btn-secondary btn-round cart" products_id="{{$v->products_id}}">@lang('website.Add to Cart')</button>
+                                                        @elseif($v->products_min_order>1)
+                                                             <a class="btn btn-block btn-secondary" href="{{ URL::to('/product-detail/'.$v->products_slug)}}">@lang('website.View Detail')</a>
                                                         @else
                                                             <button type="button"  class="btn btn-secondary btn-round acitve">@lang('website.Added')</button>
                                                         @endif
@@ -161,31 +161,31 @@
                                             <div class="product-hover">
                                                 <div class="icons">
                                                     <div class="icon-liked">
-                                                        <span products_id = '{{$products->products_id}}' class="fa @if($products->isLiked==1) fa-heart @else fa-heart-o @endif is_liked"><span class="badge badge-secondary">{{$products->products_liked}}</span></span>
+                                                        <span products_id = '{{$v->products_id}}' class="fa @if($v->isLiked==1) fa-heart @else fa-heart-o @endif is_liked"><span class="badge badge-secondary">{{$v->products_liked}}</span></span>
                                                         
                                                     </div>          
-                                                    @if($products->products_type!=2)
-                                                        <a href="{{ URL::to('/product-detail/'.$products->products_slug)}}" class="fa fa-eye"></a>
+                                                    @if($v->products_type!=2)
+                                                        <a href="{{ URL::to('/feature-product-detail/'.$v->products_slug)}}" class="fa fa-eye"></a>
                                                     @endif
                                                 </div>
                                                 
                                                 <div class="buttons">
-                                                    @if($products->products_type==0)
-                                                        @if(!in_array($products->products_id,$result['cartArray']))
-                                                        	@if($products->defaultStock==0)
-                                                            	<button type="button" class="btn btn-block btn-danger" products_id="{{$products->products_id}}">@lang('website.Out of Stock')</button>
-                                                            @elseif($products->products_min_order>1)
-                                                             <a class="btn btn-block btn-secondary" href="{{ URL::to('/product-detail/'.$products->products_slug)}}">@lang('website.View Detail')</a>
+                                                    @if($v->products_type==0)
+                                                        @if(!in_array($v->products_id,$result['cartArray']))
+                                                        	@if($v->defaultStock==0)
+                                                            	<button type="button" class="btn btn-block btn-danger" products_id="{{$v->products_id}}">@lang('website.Out of Stock')</button>
+                                                            @elseif($v->products_min_order>1)
+                                                             <a class="btn btn-block btn-secondary" href="{{ URL::to('/feature-product-detail/'.$v->products_slug)}}">@lang('website.View Detail')</a>
                                                             @else
-                                                            	<button type="button" class="btn btn-block btn-secondary cart" products_id="{{$products->products_id}}">@lang('website.Add to Cart')</button>
+                                                            	<button type="button" class="btn btn-block btn-secondary cart" products_id="{{$v->products_id}}">@lang('website.Add to Cart')</button>
                                                             @endif
                                                         @else
                                                             <button type="button" class="btn btn-block btn-secondary active">@lang('website.Added')</button>
                                                         @endif
-                                                    @elseif($products->products_type==1)
-                                                    	<a class="btn btn-block btn-secondary" href="{{ URL::to('/product-detail/'.$products->products_slug)}}">@lang('website.View Detail')</a>
-                                                    @elseif($products->products_type==2)
-                                                    	<a href="{{$products->products_url}}" target="_blank" class="btn btn-block btn-secondary">@lang('website.External Link')</a>
+                                                    @elseif($v->products_type==1)
+                                                    	<a class="btn btn-block btn-secondary" href="{{ URL::to('/feature-product-detail/'.$v->products_slug)}}">@lang('website.View Detail')</a>
+                                                    @elseif($v->products_type==2)
+                                                    	<a href="{{$v->products_url}}" target="_blank" class="btn btn-block btn-secondary">@lang('website.External Link')</a>
                                                     @endif
                                                 </div>
                                                 
