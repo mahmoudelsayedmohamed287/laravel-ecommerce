@@ -7,15 +7,7 @@
 </style>
 <div class="login-box">
   <div class="login-logo">
-<<<<<<< HEAD
 
-  
-  	@if(empty($web_setting[15]->value) or !file_exists(asset('').$web_setting[15]->value))
-
-  
-
-=======
->>>>>>> bb0712ee0d2ea5a4e478b17befa1511e4388c741
         @if($web_setting[66]->value=='1' and $web_setting[67]->value=='0')
       		<img src="{{asset('/resources/views/admin/images/admin_logo/logo-android-blue-v1.png')}}" class="ionic-hide"> 
         	<img src="{{asset('/resources/views/admin/images/admin_logo/logo-ionic-blue-v1.png')}}" class="android-hide"> 
