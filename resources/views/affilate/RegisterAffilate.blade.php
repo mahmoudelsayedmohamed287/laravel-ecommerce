@@ -9,13 +9,13 @@
       <li><a href="{{ URL::to('admin/customers')}}"><i class="fa fa-users"></i> {{ trans('labels.ListingAllCustomers') }}</a></li>
       <li class="active">{{ trans('labels.start affilate') }}</li>
     </ol>
-  </section>  
+  </section>
 
   <!-- Main content -->
   <section class="content">
     <!-- Info boxes -->
 
-      
+
     <!-- /.row -->
 
     <div class="row">
@@ -31,8 +31,8 @@
               <div>
               		<div class="box box-info">
 <!--   Hussien -->
-                        
-          
+
+
                         <section class="affilateDashBoard">
                             <div class="affilateDashBoard-wrapper">
                                 <div class="affilateDashBoard-inner-wrapper">
@@ -50,11 +50,13 @@
                         <select class="form-control" id="Period" >
     <option class="today">today</option>
     <option class="yesterday">yesterday</option>
-    <option class="lastWeek">last week</option>
+    <option class="lastWeek" id="lastWeek">last week</option>
     <option class="thisWeek">this week</option>
     <option class="lastMonth">last month</option>
     <option class="thisMonth">this month</option>
   </select>
+
+
                             <!-- <ul>
                                 <li class="today">today</li>
                                 <li class="yesterday">yesterday</li>
@@ -65,6 +67,10 @@
                             </ul> -->
                         </div>
                     </div>
+
+
+
+
 <!--
                                                             <label for="period">
                                                                 <span>{{ trans('labels.period') }}</span>
@@ -78,8 +84,9 @@
                                                             <div class="flex-item-header">
                                                                 <span>{{ trans('labels.clicks') }}</span>
                                                             </div>
+          
                                                             <div class="flex-item-body">
-                                                                <span>{{  $clicks }}</span>
+                                                                <span id="click"></span>
                                                             </div>
                                                         </div>
                                                         <div class="affilateDashBoard-flex-item">
@@ -87,7 +94,7 @@
                                                                 <span>{{ trans('labels.confirmed orders') }}</span>
                                                             </div>
                                                             <div class="flex-item-body">
-                                                                <span>{{ $confirmed }}</span>
+                                                                <span id="confirmed"></span>
                                                             </div>
                                                         </div>
                                                         <div class="affilateDashBoard-flex-item">
@@ -150,7 +157,7 @@
                                                         <!-- /.box-body -->
                                                         <div class="box-footer text-center">
                                                             <button type="submit" class="btn btn-primary">{{ trans('labels.start affilate') }}</button>
-                                
+
                                                         </div>
                                                         <!-- /.box-footer -->
                                                         {!! Form::close() !!}
@@ -186,7 +193,7 @@
     <!-- Main row -->
 
     <!-- /.row -->
-  
+
   <!-- /.content -->
 </div>
     </section>

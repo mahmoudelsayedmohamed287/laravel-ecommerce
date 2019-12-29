@@ -1,49 +1,62 @@
 /*start the glopal style*/
-*{
+
+* {
     padding: 0;
     margin: 0;
     list-style-type: none
 }
+
+
 /*start the main contianer style*/
-.affilateDashBoard-wrapper{
+
+.affilateDashBoard-wrapper {
     padding: 10px;
 }
-.affilateDashBoard-flex-container{
+
+.affilateDashBoard-flex-container {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     align-items: flex-start
 }
+
+
 /********************************/
+
+
 /*start the left part style*/
-.affilateDashBoard-leftpart{
+
+.affilateDashBoard-leftpart {
     width: 64%;
     background-color: #ecf0f5;
     padding: 25px;
 }
-.affilateDashBoard-leftpart-period{
+
+.affilateDashBoard-leftpart-period {
     padding-bottom: 16px;
     border-bottom: 1px solid #ccc
 }
-.requ{
-   position: relative;
- }
- .requ .dateRangeTol {
-  position: absolute;
-  left:0;
-  top:64px;
-  width:300px;
-  background: #fff;
-  z-index: 2;
-  border:1px solid darkgray;
-  border-top:none;
-  padding:4px;
-  display: none;
+
+.requ {
+    position: relative;
 }
 
- .requ input,
- .requ select,
- .requ select option{
+.requ .dateRangeTol {
+    position: absolute;
+    left: 0;
+    top: 64px;
+    width: 300px;
+    background: #fff;
+    z-index: 2;
+    border: 1px solid darkgray;
+    border-top: none;
+    padding: 4px;
+    display: none;
+}
+
+.requ input,
+.requ select,
+.requ select option {
     height: 34px;
     margin-top: 4px;
     padding: 0;
@@ -53,87 +66,94 @@
     width: 300px;
 }
 
+.requ select {
+    width: 100%;
+}
 
 .requ .ACC-BTNS {
-  width:100%;
-  padding:32px 0 16px;
+    width: 100%;
+    padding: 32px 0 16px;
 }
 
-
-
-
-
-.requ .dateRangeTol li{
-  border:1px solid transparent;
-  transition: all 0.5s ease-in-out;
-  font-size: 0.8em;
-  font-weight: bold;
-  color: #6b6b6b;
-  cursor: pointer;
-}
-.requ .dateRangeTol ul li{
-  padding:8px 0;
-  font-weight: bold;
-}
-.requ .dateRangeTol ul li:hover,.requ .dateRangeTol ol li:hover{
-  background: darkgrey;
+.requ .dateRangeTol li {
+    border: 1px solid transparent;
+    transition: all 0.5s ease-in-out;
+    font-size: 0.8em;
+    font-weight: bold;
+    color: #6b6b6b;
+    cursor: pointer;
 }
 
-
-.requ .dateRangeTol ol li{
-  position: relative;
+.requ .dateRangeTol ul li {
+    padding: 8px 0;
+    font-weight: bold;
 }
 
-.requ .dateRangeTol input{
-  position: relative;
-  opacity: 0;
-  z-index:1;
-  height:30px;
-  margin: 0;
+.requ .dateRangeTol ul li:hover,
+.requ .dateRangeTol ol li:hover {
+    background: darkgrey;
 }
 
-.requ .dateRangeTol ol li:hover{
-  padding: 0 4px;
-  border-radius: 4px;
+.requ .dateRangeTol ol li {
+    position: relative;
 }
 
-.requ .dateRangeTol p{
-  position: absolute;
-  top:8px;
-  left:0;
-  color: #6b6b6b;
+.requ .dateRangeTol input {
+    position: relative;
+    opacity: 0;
+    z-index: 1;
+    height: 30px;
+    margin: 0;
 }
-.affilateDashBoard-leftpart-period label{
+
+.requ .dateRangeTol ol li:hover {
+    padding: 0 4px;
+    border-radius: 4px;
+}
+
+.requ .dateRangeTol p {
+    position: absolute;
+    top: 8px;
+    left: 0;
+    color: #6b6b6b;
+}
+
+.affilateDashBoard-leftpart-period label {
     display: flex;
     flex-direction: column;
 }
-.affilateDashBoard-leftpart-period label span{
+
+.affilateDashBoard-leftpart-period label span {
     margin-bottom: 5px;
     text-transform: capitalize;
     color: #555
 }
-.affilateDashBoard-leftpart-period label input{
+
+.affilateDashBoard-leftpart-period label input {
     max-width: 250px;
     border-radius: 2px;
     border: 1px solid #ccc
 }
-.affilateDashBoard-leftpart-flex-container{
+
+.affilateDashBoard-leftpart-flex-container {
     margin: 50px 0 0;
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
     flex-wrap: wrap
 }
-.affilateDashBoard-flex-item{
+
+.affilateDashBoard-flex-item {
     width: 32%;
     margin: 8px 0;
-    -webkit-box-shadow: 0px 0px 10px 7px rgba(219,216,219,1);
-    -moz-box-shadow: 0px 0px 10px 7px rgba(219,216,219,1);
-    box-shadow: 0px 0px 10px 7px rgba(219,216,219,1);
+    -webkit-box-shadow: 0px 0px 10px 7px rgba(219, 216, 219, 1);
+    -moz-box-shadow: 0px 0px 10px 7px rgba(219, 216, 219, 1);
+    box-shadow: 0px 0px 10px 7px rgba(219, 216, 219, 1);
     border-radius: 5px;
     text-align: center
 }
-.affilateDashBoard-flex-item .flex-item-header{
+
+.affilateDashBoard-flex-item .flex-item-header {
     background-color: #222d32;
     border-top-left-radius: 5px;
     border-top-right-radius: 5px;
@@ -143,7 +163,8 @@
     font-size: 17px;
     padding: 10px 0;
 }
-.affilateDashBoard-flex-item .flex-item-body{
+
+.affilateDashBoard-flex-item .flex-item-body {
     padding: 25px 0;
     font-size: 20px;
     font-weight: 600;
@@ -151,81 +172,87 @@
     border-bottom-left-radius: 5px;
     border-bottom-right-radius: 5px;
 }
-.affilateDashBoard-Blue{
+
+.affilateDashBoard-Blue {
     background-color: #3c8dbc!important;
     color: #fff
 }
+
+
 /***************************/
 
 
-
-
-
-
-
-
-
 /*start the right part style*/
-.affilateDashBoard-rightpart{
+
+.affilateDashBoard-rightpart {
     width: 34%;
 }
-.affilateDashBoard-rightpart .affliate-steps{
-   -webkit-box-shadow: 0px 0px 10px 0px rgba(219,216,219,1);
-    -moz-box-shadow: 0px 0px 10px 0px rgba(219,216,219,1);
-    box-shadow: 0px 0px 10px 0px rgba(219,216,219,1);
+
+.affilateDashBoard-rightpart .affliate-steps {
+    -webkit-box-shadow: 0px 0px 10px 0px rgba(219, 216, 219, 1);
+    -moz-box-shadow: 0px 0px 10px 0px rgba(219, 216, 219, 1);
+    box-shadow: 0px 0px 10px 0px rgba(219, 216, 219, 1);
     border-radius: 5px;
 }
-.affilateDashBoard-rightpart .affliate-steps .step{
+
+.affilateDashBoard-rightpart .affliate-steps .step {
     padding: 10px;
     font-size: 17px;
     line-height: 1.5;
     word-spacing: 1.5px;
 }
-.affilateDashBoard .box-body button{
-        width: 100%;
+
+.affilateDashBoard .box-body button {
+    width: 100%;
     padding: 15px 0;
 }
+
+
 /****************************/
+
+
 /*start responsive*/
-@media(max-width:768px){
-    .affilateDashBoard-flex-container{
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    align-items: flex-start
-}
-    .affilateDashBoard-leftpart{
-    width: 100%;
-    background-color: #ecf0f5;
-    padding: 25px;
-}
-    .affilateDashBoard-rightpart{
-    width: 100%;
-    margin-top: 32px
-}
-    .affilateDashBoard-flex-item{
-    width: 48%;
-    margin: 8px 0;
-    -webkit-box-shadow: 0px 0px 10px 7px rgba(219,216,219,1);
-    -moz-box-shadow: 0px 0px 10px 7px rgba(219,216,219,1);
-    box-shadow: 0px 0px 10px 7px rgba(219,216,219,1);
-    border-radius: 5px;
-    text-align: center
-}
-}
-@media(max-width:576px){
-    .affilateDashBoard-flex-item{
-    width: 100%;
-    margin: 8px 0;
-    -webkit-box-shadow: 0px 0px 10px 7px rgba(219,216,219,1);
-    -moz-box-shadow: 0px 0px 10px 7px rgba(219,216,219,1);
-    box-shadow: 0px 0px 10px 7px rgba(219,216,219,1);
-    border-radius: 5px;
-    text-align: center
-}
+
+@media(max-width:768px) {
+    .affilateDashBoard-flex-container {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: flex-start
+    }
     .affilateDashBoard-leftpart {
-    width: 100%;
-    background-color: #ecf0f5;
-    padding: 25px 8px;
+        width: 100%;
+        background-color: #ecf0f5;
+        padding: 25px;
+    }
+    .affilateDashBoard-rightpart {
+        width: 100%;
+        margin-top: 32px
+    }
+    .affilateDashBoard-flex-item {
+        width: 48%;
+        margin: 8px 0;
+        -webkit-box-shadow: 0px 0px 10px 7px rgba(219, 216, 219, 1);
+        -moz-box-shadow: 0px 0px 10px 7px rgba(219, 216, 219, 1);
+        box-shadow: 0px 0px 10px 7px rgba(219, 216, 219, 1);
+        border-radius: 5px;
+        text-align: center
+    }
 }
+
+@media(max-width:576px) {
+    .affilateDashBoard-flex-item {
+        width: 100%;
+        margin: 8px 0;
+        -webkit-box-shadow: 0px 0px 10px 7px rgba(219, 216, 219, 1);
+        -moz-box-shadow: 0px 0px 10px 7px rgba(219, 216, 219, 1);
+        box-shadow: 0px 0px 10px 7px rgba(219, 216, 219, 1);
+        border-radius: 5px;
+        text-align: center
+    }
+    .affilateDashBoard-leftpart {
+        width: 100%;
+        background-color: #ecf0f5;
+        padding: 25px 8px;
+    }
 }

@@ -173,7 +173,7 @@ Route::group(['prefix' => 'admin'], function () {
 
 
 
-  
+
 
 
 //Register Affilate program
