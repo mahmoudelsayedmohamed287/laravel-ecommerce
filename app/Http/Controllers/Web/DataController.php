@@ -535,7 +535,7 @@ class DataController extends Controller
 					
 			
 			$categories->where('products_description.language_id','=',Session::get('language_id'))->where('products_status','=',1);
-			$categories->where('products.is_feature','=',0);
+			
 			//get single category products			
 			if(!empty($data['categories_id'])){				
 				$categories->where('products_to_categories.categories_id','=', $data['categories_id']);
@@ -602,9 +602,147 @@ class DataController extends Controller
 				// fetch all options add join from products_options table for option name
 				$products_attribute = DB::table('products_attributes')->where('products_id','=', $products_id)->groupBy('options_id')->orderby('is_default',"DESC")->get();
 				if(count($products_attribute)){
+				
 				$index2 = 0;
 					foreach($products_attribute as $attribute_data){
-												
+										
+						$option_name = DB::table('products_options')
+										->leftJoin('products_options_descriptions', 'products_options_descriptions.products_options_id', '=', 'products_options.products_options_id')->select('products_options.products_options_id', 'products_options_descriptions.options_name as products_options_name', 'products_options_descriptions.language_id')->where('language_id','=', Session::get('language_id'))->where('products_options.products_options_id','=', $attribute_data->options_id)->get();
+						
+						if(count($option_name)>0){
+							
+							$temp = array();
+							$temp_option['id'] = $attribute_data->options_id;
+							$temp_option['name'] = $option_name[0]->products_options_name;
+							$temp_option['is_default'] = $attribute_data->is_default;
+							$attr[$index2]['option'] = $temp_option;
+
+							// fetch all attributes add join from products_options_values table for option value name
+							$attributes_value_query =  DB::table('products_attributes')->where('products_id','=', $products_id)->where('options_id','=', $attribute_data->options_id)->orderby('is_default',"DESC")->get();
+							$k = 0;
+							foreach($attributes_value_query as $products_option_value){
+								
+								$option_value = DB::table('products_options_values')->leftJoin('products_options_values_descriptions','products_options_values_descriptions.products_options_values_id','=','products_options_values.products_options_values_id')->select('products_options_values.products_options_values_id', 'products_options_values_descriptions.options_values_name as products_options_values_name' )->where('products_options_values_descriptions.language_id','=', Session::get('language_id'))->where('products_options_values.products_options_values_id','=', $products_option_value->options_values_id)->get();
+								
+								
+								$attributes = DB::table('products_attributes')->where([['products_id','=', $products_id],['options_id','=', $attribute_data->options_id],['options_values_id','=', $products_option_value->options_values_id]])->orderby('is_default',"DESC")->get();
+								
+								$temp_i['products_attributes_id'] = $attributes[0]->products_attributes_id;
+								$temp_i['id'] = $products_option_value->options_values_id;
+								$temp_i['value'] = $option_value[0]->products_options_values_name;
+								$temp_i['price'] = $products_option_value->options_values_price;
+								$temp_i['price_prefix'] = $products_option_value->price_prefix;
+								$temp_i['is_default'] = $products_option_value->is_default;
+								array_push($temp,$temp_i);
+
+							}
+							$attr[$index2]['values'] = $temp;
+							$result[$index]->attributes = 	$attr;	
+							$index2++;
+						}
+					}
+				}else{
+					$result[$index]->attributes = 	array();	
+				}
+					$index++;
+				}
+					$responseData = array('success'=>'1', 'product_data'=>$result,  'message'=>Lang::get('website.Returned all products'), 'total_record'=>count($total_record));
+					
+				}else{
+					$responseData = array('success'=>'0', 'product_data'=>$result,  'message'=>Lang::get('website.Empty record'), 'total_record'=>count($total_record));
+				}	
+				
+		return($responseData);
+	
+	}
+	
+	public function products1($slug){
+		
+			
+
+			
+			$categories = DB::table('products')
+				->leftJoin('manufacturers','manufacturers.manufacturers_id','=','products.manufacturers_id')
+				->leftJoin('manufacturers_info','manufacturers.manufacturers_id','=','manufacturers_info.manufacturers_id')
+				->leftJoin('products_description','products_description.products_id','=','products.products_id')->where('products.products_slug','=',$slug);
+				
+			// if(!empty($data['categories_id'])){
+			// 	$categories->LeftJoin('products_to_categories', 'products.products_id', '=', 'products_to_categories.products_id')
+			// 			->leftJoin('categories','categories.categories_id','=','products_to_categories.categories_id')
+			// 			->LeftJoin('categories_description','categories_description.categories_id','=','products_to_categories.categories_id');
+			// }
+			
+			
+			
+			// $categories->where('products_description.language_id','=',Session::get('language_id'))->where('products_status','=',1)
+
+			
+			
+			
+			$categories->groupBy('products.products_id');
+				
+			//count
+			$total_record = $categories->get();
+			$products  = $categories->get();
+			
+			$result = array();
+			$result2 = array();
+		
+			//check if record exist
+			if(count($products)>0){
+		
+				$index = 0;	
+				foreach ($products as $products_data){
+				$products_id = $products_data->products_id;
+				
+				//multiple images
+				$products_images = DB::table('products_images')->select('image')->where('products_id','=', $products_id)->orderBy('sort_order', 'ASC')->get();		
+				$products_data->images =  $products_images;
+				
+				//categories
+				$categories = DB::table('products_to_categories')
+								->leftjoin('categories','categories.categories_id','products_to_categories.categories_id')
+								->leftjoin('categories_description','categories_description.categories_id','products_to_categories.categories_id')
+								->select('categories.categories_id','categories_description.categories_name','categories.categories_image','categories.categories_icon', 'categories.parent_id')
+								->where('products_id','=', $products_id)
+								->where('categories_description.language_id','=', Session::get('language_id'))->get();		
+				
+				$products_data->categories =  $categories;				
+				array_push($result,$products_data);
+				
+				$options = array();
+				$attr = array();
+				
+				$stocks = 0;
+				$stockOut = 0;				
+				if($products_data->products_type == '0'){									
+					$stocks = DB::table('inventory')->where('products_id',$products_data->products_id)->where('stock_type','in')->sum('stock');
+					$stockOut = DB::table('inventory')->where('products_id',$products_data->products_id)->where('stock_type','out')->sum('stock');							
+				}
+								
+				$result[$index]->defaultStock = $stocks - $stockOut;	
+				
+				//like product
+				if(!empty(session('customers_id'))){
+					$liked_customers_id						=	session('customers_id');	
+					$categories = DB::table('liked_products')->where('liked_products_id', '=', $products_id)->where('liked_customers_id', '=', $liked_customers_id)->get();
+					
+					if(count($categories)>0){
+						$result[$index]->isLiked = '1';
+					}else{
+						$result[$index]->isLiked = '0';
+					}
+				}else{
+					$result[$index]->isLiked = '0';						
+				}
+				
+				// fetch all options add join from products_options table for option name
+				$products_attribute = DB::table('products_attributes')->where('products_id','=', $products_id)->groupBy('options_id')->orderby('is_default',"DESC")->get();
+				if(count($products_attribute)){
+				
+				$index2 = 0;
+					foreach($products_attribute as $attribute_data){
+										
 						$option_name = DB::table('products_options')
 										->leftJoin('products_options_descriptions', 'products_options_descriptions.products_options_id', '=', 'products_options.products_options_id')->select('products_options.products_options_id', 'products_options_descriptions.options_name as products_options_name', 'products_options_descriptions.language_id')->where('language_id','=', Session::get('language_id'))->where('products_options.products_options_id','=', $attribute_data->options_id)->get();
 						
@@ -656,10 +794,11 @@ class DataController extends Controller
 	}	
 
 
+
 		//products 
     public function productsFetures(){
 		
-					
+
 				$sortby = "products.is_feature";
 				$order = "desc";
 		
@@ -678,11 +817,12 @@ class DataController extends Controller
 					$categories->where('categories_description.language_id','=',Session::get('language_id'));
 				}
 			
-						
+				
 				
 			
 				
 				$categories->where('products.is_feature',1)->orderBy($sortby, $order)->groupBy('products.products_id');
+
 					
 				//count
 				$total_record = $categories->get();
@@ -695,95 +835,99 @@ class DataController extends Controller
 				//check if record exist
 				if(count($products)>0){
 					
-					$index = 0;	
-					foreach ($products as $products_data){
-					$products_id = $products_data->products_id;
-					
-					//multiple images
-					$products_images = DB::table('products_images')->select('image')->where('products_id','=', $products_id)->orderBy('sort_order', 'ASC')->get();		
-					$products_data->images =  $products_images;
-					
-					//categories
-					$categories = DB::table('products_to_categories')
-									->leftjoin('categories','categories.categories_id','products_to_categories.categories_id')
-									->leftjoin('categories_description','categories_description.categories_id','products_to_categories.categories_id')
-									->select('categories.categories_id','categories_description.categories_name','categories.categories_image','categories.categories_icon', 'categories.parent_id')
-									->where('products_id','=', $products_id)
-									->where('categories_description.language_id','=', Session::get('language_id'))->get();		
-					
-					$products_data->categories =  $categories;				
-					array_push($result,$products_data);
-					
-					$options = array();
-					$attr = array();
-					
-					$stocks = 0;
-					$stockOut = 0;				
-					if($products_data->products_type == '0'){									
-						$stocks = DB::table('inventory')->where('products_id',$products_data->products_id)->where('stock_type','in')->sum('stock');
-						$stockOut = DB::table('inventory')->where('products_id',$products_data->products_id)->where('stock_type','out')->sum('stock');							
-					}
+									$index = 0;	
+									foreach ($products as $products_data){
+									$products_id = $products_data->products_id;
 									
-					$result[$index]->defaultStock = $stocks - $stockOut;	
+									//multiple images
+									$products_images = DB::table('products_images')->select('image')->where('products_id','=', $products_id)->orderBy('sort_order', 'ASC')->get();		
+									$products_data->images =  $products_images;
+									
+									//categories
+									$categories = DB::table('products_to_categories')
+													->leftjoin('categories','categories.categories_id','products_to_categories.categories_id')
+													->leftjoin('categories_description','categories_description.categories_id','products_to_categories.categories_id')
+													->select('categories.categories_id','categories_description.categories_name','categories.categories_image','categories.categories_icon', 'categories.parent_id')
+													->where('products_id','=', $products_id)
+													->where('categories_description.language_id','=', Session::get('language_id'))->get();		
+									
+									$products_data->categories =  $categories;				
+									array_push($result,$products_data);
+									
+									$options = array();
+									$attr = array();
+									
+									$stocks = 0;
+									$stockOut = 0;				
+										if($products_data->products_type == '0'){									
+											$stocks = DB::table('inventory')->where('products_id',$products_data->products_id)->where('stock_type','in')->sum('stock');
+											$stockOut = DB::table('inventory')->where('products_id',$products_data->products_id)->where('stock_type','out')->sum('stock');							
+										}
+													
+									$result[$index]->defaultStock = $stocks - $stockOut;	
 					
 					//like product
-					if(!empty(session('customers_id'))){
-						$liked_customers_id						=	session('customers_id');	
-						$categories = DB::table('liked_products')->where('liked_products_id', '=', $products_id)->where('liked_customers_id', '=', $liked_customers_id)->get();
-						
-						if(count($categories)>0){
-							$result[$index]->isLiked = '1';
-						}else{
-							$result[$index]->isLiked = '0';
-						}
-					}else{
-						$result[$index]->isLiked = '0';						
-					}
+									if(!empty(session('customers_id'))){
+										$liked_customers_id						=	session('customers_id');	
+										$categories = DB::table('liked_products')->where('liked_products_id', '=', $products_id)->where('liked_customers_id', '=', $liked_customers_id)->get();
+										
+										if(count($categories)>0){
+											$result[$index]->isLiked = '1';
+										}else{
+											$result[$index]->isLiked = '0';
+										}
+									}else{
+										$result[$index]->isLiked = '0';						
+									}
 					
 					// fetch all options add join from products_options table for option name
-					$products_attribute = DB::table('products_attributes')->where('products_id','=', $products_id)->groupBy('options_id')->orderby('is_default',"DESC")->get();
-					if(count($products_attribute)){
-					$index2 = 0;
-						foreach($products_attribute as $attribute_data){
-													
-							$option_name = DB::table('products_options')
-											->leftJoin('products_options_descriptions', 'products_options_descriptions.products_options_id', '=', 'products_options.products_options_id')->select('products_options.products_options_id', 'products_options_descriptions.options_name as products_options_name', 'products_options_descriptions.language_id')->where('language_id','=', Session::get('language_id'))->where('products_options.products_options_id','=', $attribute_data->options_id)->get();
+							$products_attribute = DB::table('products_attributes')->where('products_id','=', $products_id)->groupBy('options_id')->get();
 							
-							if(count($option_name)>0){
+							if(count($products_attribute)){
 								
-								$temp = array();
-								$temp_option['id'] = $attribute_data->options_id;
-								$temp_option['name'] = $option_name[0]->products_options_name;
-								$temp_option['is_default'] = $attribute_data->is_default;
-								$attr[$index2]['option'] = $temp_option;
-	
-								// fetch all attributes add join from products_options_values table for option value name
-								$attributes_value_query =  DB::table('products_attributes')->where('products_id','=', $products_id)->where('options_id','=', $attribute_data->options_id)->orderby('is_default',"DESC")->get();
-								$k = 0;
-								foreach($attributes_value_query as $products_option_value){
+								
+							$index2 = 0;
+								foreach($products_attribute as $attribute_data){
+															
+									$option_name = DB::table('products_options')
+													->leftJoin('products_options_descriptions', 'products_options_descriptions.products_options_id', '=', 'products_options.products_options_id')->select('products_options.products_options_id', 'products_options_descriptions.options_name as products_options_name', 'products_options_descriptions.language_id')->where('language_id','=', Session::get('language_id'))->where('products_options.products_options_id','=', $attribute_data->options_id)->get();
 									
-									$option_value = DB::table('products_options_values')->leftJoin('products_options_values_descriptions','products_options_values_descriptions.products_options_values_id','=','products_options_values.products_options_values_id')->select('products_options_values.products_options_values_id', 'products_options_values_descriptions.options_values_name as products_options_values_name' )->where('products_options_values_descriptions.language_id','=', Session::get('language_id'))->where('products_options_values.products_options_values_id','=', $products_option_value->options_values_id)->get();
-									
-									
-									$attributes = DB::table('products_attributes')->where([['products_id','=', $products_id],['options_id','=', $attribute_data->options_id],['options_values_id','=', $products_option_value->options_values_id]])->orderby('is_default',"DESC")->get();
-									
-									$temp_i['products_attributes_id'] = $attributes[0]->products_attributes_id;
-									$temp_i['id'] = $products_option_value->options_values_id;
-									$temp_i['value'] = $option_value[0]->products_options_values_name;
-									$temp_i['price'] = $products_option_value->options_values_price;
-									$temp_i['price_prefix'] = $products_option_value->price_prefix;
-									$temp_i['is_default'] = $products_option_value->is_default;
-									array_push($temp,$temp_i);
-	
-								}
-								$attr[$index2]['values'] = $temp;
-								$result[$index]->attributes = 	$attr;	
-								$index2++;
-							}
-						}
-					}else{
-						$result[$index]->attributes = 	array();	
-					}
+											if(count($option_name)>0){
+												
+												$temp = array();
+												$temp_option['id'] = $attribute_data->options_id;
+												$temp_option['name'] = $option_name[0]->products_options_name;
+												$temp_option['is_default'] = $attribute_data->is_default;
+												$attr[$index2]['option'] = $temp_option;
+					
+												// fetch all attributes add join from products_options_values table for option value name
+												$attributes_value_query =  DB::table('products_attributes')->where('products_id','=', $products_id)->where('options_id','=', $attribute_data->options_id)->orderby('is_default',"DESC")->get();
+												$k = 0;
+												foreach($attributes_value_query as $products_option_value){
+													
+													$option_value = DB::table('products_options_values')->leftJoin('products_options_values_descriptions','products_options_values_descriptions.products_options_values_id','=','products_options_values.products_options_values_id')->select('products_options_values.products_options_values_id', 'products_options_values_descriptions.options_values_name as products_options_values_name' )->where('products_options_values_descriptions.language_id','=', Session::get('language_id'))->where('products_options_values.products_options_values_id','=', $products_option_value->options_values_id)->get();
+													
+													
+													$attributes = DB::table('products_attributes')->where([['products_id','=', $products_id],['options_id','=', $attribute_data->options_id],['options_values_id','=', $products_option_value->options_values_id]])->orderby('is_default',"DESC")->get();
+													
+													$temp_i['products_attributes_id'] = $attributes[0]->products_attributes_id;
+													$temp_i['id'] = $products_option_value->options_values_id;
+													$temp_i['value'] = $option_value[0]->products_options_values_name;
+													$temp_i['price'] = $products_option_value->options_values_price;
+													$temp_i['price_prefix'] = $products_option_value->price_prefix;
+													$temp_i['is_default'] = $products_option_value->is_default;
+													array_push($temp,$temp_i);
+					
+												}
+												$attr[$index2]['values'] = $temp;
+												$result[$index]->attributes = 	$attr;	
+												$index2++;
+											}
+										}
+									}else{
+										
+										$result[$index]->attributes = 	array();	
+									}
 						$index++;
 					}
 						$responseData = array('success'=>'1', 'product_data'=>$result,  'message'=>Lang::get('website.Returned all products'), 'total_record'=>count($total_record));
@@ -848,4 +992,7 @@ class DataController extends Controller
 
 	}	
 
+
+
+	
 }
