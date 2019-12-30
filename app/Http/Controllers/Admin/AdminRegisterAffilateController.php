@@ -94,6 +94,7 @@ for($i; $i < count($affaliateDeatils); $i++){
                              $query->orderBy('date', 'asc');
 
                          }])->get();
+                         dd($date);
 
                   break;
                   case 'thisMonth':

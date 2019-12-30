@@ -21,6 +21,7 @@ use Illuminate\Foundation\Auth\ThrottlesLogins;
 //for requesting a value
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
+use App\affilate_product_status;
 //for Carbon a value
 use Carbon;
 use Session;
