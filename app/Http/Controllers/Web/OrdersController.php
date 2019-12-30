@@ -21,6 +21,7 @@ use Illuminate\Foundation\Auth\ThrottlesLogins;
 //for requesting a value
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
+use App\affilate_product_status;
 //for Carbon a value
 use Carbon;
 use Session;
@@ -602,7 +603,7 @@ class OrdersController extends DataController
 					$get_id =  \DB::table('affilate_product_link')->where('product_id', $product_id)
 					 ->where('affilate_code', '=', $code505)
 					 ->get();
-					 $date = \Carbon\Carbon::today();
+					 $date = \Carbon\Carbon::today()->format('Y-m-d');
 
 					 $status = new affilate_product_status();
 					 $status->product_link_id = $get_id[0]->id;
