@@ -86,7 +86,7 @@ $affilate_product_link = affilate_product_link::where('user_id', $user_id)
 
          }])->get();
 
-dd($affilate_product_link);
+
 foreach ($affilate_product_link  as $value) {
   // code...
   $all[] = [$value->get_affilate_product_status];
