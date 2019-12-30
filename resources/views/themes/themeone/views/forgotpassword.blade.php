@@ -32,6 +32,7 @@
                 @if($result['commonContent']['setting'][61]->value==1)
 				<!--Google +-->
 				<a href="login/google" class="btn btn-light google"><i class="fa fa-google-plus"></i>@lang('website.Login with Google')</a>
+				@endif
 			</div>
 		</div>
 

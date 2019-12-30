@@ -417,7 +417,7 @@ $("#Period").change(function(e) {
 
 
 $('#click').html(data.click);
-$('#confirmed').html(data.confirmed);
+$('#confirmed').html(data.confirmed);   
 
 
   // document.getElementById("ajax_data").innerHTML = ajax_data;
