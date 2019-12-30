@@ -53,10 +53,22 @@ for($i; $i < count($affaliateDeatils); $i++){
       switch ($date) {
         case 'today':
         $date = Carbon::today()->format('Y-m-d');
+        $affilate_product_link = affilate_product_link::where('user_id', $user_id)
+                 ->with(['get_affilate_product_status' => function ($query)  use ($date) {
+                     $query->where('date','=', $date);
+                     $query->orderBy('date', 'asc');
+
+                 }])->get();
 
           break;
           case 'yesterday':
             $date = Carbon::yesterday()->format('Y-m-d');
+            $affilate_product_link = affilate_product_link::where('user_id', $user_id)
+                     ->with(['get_affilate_product_status' => function ($query)  use ($date) {
+                         $query->where('date','=', $date);
+                         $query->orderBy('date', 'asc');
+
+                     }])->get();
 
             break;
 
@@ -65,50 +77,79 @@ for($i; $i < count($affaliateDeatils); $i++){
              $currentDate->startOfWeek()->subWeek();
              $date = $currentDate->format('Y-m-d');
 
+             $affilate_product_link = affilate_product_link::where('user_id', $user_id)
+                      ->with(['get_affilate_product_status' => function ($query)  use ($date) {
+                          $query->where('date','>=', $date);
+                          $query->orderBy('date', 'asc');
+
+                      }])->get();
+
                 break;
                 case 'lastMonth':
                 $firstDayofPreviousMonth = Carbon::now()->startOfMonth()->subMonth()->toDateString();
                 $date= $firstDayofPreviousMonth;
+                $affilate_product_link = affilate_product_link::where('user_id', $user_id)
+                         ->with(['get_affilate_product_status' => function ($query)  use ($date) {
+                             $query->where('date','>=', $date);
+                             $query->orderBy('date', 'asc');
+
+                         }])->get();
 
                   break;
                   case 'thisMonth':
                   $lastDayofPreviousMonth = Carbon::now()->subMonth()->endOfMonth()->toDateString();
                   $date= $lastDayofPreviousMonth;
 
+                  $affilate_product_link = affilate_product_link::where('user_id', $user_id)
+                           ->with(['get_affilate_product_status' => function ($query)  use ($date) {
+                               $query->where('date','>=', $date);
+                               $query->orderBy('date', 'asc');
+
+                           }])->get();
+
 
                     break;
       }
 
-$affilate_product_link = affilate_product_link::where('user_id', $user_id)
-         ->with(['get_affilate_product_status' => function ($query)  use ($date) {
-             $query->where('date','>=', $date);
-             $query->orderBy('date', 'asc');
-
-         }])->get();
-
-
-foreach ($affilate_product_link  as $value) {
-  // code...
-  $all[] = [$value->get_affilate_product_status];
-}
-$all_count = count($all);
 
 $clicks = [];
-$confirmedOrder = [];
-for ($i=0; $i < $all_count ; $i++) {
+ $confirmedOrder = [];
+    foreach ($affilate_product_link as $value) {
+    foreach ($value->get_affilate_product_status as $key) {
+    array_push($clicks,$key->click);
+      array_push($confirmedOrder,$key->confirmed);
+    }
+    }
 
 
-  if (isset($all[$i][0]->click)) {
-    $click = $all[$i][0]->click;
-    $confirmed = $all[$i][0]->confirmed;
-   array_push($clicks,$click);
-   array_push($confirmedOrder,$confirmed);
-  }
 
-}
+
+// foreach ($affilate_product_link  as $value) {
+//   // code...
+//   $all[] = [$value->get_affilate_product_status];
+// }
+//
+//
+// $all_count = count($all);
+// $clicks = [];
+// $confirmedOrder = [];
+// for ($i=0; $i < $all_count ; $i++) {
+//
+//   if (isset($all[$i][0]->click)) {
+//     $click = $all[$i][0]->click;
+//
+//
+//     $confirmed = $all[$i][0]->confirmed;
+//    array_push($clicks,$click);
+//    array_push($confirmedOrder,$confirmed);
+//   }
+//
+// }
 
   $click_count  =array_sum($clicks);
   $confirmed_count=array_sum($confirmedOrder);
+
+  // dd($click_count);
 
   $data = ['click'=>$click_count, 'confirmed'=>$confirmed_count];
       return response()->json($data);
