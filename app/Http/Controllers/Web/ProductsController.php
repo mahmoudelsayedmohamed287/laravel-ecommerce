@@ -455,7 +455,7 @@ class ProductsController extends DataController
 					 $status->save();
 
 
-						$get_session = Session::get('affilate_code');
+						$get_session = Session::get('affilate_code');}
         
         return view("product-detail", $title)->with(['result' => $result ,
 													'seller_name' => $seller[0]->first_name,
@@ -465,7 +465,7 @@ class ProductsController extends DataController
       
 
 
-	}}
+	}
 
 
 	public function filterProducts(Request $request){
