@@ -41,20 +41,17 @@
     position: relative;
 }
 
-.requ .dateRangeTol {
-<<<<<<< HEAD
+/* .requ .dateRangeTol {
     position: absolute;
     left: 0;
     top: 64px;
-    width: 300px;
+    width: auto;
     background: #fff;
     z-index: 2;
     border: 1px solid darkgray;
     border-top: none;
     padding: 4px;
-    display: none;
-
-}
+} */
 
 .requ input,
 .requ select,
@@ -65,12 +62,11 @@
     font-size: 1.1em;
     color: #3B3B3B;
     width: 300px;
-    width: 300px;
+}
+.requ input{
+    display: none;
 }
 
-.requ select {
-    width: 100%;
-}
 
 .requ .ACC-BTNS {
     width: 100%;

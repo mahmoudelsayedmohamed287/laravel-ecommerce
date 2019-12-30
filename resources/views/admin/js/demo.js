@@ -341,69 +341,29 @@
         }
 
     }
-    // $(".dateMenu").on("click",function(){
-    // 	$('.dateRangeTol').toggle();
-    // })
-    // var lastWeek = new Date();
-    // lastWeek.setDate(lastWeek.getDate() -7)
-    // var aWeekBefore = lastWeek.toLocaleDateString();
-
-    // $(".lastWeek").on("click",function(){
-    //   $(".dateMenu").val(aWeekBefore);
-
-    // });
-    // var today = new Date();
-    // today.setDate(today.getDate())
-    // var aDay = today.toLocaleDateString();
-
-    // $(".today").on("click",function(){
-    //   alert('ddddddddddddd');
-    //   $(".dateMenu").val(aDay);
-    //   $("#sel1").val(aDay);
-    // });
-    // var yesterday = new Date();
-    // yesterday.setDate(yesterday.getDate()-1)
-    // var aDayBefore = yesterday.toLocaleDateString();
-
-    // $(".yesterday").on("click",function(){
-    // 	$(".dateMenu").val(aDayBefore);
-    // });
-    // var lastMonth = new Date();
-    // lastMonth.setDate(lastMonth.getDate()-30)
-    // var aMonthBefore = lastMonth.toLocaleDateString();
-
-    // $(".lastMonth").on("click",function(){
-    // 	$(".dateMenu").val(aMonthBefore);
-    // });
-    // var thisMonth = new Date();
-    // thisMonth.setDate(thisMonth.getDay())
-    // var toMonth = thisMonth.toLocaleDateString();
-    // $(".thisMonth").on("click",function(){
-    // 	$(".dateMenu").val(toMonth + " - " + new Date().toLocaleDateString());
-    // });
     $(".dateMenu").on("click", function() {
         $('.dateRangeTol').toggle();
     })
     var lastWeek = new Date();
     lastWeek.setDate(lastWeek.getDate() - 7)
-    var aWeekBefore = lastWeek.toLocaleDateString();
+    var aWeekBefore = lastWeek.toLocaleDateString().replace(/\//g, '-');
     var today = new Date();
     today.setDate(today.getDate())
-    var aDay = today.toLocaleDateString();
+    var aDay = today.toLocaleDateString().replace(/\//g, '-');
     var yesterday = new Date();
     yesterday.setDate(yesterday.getDate() - 1)
-    var aDayBefore = yesterday.toLocaleDateString();
+    var aDayBefore = yesterday.toLocaleDateString().replace(/\//g, '-');
     var lastMonth = new Date();
     lastMonth.setDate(lastMonth.getDate() - 30)
-    var aMonthBefore = lastMonth.toLocaleDateString();
+    var aMonthBefore = lastMonth.toLocaleDateString().replace(/\//g, '-');
     var thisMonth = new Date();
     thisMonth.setDate(thisMonth.getDay())
-    var toMonth = thisMonth.toLocaleDateString();
+    var toMonth = thisMonth.toLocaleDateString().replace(/\//g, '-');
     $(".lastWeek").val(aWeekBefore);
     $(".today").val(aDay);
     $(".yesterday").val(aDayBefore);
     $(".lastMonth").val(aMonthBefore);
-    $(".thisMonth").val(toMonth + " - " + new Date().toLocaleDateString());
+    $(".thisMonth").val(toMonth + " - " + new Date().toLocaleDateString().replace(/\//g, '-'));
 })(jQuery, $.AdminLTE);
 
 

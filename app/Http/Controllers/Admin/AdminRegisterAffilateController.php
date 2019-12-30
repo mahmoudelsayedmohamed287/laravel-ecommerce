@@ -74,6 +74,7 @@ for ($i=0; $i < $all_count ; $i++) {
   }
 
 }
+
   $click_count  =array_sum($clicks);
   $confirmed_count=array_sum($confirmedOrder);
 
