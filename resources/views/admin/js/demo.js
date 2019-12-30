@@ -344,26 +344,26 @@
     $(".dateMenu").on("click", function() {
         $('.dateRangeTol').toggle();
     })
-    var lastWeek = new Date();
-    lastWeek.setDate(lastWeek.getDate() - 7)
-    var aWeekBefore = lastWeek.toLocaleDateString().replace(/\//g, '-');
-    var today = new Date();
-    today.setDate(today.getDate())
-    var aDay = today.toLocaleDateString().replace(/\//g, '-');
-    var yesterday = new Date();
-    yesterday.setDate(yesterday.getDate() - 1)
-    var aDayBefore = yesterday.toLocaleDateString().replace(/\//g, '-');
-    var lastMonth = new Date();
-    lastMonth.setDate(lastMonth.getDate() - 30)
-    var aMonthBefore = lastMonth.toLocaleDateString().replace(/\//g, '-');
-    var thisMonth = new Date();
-    thisMonth.setDate(thisMonth.getDay())
-    var toMonth = thisMonth.toLocaleDateString().replace(/\//g, '-');
-    $(".lastWeek").val(aWeekBefore);
-    $(".today").val(aDay);
-    $(".yesterday").val(aDayBefore);
-    $(".lastMonth").val(aMonthBefore);
-    $(".thisMonth").val(toMonth + " - " + new Date().toLocaleDateString().replace(/\//g, '-'));
+    // var lastWeek = new Date();
+    // lastWeek.setDate(lastWeek.getDate() - 7)
+    // var aWeekBefore = lastWeek.toLocaleDateString();
+    // var today = new Date();
+    // today.setDate(today.getDate())
+    // var aDay = today.toLocaleDateString();
+    // var yesterday = new Date();
+    // yesterday.setDate(yesterday.getDate() - 1)
+    // var aDayBefore = yesterday.toLocaleDateString();
+    // var lastMonth = new Date();
+    // lastMonth.setDate(lastMonth.getDate() - 30)
+    // var aMonthBefore = lastMonth.toLocaleDateString();
+    // var thisMonth = new Date();
+    // thisMonth.setDate(thisMonth.getDay())
+    // var toMonth = thisMonth.toLocaleDateString();
+    // $(".lastWeek").val(aWeekBefore);
+    // $(".today").val(aDay);
+    // $(".yesterday").val(aDayBefore);
+    // $(".lastMonth").val(aMonthBefore);
+    // $(".thisMonth").val(toMonth + " - " + new Date().toLocaleDateString());
 })(jQuery, $.AdminLTE);
 
 
