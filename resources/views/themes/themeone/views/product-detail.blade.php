@@ -215,18 +215,15 @@
 															$is_default = 0;
 															@endphp
                                                             @foreach( $attributes_data['values'] as $values_data )
+                                                            
                                                             {{ $values_data['is_default'] }}
-																@if($is_default==0)
-																	@if($values_data['is_default']==1)
+                                                           
+																
+																	
 																		<option  attributes_value="{{ $values_data['products_attributes_id'] }}" value="{{ $values_data['id'] }}" prefix = '{{ $values_data['price_prefix'] }}'  value_price ="{{ $values_data['price']+0 }}" >{{ $values_data['value'] }}</option>
-																	@endif	
-																@endif
+																	
+																
 
-																@if($is_default==1){
-																	@if($values_data['is_default']==0)
-																		<option  attributes_value="{{ $values_data['products_attributes_id'] }}" value="{{ $values_data['id'] }}" prefix = '{{ $values_data['price_prefix'] }}'  value_price ="{{ $values_data['price']+0 }}" >{{ $values_data['value'] }}</option>
-																	@endif	
-																@endif
 
 																@php
 																$is_default++;
