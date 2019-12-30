@@ -7,6 +7,9 @@ use Lang;
 use App\Affilate_user;
 use Session;
 use App\affilate_product_link;
+use Carbon\Carbon;
+
+
 
 use App\Http\Controllers\Controller;
 class AdminRegisterAffilateController extends Controller
@@ -47,10 +50,38 @@ for($i; $i < count($affaliateDeatils); $i++){
       $title = array('pageTitle' => Lang::get("labels.AddCustomer"));
                // dd($request->Period);
       $date = $request->Period;
+      switch ($date) {
+        case 'today':
+        $date = Carbon::today()->format('Y-m-d');
+
+          break;
+          case 'yesterday':
+            $date = Carbon::yesterday()->format('Y-m-d');
+
+            break;
+
+              case 'thisWeek':
+              $currentDate = \Carbon\Carbon::now();
+             $currentDate->startOfWeek()->subWeek();
+             $date = $currentDate->format('Y-m-d');
+
+                break;
+                case 'lastMonth':
+                $firstDayofPreviousMonth = Carbon::now()->startOfMonth()->subMonth()->toDateString();
+                $date= $firstDayofPreviousMonth;
+
+                  break;
+                  case 'thisMonth':
+                  $lastDayofPreviousMonth = Carbon::now()->subMonth()->endOfMonth()->toDateString();
+                  $date= $lastDayofPreviousMonth;
+
+
+                    break;
+      }
 
 $affilate_product_link = affilate_product_link::where('user_id', $user_id)
          ->with(['get_affilate_product_status' => function ($query)  use ($date) {
-             $query->where('date','<=', $date);
+             $query->where('date','>=', $date);
              $query->orderBy('date', 'asc');
 
          }])->get();

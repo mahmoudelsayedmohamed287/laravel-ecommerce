@@ -50,10 +50,10 @@
                         <select class="form-control" id="Period" >
     <option class="today">today</option>
     <option class="yesterday">yesterday</option>
-    <option class="lastWeek" id="lastWeek">last week</option>
-    <option class="thisWeek">this week</option>
-    <option class="lastMonth">last month</option>
-    <option class="thisMonth">this month</option>
+
+    <option class="thisWeek">thisWeek</option>
+    <option class="lastMonth">lastMonth</option>
+    <option class="thisMonth">thisMonth</option>
   </select>
 
 
