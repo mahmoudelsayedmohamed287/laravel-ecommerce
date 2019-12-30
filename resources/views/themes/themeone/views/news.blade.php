@@ -57,7 +57,7 @@
                                     </div>
                                 </div>
                                 <div class="blogs blogs-4x" id="listing-news">
-                                <? //echo "<pre>".print_r($result['news'], true)."</pre>"?>
+
                                     @if($result['news']['success']==1)
                                     @foreach($result['news']['news_data'] as $key=>$news_data)
                                     
