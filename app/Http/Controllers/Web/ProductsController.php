@@ -428,9 +428,41 @@ class ProductsController extends DataController
 		//liked products
 		$result['liked_products'] = $this->likedProducts();
 		$seller = DB::table('administrators')->where('myid',$products[0]->admin_id)->get();
-		return view("product-detail", $title)->with(['result' => $result ,
+		
+        
+          	$code = app('request')->input('u-a');
+//            dd($code);
+//        echo $code; 
+						$product_id = app('request')->input('pro-d');
+					$data = array('code' =>$code,'product_id'=>$product_id );
+						if (isset($code)) {
+
+							$cookie = Session::put('affilate_code', $data, 60);
+
+					 // \DB::table('affilate_product_link')->where('product_id', $product_id)
+					 // ->where('affilate_code', '=', $code)
+					 // ->increment('click');
+					$get_id =  \DB::table('affilate_product_link')->where('product_id', $product_id)
+					 ->where('affilate_code', '=', $code)
+					 ->get();
+					 $date = \Carbon\Carbon::today()->format('Y-m-d');
+//                    dd($get_id);
+
+           $status = new affilate_product_status();
+					 $status->product_link_id = $get_id[0]->id;
+					 $status->click = 1;
+					 $status->date = $date;
+					 $status->save();
+
+
+						$get_session = Session::get('affilate_code');}
+        
+        return view("product-detail", $title)->with(['result' => $result ,
 													'seller_name' => $seller[0]->first_name,
 													'seller_id' =>  $seller[0]->myid]);
+        //yousry  code
+        
+      
 
 
 	}

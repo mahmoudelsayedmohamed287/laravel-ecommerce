@@ -52,15 +52,17 @@
                             </td>
                             <td align="center">
                             	<!--{{ $products->products_date_added }}-->
-                                <?
-									$date = new DateTime($products->products_date_added);
+
+                                <?php
+									 $date = new DateTime($products->products_date_added);
 									$myDate = $date->format('d-m-Y');
 									print $myDate;
 								?>
+
                             </td>
                             
                             <td align="center">
-                                <?
+                                <?php
 									if(!empty($products->products_last_modified)){
 										$date = new DateTime($products->products_last_modified);
 										$myDate = $date->format('d-m-Y');

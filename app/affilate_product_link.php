@@ -13,7 +13,9 @@ class affilate_product_link extends Model
 
   public function get_affilate_product_status(){
 
- return $this->belongsTo('App\affilate_product_status', 'id', 'product_link_id');
+  return $this->hasMany('App\affilate_product_status', 'product_link_id', 'id');
+
+
 
 
  }

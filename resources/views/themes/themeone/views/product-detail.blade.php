@@ -213,12 +213,14 @@
                                                         <select name="{{ $attributes_data['option']['id'] }}" onChange="getQuantity()" class="currentstock form-control attributeid_<?=$index++?>" attributeid = "{{ $attributes_data['option']['id'] }}">
 															
                                                             @foreach( $attributes_data['values'] as $values_data )
+
                                                           
                                                             
 																	
 																		<option  attributes_value="{{ $values_data['products_attributes_id'] }}" value="{{ $values_data['id'] }}" prefix = '{{ $values_data['price_prefix'] }}'  value_price ="{{ $values_data['price']+0 }}" >{{ $values_data['value'] }}</option>
 																	
-														
+												
+
 																													   
                                                             @endforeach								
                                                         </select>								
