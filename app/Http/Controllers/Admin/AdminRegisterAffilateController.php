@@ -19,13 +19,13 @@ class AdminRegisterAffilateController extends Controller
       $user_id= auth()->guard('admin')->user()->myid;
        $title = array('pageTitle' => Lang::get("labels.AddCustomer"));
        $affaliateDeatils = \DB::table('affilate_product_link')->where('user_id','=',$user_id)->get();
-$clicks = [];
-$confirmedOrder = [];
-$i = 0;
-for($i; $i < count($affaliateDeatils); $i++){
-  array_push($clicks,$affaliateDeatils[$i]->click);
-  array_push($confirmedOrder,$affaliateDeatils[$i]->confirmed);
-}
+        $clicks = [];
+        $confirmedOrder = [];
+        $i = 0;
+        for($i; $i < count($affaliateDeatils); $i++){
+          array_push($clicks,$affaliateDeatils[$i]->click);
+          array_push($confirmedOrder,$affaliateDeatils[$i]->confirmed);
+        }
 
       return view("affilate.RegisterAffilate",$title)->with(['clicks' => array_sum($clicks),
                                                              'confirmed' => array_sum($confirmedOrder)]);
@@ -50,6 +50,10 @@ for($i; $i < count($affaliateDeatils); $i++){
       $title = array('pageTitle' => Lang::get("labels.AddCustomer"));
                // dd($request->Period);
       $date = $request->Period;
+      
+      // if($date == null){
+      //   $date = 'today';
+      // }
       switch ($date) {
         case 'today':
         $date = Carbon::today()->format('Y-m-d');
@@ -116,6 +120,10 @@ for($i; $i < count($affaliateDeatils); $i++){
 
 
                     break;
+                   
+               
+                         
+
       }
 
 

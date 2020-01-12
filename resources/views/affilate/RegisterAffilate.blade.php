@@ -86,7 +86,9 @@
                                                             </div>
 
                                                             <div class="flex-item-body">
-                                                                <span id="click"></span>
+                                                                <span id="click">
+                                                            
+                                                                </span>
                                                             </div>
                                                         </div>
                                                         <div class="affilateDashBoard-flex-item">
@@ -94,7 +96,9 @@
                                                                 <span>{{ trans('labels.confirmed orders') }}</span>
                                                             </div>
                                                             <div class="flex-item-body">
-                                                                <span id="confirmed"></span>
+                                                                <span id="confirmed">
+                                                                  
+                                                                </span>
                                                             </div>
                                                         </div>
                                                         <div class="affilateDashBoard-flex-item">

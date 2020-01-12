@@ -2,7 +2,7 @@
     <!-- sidebar: style can be found in sidebar.less -->
     <section class="sidebar">
       <!-- Sidebar user panel -->
-      <div class="user-panel">
+      <!-- <div class="user-panel">
         <div class="pull-left image">
           <img src="{{asset('').auth()->guard('admin')->user()->image}}" class="img-circle" alt="{{ auth()->guard('admin')->user()->first_name }} {{ auth()->guard('admin')->user()->last_name }} Image">
         </div>
@@ -10,10 +10,11 @@
           <p>{{ auth()->guard('admin')->user()->first_name }} {{ auth()->guard('admin')->user()->last_name }}</p>
           <a href="#"><i class="fa fa-circle text-success"></i> {{ trans('labels.online') }}</a>
         </div>
-      </div>
+      </div> -->
+      
       <!-- sidebar menu: : style can be found in sidebar.less -->
       <ul class="sidebar-menu">
-        <li class="header">{{ trans('labels.navigation') }}</li>
+        <!-- <li class="header">{{ trans('labels.navigation') }}</li> -->
         @if(session('dashboard_view')==1 or auth()->guard('admin')->user()->adminType=='1')
         <li class="treeview {{ Request::is('admin/dashboard/this_month') ? 'active' : '' }}">
           <a href="{{ URL::to('admin/dashboard/this_month')}}">
