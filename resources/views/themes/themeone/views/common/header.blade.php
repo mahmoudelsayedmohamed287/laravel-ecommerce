@@ -61,7 +61,7 @@
                     <form class="form-inline" action="{{ URL::to('/shop')}}" method="get">
                     <div class="search-categories">
                     <select id="category_id" name="category">
-                    <option value="all">@lang('website.All Categories')</option>     
+                    <option disabled selected value="all">@lang('website.All Categories')</option>     
                         @foreach($result['commonContent']['categories'] as $categories_data)
                         	<option value="{{$categories_data->slug}}" @if($categories_data->slug==app('request')->input('category')) selected @endif>{{$categories_data->name}}</option>
                             @if(count($categories_data->sub_categories)>0)
@@ -201,7 +201,7 @@
                                 </ul>
                             </li>                            
                             <li class="nav-item"> <a class="nav-link" href="{{ URL::to('/contact-us')}}">@lang('website.Contact Us')</a> </li>
-                            <li class="nav-item last"><a href="{{ URL::to('/shop?type=special')}}" class="nav-link"><span>hotdeals</span>({{$result['commonContent']['setting'][11]->value}})</a></li>
+                            <li class="nav-item last"><a href="{{ URL::to('/shop?type=special')}}" class="nav-link"><span>hotdeals</span></a></li>
                           </ul>
                         </div>
                     </nav>
