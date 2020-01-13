@@ -23,7 +23,7 @@ return [
 		
 	'bannerLabel3'=>'دعم 24/7',
 		
-	'hotline'=>'الخط الساخن',
+	'hotline'=>'العروض',
 	
 	'bannerLabel4'=>'الدفع الآمن',
 		
@@ -95,7 +95,7 @@ return [
 		
 	'Email'=>'البريد الإلكتروني',
 		
-	'Copy Rights'=>'2017 شركة ، وشركة',
+	'Copy Rights'=>'2020 شركة digital pharaohs',
 		
 	'From our News'=>'من أخبارنا',
 		

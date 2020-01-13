@@ -23,7 +23,7 @@ return [
 		
 	'bannerLabel3'=>'Support 24/7',
 		
-	'hotline'=>'Hotline',
+	'hotline'=>'Hot Deals',
 	
 	'bannerLabel4'=>'Safe Payment',
 		
@@ -99,7 +99,7 @@ return [
 		
 	'Email'=>'Email',
 		
-	'Copy Rights'=>'2017 Company, Inc',
+	'Copy Rights'=>'2020 Company, digital pharaohs',
 		
 	'From our News'=>'From our News',
 		

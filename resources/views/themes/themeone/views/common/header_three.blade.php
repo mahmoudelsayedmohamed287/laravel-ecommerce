@@ -122,7 +122,7 @@
                             <li class="nav-item dropdown mega-dropdown open">
                               <a href="javascript:void(0);" class="nav-link dropdown-toggle">
                                 @lang('website.collection')
-                                <span class="badge badge-secondary">@lang('website.hot')</span>
+                                <!-- <span class="badge badge-secondary">@lang('website.hot')</span> -->
                               </a>
                     
                               <ul class="dropdown-menu mega-dropdown-menu row" >
@@ -209,7 +209,7 @@
                             </li>
                             
                             <li class="nav-item"> <a class="nav-link" href="{{ URL::to('/contact-us')}}">@lang('website.Contact Us')</a> </li>
-                            <li class="nav-item last"><a class="nav-link"><span>@lang('website.hotline')</span>({{$result['commonContent']['setting'][11]->value}})</a></li>
+                            <li class="nav-item last"><a class="nav-link" href="{{URL::TO('/shop?type=special')}}"><span>@lang('website.hotline')</span>({{$result['commonContent']['setting'][11]->value}})</a></li>
                           </ul>
                         </div>
                     </nav>

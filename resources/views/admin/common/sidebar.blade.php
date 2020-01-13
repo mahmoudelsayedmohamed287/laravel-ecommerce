@@ -64,10 +64,11 @@
           </ul>
         </li>
          @endif
-          
+         @if(session('news_view')==1  or auth()->guard('admin')->user()->adminType=='1')
            <li class="">
           <a href="{{ URL::to('admin/register/affilate')}}" ><i class="fa fa-tablet" aria-hidden="true"></i> <span>{{ trans('labels.affilate') }}</span></a>
         </li>
+        @endif
         @if(session('news_view')==1  or auth()->guard('admin')->user()->adminType=='1')
         <li class="treeview {{ Request::is('admin/newscategories') ? 'active' : '' }} {{ Request::is('admin/addnewscategory') ? 'active' : '' }} {{ Request::is('admin/editnewscategory/*') ? 'active' : '' }} {{ Request::is('admin/news') ? 'active' : '' }}  {{ Request::is('admin/addsubnews') ? 'active' : '' }}  {{ Request::is('admin/editsubnews/*') ? 'active' : '' }}">
           <a href="#">
