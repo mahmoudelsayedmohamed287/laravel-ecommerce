@@ -51,7 +51,7 @@ return [
 		
 	'Logout'=>'الخروج',
 		
-	'Login/Register'=>'دخولتسجيل',
+	'Login/Register'=>'دخول تسجيل',
 		
 	'item(s)'=>'العناصر',
 		
