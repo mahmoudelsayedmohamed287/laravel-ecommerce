@@ -81,8 +81,8 @@
     {!! Form::close() !!}
    <hr>
    <p>user name : admin@digitalpharohos.com</p>
-   <p>Password : admin</p>
-      <h6 style="text-align: center;">new to our ecommerce</h6>
+   <p>Password : admin1</p>
+      <!-- <h6 style="text-align: center;">new to our ecommerce</h6> -->
      
   </div>
     
