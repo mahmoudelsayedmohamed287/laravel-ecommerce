@@ -406,7 +406,7 @@ $("#Period").change(function(e) {
 
         type: 'POST',
 
-        url: '/estore_afaf/index.php/admin/register/affilate/report',
+        url: '/estore_digitalpharaohs/index.php/admin/register/affilate/report',
 
         data: { Period: Period },
         dataType: 'json',

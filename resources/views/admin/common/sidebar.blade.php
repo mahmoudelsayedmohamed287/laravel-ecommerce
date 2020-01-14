@@ -63,17 +63,16 @@
             <li class="{{ Request::is('admin/attributes') ? 'active' : '' }}  {{ Request::is('admin/addattributes') ? 'active' : '' }}  {{ Request::is('admin/editattributes/*') ? 'active' : '' }}" ><a href="{{ URL::to('admin/attributes' )}}"><i class="fa fa-circle-o"></i> {{ trans('labels.products_attributes') }}</a></li>
           </ul>
         </li>
-         @endif
-         @if(session('news_view')==1  or auth()->guard('admin')->user()->adminType=='1')
-           <li class="">
+     @endif
+           <!-- <li class="">
           <a href="{{ URL::to('admin/register/affilate')}}" ><i class="fa fa-tablet" aria-hidden="true"></i> <span>{{ trans('labels.affilate') }}</span></a>
-        </li>
-        @endif
+        </li> -->
+       
         @if(session('news_view')==1  or auth()->guard('admin')->user()->adminType=='1')
         <li class="treeview {{ Request::is('admin/newscategories') ? 'active' : '' }} {{ Request::is('admin/addnewscategory') ? 'active' : '' }} {{ Request::is('admin/editnewscategory/*') ? 'active' : '' }} {{ Request::is('admin/news') ? 'active' : '' }}  {{ Request::is('admin/addsubnews') ? 'active' : '' }}  {{ Request::is('admin/editsubnews/*') ? 'active' : '' }}">
           <a href="#">
             <i class="fa fa-database" aria-hidden="true"></i>
-<span>{{ trans('labels.link_news') }}</span> <i class="fa fa-angle-left pull-right"></i>
+           <span>{{ trans('labels.link_news') }}</span> <i class="fa fa-angle-left pull-right"></i>
           </a>
           <ul class="treeview-menu">
           	<li class="{{ Request::is('admin/newscategories') ? 'active' : '' }} {{ Request::is('admin/addnewscategory') ? 'active' : '' }} {{ Request::is('admin/editnewscategory/*') ? 'active' : '' }}"><a href="{{ URL::to('admin/newscategories')}}"><i class="fa fa-circle-o"></i>{{ trans('labels.link_news_categories') }}</a></li>
