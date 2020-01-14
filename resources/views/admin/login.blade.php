@@ -4,6 +4,10 @@
 	.wrapper{
 		display:  none !important;
 	}
+  .login-logo img{
+    width: 250px!important;
+    margin-bottom: 0!important;
+  }
 </style>
 <div class="login-box">
   <div class="login-logo">
@@ -17,7 +21,7 @@
       		<img src="{{asset('/resources/views/admin/images/admin_logo/logo-android-blue-v1.png')}}" class="ionic-hide"> 
         	<img src="{{asset('/resources/views/admin/images/admin_logo/logo-ionic-blue-v1.png')}}" class="android-hide"> 
         @elseif($web_setting[66]->value=='1' and $web_setting[67]->value=='1' or $web_setting[66]->value=='0' and $web_setting[67]->value=='1') 
-   			<img src="{{asset('/resources/views/admin/images/admin_logo/logo-laravel-blue-v1.png')}}" class="website-hide"> 
+   			<img src="{{asset('/resources/views/admin/images/admin_logo/logo.svg')}}"  class="website-hide"> 
     	@endif
   
     
@@ -65,7 +69,7 @@
        <span class="help-block hidden">{{ trans('labels.textRequiredFieldMessage') }}</span>
        
       </div>
-  	  <img src="http://ionicecommerce.com/testcontroller1.php">
+  	  
       <div class="row">
        
         <!-- /.col -->
@@ -75,10 +79,9 @@
         <!-- /.col -->
       </div>
     {!! Form::close() !!}
-<hr>
-      <h6 style="text-align: center;
-">new to our ecommerce</h6>
-      <a style="margin: 88px;" href="{{ URL::to('/signupAsSeller')}}">CREATE NEW ACCOUNT</a>
+   <hr>
+      <h6 style="text-align: center;">new to our ecommerce</h6>
+     
   </div>
     
 

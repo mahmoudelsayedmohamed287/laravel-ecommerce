@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 23.0.1, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 1400 1000" style="enable-background:new 0 0 1400 1000;" xml:space="preserve">
+<style type="text/css">
+	.st0{fill:url(#SVGID_1_);}
+	.st1{fill:url(#SVGID_2_);}
+	.st2{fill:#00A651;}
+	.st3{stroke:#000000;stroke-width:3;stroke-miterlimit:10;}
+	.st4{font-family:'YuGothicUI-Bold';}
+	.st5{font-size:56px;}
+	.st6{font-size:37.3414px;}
+	.st7{letter-spacing:7.01;}
+</style>
+<g id="Layer_1">
+	<linearGradient id="SVGID_1_" gradientUnits="userSpaceOnUse" x1="321" y1="403.7059" x2="879.7885" y2="403.7059">
+		<stop  offset="2.517407e-03" style="stop-color:#F79033"/>
+		<stop  offset="0.1528" style="stop-color:#F79435"/>
+		<stop  offset="0.3429" style="stop-color:#F99F3A"/>
+		<stop  offset="0.5284" style="stop-color:#FBB042"/>
+	</linearGradient>
+	<path class="st0" d="M879.79,237.47L571.25,526.21l-9.83,9.21c-0.22,0.19-0.44,0.39-0.67,0.57
+		c-63.01,53.49-153.35,42.88-204.82-25.36c-53.01-70.27-44.76-175.02,18.4-233.99c63.16-58.95,157.34-49.79,210.33,20.48
+		c8.68,11.5,15.7,23.93,21.13,36.93l-69.03,64.43c-0.97-15.02-6.06-29.84-15.42-42.26c-23.66-31.36-65.69-35.44-93.88-9.14
+		c-28.2,26.32-31.88,73.08-8.22,104.44c22.25,29.5,60.75,34.86,88.71,13.52l0.67,0.87l0.01-0.02l-0.64-0.86l168.01-157.36
+		l20.91-19.58l-0.06-0.06l54-50.55H879.79z"/>
+	<linearGradient id="SVGID_2_" gradientUnits="userSpaceOnUse" x1="573.2704" y1="403.7059" x2="1132.0588" y2="403.7059">
+		<stop  offset="0.2788" style="stop-color:#F3A91E"/>
+		<stop  offset="0.3279" style="stop-color:#EDA427"/>
+		<stop  offset="0.4029" style="stop-color:#DE973D"/>
+		<stop  offset="0.4945" style="stop-color:#C58456"/>
+		<stop  offset="0.5993" style="stop-color:#A46C6B"/>
+		<stop  offset="0.715" style="stop-color:#7F4F7D"/>
+		<stop  offset="0.8365" style="stop-color:#542D8B"/>
+	</linearGradient>
+	<path class="st1" d="M573.27,569.94L881.81,281.2l9.83-9.21c0.22-0.19,0.44-0.39,0.67-0.57c63.01-53.49,153.35-42.88,204.82,25.36
+		c53.01,70.27,44.76,175.02-18.4,233.99c-63.16,58.95-157.34,49.79-210.33-20.48c-8.68-11.5-15.7-23.93-21.13-36.93l69.03-64.43
+		c0.97,15.02,6.06,29.84,15.42,42.26c23.66,31.36,65.69,35.44,93.88,9.14c28.2-26.32,31.88-73.08,8.22-104.44
+		c-22.25-29.5-60.75-34.86-88.71-13.52l-0.67-0.87l-0.01,0.02l0.64,0.86L777.04,499.75l-20.91,19.58l0.06,0.06l-54,50.55H573.27z"/>
+	<path class="st2" d="M598.4,470.31l-0.44,0.37l-0.02-0.02C598.1,470.55,598.25,470.43,598.4,470.31z"/>
+</g>
+<g id="Layer_2">
+	<text transform="matrix(1.4608 0 0 1 354.8818 669.8857)" class="st3 st4 st5">DlGlTAL PHARAOHS</text>
+	<text transform="matrix(1.1416 0 0 1 571.7651 729.3264)" class="st4 st6 st7">SOLUTIONS</text>
+</g>
+</svg>
