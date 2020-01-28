@@ -55,10 +55,12 @@ class AdminOrdersController extends Controller
 		$index = 0;
 		$total_price = array();
 		
+            
 		foreach($orders as $orders_data){
 			$orders_products = DB::table('orders_products')
 				->select('final_price', DB::raw('SUM(final_price) as total_price'))
 				->where('orders_id', '=' ,$orders_data->orders_id)
+                
 				->get();
 				
 			$orders[$index]->total_price = $orders_products[0]->total_price;		
@@ -66,7 +68,9 @@ class AdminOrdersController extends Controller
 			$orders_status_history = DB::table('orders_status_history')
 				->LeftJoin('orders_status', 'orders_status.orders_status_id', '=', 'orders_status_history.orders_status_id')
 				->select('orders_status.orders_status_name', 'orders_status.orders_status_id')
-				->where('orders_id', '=', $orders_data->orders_id)->orderby('orders_status_history.date_added', 'DESC')->limit(1)->get();
+				->where('orders_id', '=', $orders_data->orders_id)
+                 
+                ->orderby('orders_status_history.date_added', 'DESC')->limit(1)->get();
 				
 			//print_r($orders_status_history);
 			$orders[$index]->orders_status_id = $orders_status_history[0]->orders_status_id;
@@ -107,7 +111,9 @@ class AdminOrdersController extends Controller
 		$order = DB::table('orders')
 				->LeftJoin('orders_status_history', 'orders_status_history.orders_id', '=', 'orders.orders_id')
 				->LeftJoin('orders_status', 'orders_status.orders_status_id', '=' ,'orders_status_history.orders_status_id')
-				->where('orders.orders_id', '=', $orders_id)->orderby('orders_status_history.date_added', 'DESC')->get();
+				->where('orders.orders_id', '=', $orders_id)
+            
+            ->orderby('orders_status_history.date_added', 'DESC')->get();
 			
 		
 		foreach($order as $data){
@@ -116,7 +122,9 @@ class AdminOrdersController extends Controller
 			$orders_products = DB::table('orders_products')
 				->join('products', 'products.products_id','=', 'orders_products.products_id')
 				->select('orders_products.*', 'products.products_image as image')
-				->where('orders_products.orders_id', '=', $orders_id)->get();
+				->where('orders_products.orders_id', '=', $orders_id)
+                
+                ->get();
 				$i = 0;
 				$total_price  = 0;
 				$total_tax	  = 0;
