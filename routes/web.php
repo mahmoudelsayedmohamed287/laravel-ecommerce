@@ -66,7 +66,7 @@ Route::group(['prefix' => 'admin'], function () {
 		|
 		*/
             
-            
+           Route::get('/singleadmin', 'admintypeController@dashboard'); 
             
             ///order of admin
              Route::get('/AdminOrderSpecific', 'AdminOrderadminController@index');

@@ -193,8 +193,22 @@ class AdminController extends Controller
 		$currency = $myVar->getSetting();
 		$result['currency'] = $currency;
 
-		return view("admin.dashboard",$title)->with('result', $result);
+		//return view("admin.dashboard",$title)->with('result', $result);
+
+			  // to redirect admin to his dashboard
+				  
+			  if(!empty(auth()->guard('admin')->user()->adminType)){	
+				if(auth()->guard('admin')->user()->adminType == 6){
+		
+				return redirect('/admin/singleadmin');
+			}else{
+		
+				return view("admin.dashboard",$title)->with('result', $result);
+			}
 		}
+		}
+
+	
 	
 	
 	public function login(){
@@ -203,9 +217,15 @@ class AdminController extends Controller
 		}}else{
 			$title = array('pageTitle' => Lang::get("labels.login_page_name"));
 			return view("admin.login",$title);
+
+					
 		}
 		
+		
 	}
+
+	
+
 	
 	public function admininfo(){
 		$administor = administrators::all();		
@@ -255,6 +275,8 @@ class AdminController extends Controller
               
 
 				session(['admin_type' => $admin->adminType]);
+
+		
 								
 
 				if(!empty(auth()->guard('admin')->user()->adminType)){	
@@ -717,7 +739,7 @@ class AdminController extends Controller
 			->leftJoin('admin_types','admin_types.admin_type_id','=','administrators.adminType')
 			->select('administrators.*', 'countries.*', 'zones.*','admin_types.admin_type_id','admin_types.admin_type_name','admin_types.created_at')
 			->where('email','!=','vectorcoder@gmail.com')
-			->where('adminType','!=','1')
+			->where('adminType','=','6')
 			->paginate(50);
 			
 				
@@ -816,7 +838,7 @@ class AdminController extends Controller
 		$myVar = new AddressController();
 		$result['countries'] = $myVar->getAllCountries();
 		
-		$adminTypes = DB::table('admin_types')->where('isActive', 1)->where('admin_type_id','!=','1')->get();
+		$adminTypes = DB::table('admin_types')->where('isActive', 1)->where('admin_type_id','=','6')->get();
 		$result['adminTypes'] = $adminTypes;
 		
 		$result['myid'] = $myid;
@@ -931,7 +953,7 @@ class AdminController extends Controller
 		$message = array();
 		$errorMessage = array();
 		
-		$adminTypes = DB::table('admin_types')->where('admin_type_id','!=',1)->paginate(50);			
+		$adminTypes = DB::table('admin_types')->where('admin_type_id','!=',6)->paginate(50);			
 				
 		$result['message'] = $message;
 		$result['errorMessage'] = $errorMessage;
