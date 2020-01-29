@@ -199,36 +199,5 @@ class admintypeController extends Controller
 	
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
    
 }

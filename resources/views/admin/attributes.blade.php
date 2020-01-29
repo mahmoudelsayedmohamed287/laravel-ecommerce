@@ -56,7 +56,9 @@
                       <th>{{ trans('labels.ID') }}</th>
                       <th>{{ trans('labels.Options') }}</th>
                       <th width="40%">{{ trans('labels.Values') }}</th>
-                      <th>{{ trans('labels.Action') }}</th>
+                      @if(session('admin_type')==1) 
+                        <th>{{ trans('labels.Action') }}</th>
+                        @endif
                     </tr>
                   </thead>
                   <tbody>
@@ -91,7 +93,8 @@
                        	 @endforeach
                          <a href="{{ URL::to('admin/manage-options-values')}}/{{$data->products_options_id}}" >{{ trans('labels.Manage Values') }}</a><br>
                         </td>
-                        <td><a option_id="{{$data->products_options_id}}" class="badge bg-red deleteOption"><i class="fa fa-trash " aria-hidden="true"></i></a></td>
+                        @if(session('admin_type')==1)
+                        <td><a option_id="{{$data->products_options_id}}" class="badge bg-red deleteOption"><i class="fa fa-trash " aria-hidden="true"></i></a></td>@endif
                   	</tr>
                     	
                     @endforeach

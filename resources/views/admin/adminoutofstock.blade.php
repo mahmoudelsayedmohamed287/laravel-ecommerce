@@ -46,9 +46,7 @@
                                 <td width="45%">
                                     <strong>{{ $outOfStockData->products_name }} ( {{ $outOfStockData->products_model }} )</strong><br>
                                 </td>
-                                <!--<td>
-                                    {{ $outOfStockData->products_quantity }}
-                                </td>-->
+                                
                                
                                 <td>
                                     <a data-toggle="tooltip" data-placement="bottom" title="{{ trans('labels.View') }}" href="stockin?products_id={{ $outOfStockData->products_id }}" class="badge bg-light-blue"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a> 
