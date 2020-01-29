@@ -15,7 +15,7 @@
         @endif
           
             @if(session('admin_type')!=1) 
-         <li class="">
+         <li class="treeview">
           <a href="{{ URL::to('admin/singleadmin')}}" ><i class="fa fa-dashboard"></i> <span>{{ trans('labels.header_dashboard') }} </span></a>
         </li>  
           @endif
@@ -258,8 +258,14 @@
           @endif
           
            @if(session('admin_type')!=1) 
-         <li class="">
+         <li class="treeview">
           <a href="{{ URL::to('admin/AdminOrderSpecific')}}" ><i class="fa fa-list-ul" aria-hidden="true"></i> <span> Orders </span></a>
+        </li>  
+          @endif
+          
+          @if(session('admin_type')!=1) 
+         <li class="treeview">
+          <a href="{{ URL::to('admin/admincustomers')}}" ><i class="fa fa-users" aria-hidden="true"></i> <span> Customers </span></a>
         </li>  
           @endif
       </ul>

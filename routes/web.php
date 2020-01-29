@@ -79,6 +79,9 @@ Route::group(['prefix' => 'admin'], function () {
             //admin out of stock
             
              Route::get('/adminoutofstock', 'admintypeController@outofstock');
+            
+            //admin customer
+            Route::get('/admincustomers', 'admincustomerController@adminCustomer');
 			//main listingManufacturer
 			Route::get('/manufacturers', 'AdminManufacturerController@manufacturers');
 			Route::get('/addmanufacturer', 'AdminManufacturerController@addmanufacturer');
