@@ -44,13 +44,14 @@
           <div class="small-box bg-aqua">
             <div class="inner">
             <p>{{ trans('labels.NewOrders') }}</p>
-              <h3>{{ $result['total_orders'] }}</h3>
-        
+               @foreach ($result['orders_admin'] as $key=>$orders)
+                <h3>{{ $orders->order_count }}</h3>
+        @endforeach
             </div>
             <div class="icon">
             <img src="{{asset('').'/resources/views/admin/images/loader.png' }}" class="custom-img-dash">
             </div>
-            <a href="{{ URL::to('admin/orders')}}" class="small-box-footer" data-toggle="tooltip" data-placement="bottom" title="{{ trans('labels.viewAllOrders') }}">{{ trans('labels.viewAllOrders') }} <i class="fa fa-arrow-circle-right"></i></a>
+            <a href="{{ URL::to('admin/AdminOrderSpecific')}}" class="small-box-footer" data-toggle="tooltip" data-placement="bottom" title="{{ trans('labels.viewAllOrders') }}">{{ trans('labels.viewAllOrders') }} <i class="fa fa-arrow-circle-right"></i></a>
           </div>
         </div>
         <!-- ./col -->
@@ -59,8 +60,9 @@
           <div class="small-box bg-light-blue">
             <div class="inner">
             <p>{{ trans('labels.Total Money') }}</p>
-              <h3>{{ $result['currency'][19]->value }}{{ $result['total_money'] }}</h3>
-			  
+                @foreach ($result['inventory'] as $key=>$inventory)
+              <h3>{{$inventory->purchase_price}}</h3>
+			  @endforeach
             </div>
             <div class="icon">
             <img src="{{asset('').'/resources/views/admin/images/coin.png' }}" class="custom-img-dash">
@@ -74,13 +76,18 @@
           <div class="small-box bg-teal">
             <div class="inner">
             <p>{{ trans('labels.Total Money Earned') }}</p>
-              <h3>{{ $result['currency'][19]->value }}{{ $result['profit'] }}</h3>
-			  
+             
+                @foreach ($result['MoneyEarned'] as $key=>$MoneyEarned)
+                <h3>
+                 {{ $MoneyEarned->MoneyEarned }}
+                
+                </h3>
+			  @endforeach
             </div>
             <div class="icon">
             <img src="{{asset('').'/resources/views/admin/images/money-bag.png' }}" class="custom-img-dash">
             </div>
-            <a href="{{ URL::to('admin/orders')}}" class="small-box-footer" data-toggle="tooltip" data-placement="bottom" title="{{ trans('labels.viewAllOrders') }}">{{ trans('labels.viewAllOrders') }} <i class="fa fa-arrow-circle-right"></i></a>
+            <a href="{{ URL::to('admin/AdminOrderSpecific')}}" class="small-box-footer" data-toggle="tooltip" data-placement="bottom" title="{{ trans('labels.viewAllOrders') }}">{{ trans('labels.viewAllOrders') }} <i class="fa fa-arrow-circle-right"></i></a>
           </div>
         </div>
         <!-- ./col -->
@@ -90,12 +97,16 @@
             <div class="inner">
             <p>{{ trans('labels.outOfStock') }}</p>
 
-              <h3>{{ $result['outOfStock'] }} </h3>
+              <h3>
+
+                  {{$result['productee']}}
+                </h3>
+
             </div>
             <div class="icon">
               <img src="{{asset('').'/resources/views/admin/images/oos.png' }}" class="custom-img-dash">
             </div>
-            <a href="{{ URL::to('admin/outofstock')}}" class="small-box-footer" data-toggle="tooltip" data-placement="bottom" title="{{ trans('labels.outOfStock') }}">{{ trans('labels.outOfStock') }} <i class="fa fa-arrow-circle-right"></i></a>
+            <a href="{{ URL::to('admin/adminoutofstock')}}" class="small-box-footer" data-toggle="tooltip" data-placement="bottom" title="{{ trans('labels.outOfStock') }}">{{ trans('labels.outOfStock') }} <i class="fa fa-arrow-circle-right"></i></a>
           </div>
         </div>
         <!-- ./col -->
@@ -105,7 +116,7 @@
             <div class="inner">
             <p>{{ trans('labels.customerRegistrations') }}</p>
 
-              <h3>{{ $result['totalCustomers'] }}</h3>
+              <h3>{{$result['customer']}}</h3>
 
             </div>
             <div class="icon">
@@ -119,9 +130,11 @@
           <!-- small box -->
           <div class="small-box bg-green">
             <div class="inner">
-                            <p>{{ trans('labels.totalProducts') }}</p>
+             <p>{{ trans('labels.totalProducts') }}</p>
 
-              <h3>{{ $result['totalProducts'] }}</h3>
+              @foreach ($result['product'] as $key=>$product)
+              <h3>{{ $product->product_count }} </h3>
+                @endforeach
 
             </div>
             <div class="icon">

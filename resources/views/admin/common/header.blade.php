@@ -28,6 +28,7 @@
       <!-- Navbar Right Menu -->
       <div class="navbar-custom-menu">
         <ul class="nav navbar-nav">
+            @if(session('admin_type')==1) 
           <!-- Messages: style can be found in dropdown.less-->
           <li class="dropdown messages-menu">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
@@ -98,8 +99,8 @@
               </li>
               <!--<li class="footer"><a href="#">See All Messages</a></li>-->
             </ul>
-          </li>
-          
+          </li>@endif
+          @if(session('admin_type')==1) 
           <li class="dropdown messages-menu">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
               <i class="fa fa-th"></i>
@@ -129,7 +130,7 @@
               <!--<li class="footer"><a href="#">See All Messages</a></li>-->
             </ul>
           </li>
-          
+          @endif
           <!-- User Account: style can be found in dropdown.less -->
           <li class="dropdown user user-menu">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
@@ -146,6 +147,7 @@
                   <small>{{ trans('labels.administrator')}}</small>
                 </p>
               </li>
+               
               <!-- Menu Body -->
               <!--<li class="user-body">
                 <div class="row">
@@ -162,11 +164,13 @@
               </li>-->
               <!-- Menu Footer-->
               <li class="user-footer">
+                   @if(session('admin_type')==1) 
               @if(session('profile_view')==1 or auth()->guard('admin')->user()->adminType=='1')
                 <div class="pull-left">
                   <a href="{{ URL::to('admin/profile')}}" class="btn btn-default btn-flat">{{ trans('labels.profile_link')}}</a>
                 </div>                
               @endif
+                  @endif
                 <div class="pull-right">
                   <a href="{{ URL::to('admin/logout')}}" class="btn btn-default btn-flat">{{ trans('labels.sign_out') }}</a>
                 </div>

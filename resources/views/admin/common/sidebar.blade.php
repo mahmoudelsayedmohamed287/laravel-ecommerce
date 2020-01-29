@@ -1,16 +1,7 @@
 <aside class="main-sidebar">
     <!-- sidebar: style can be found in sidebar.less -->
     <section class="sidebar">
-      <!-- Sidebar user panel -->
-      <!-- <div class="user-panel">
-        <div class="pull-left image">
-          <img src="{{asset('').auth()->guard('admin')->user()->image}}" class="img-circle" alt="{{ auth()->guard('admin')->user()->first_name }} {{ auth()->guard('admin')->user()->last_name }} Image">
-        </div>
-        <div class="pull-left info">
-          <p>{{ auth()->guard('admin')->user()->first_name }} {{ auth()->guard('admin')->user()->last_name }}</p>
-          <a href="#"><i class="fa fa-circle text-success"></i> {{ trans('labels.online') }}</a>
-        </div>
-      </div> -->
+     
       
       <!-- sidebar menu: : style can be found in sidebar.less -->
       <ul class="sidebar-menu">
@@ -22,6 +13,12 @@
           </a>
         </li>
         @endif
+          
+            @if(session('admin_type')!=1) 
+         <li class="">
+          <a href="{{ URL::to('admin/singleadmin')}}" ><i class="fa fa-dashboard"></i> <span>{{ trans('labels.header_dashboard') }} </span></a>
+        </li>  
+          @endif
         @if(session('language_view')==1  or auth()->guard('admin')->user()->adminType=='1')
         <li class="treeview {{ Request::is('admin/languages') ? 'active' : '' }} {{ Request::is('admin/addlanguages') ? 'active' : '' }} {{ Request::is('admin/editlanguages/*') ? 'active' : '' }} ">
           <a href="{{ URL::to('admin/languages')}}">
@@ -124,20 +121,20 @@
           </ul>
         </li>
          @endif
-        @if(session('orders_view')==1)
+        @if(auth()->guard('admin')->user()->adminType=='1')
         
         <li class="treeview {{ Request::is('admin/orders') ? 'active' : '' }}  {{ Request::is('admin/addOrders') ? 'active' : '' }}  {{ Request::is('admin/vieworder/*') ? 'active' : '' }}">
           <a href="{{ URL::to('admin/orders')}}" ><i class="fa fa-list-ul" aria-hidden="true"></i> <span> {{ trans('labels.link_orders') }}</span>
           </a>
         </li>
          @endif
-        @if(session('shipping_methods_view')==1 or auth()->guard('admin')->user()->adminType=='1')
+        @if( auth()->guard('admin')->user()->adminType=='1')
         <li class="treeview {{ Request::is('admin/shippingmethods') ? 'active' : '' }} {{ Request::is('admin/upsShipping') ? 'active' : '' }} {{ Request::is('admin/flateRate') ? 'active' : '' }}">
           <a href="{{ URL::to('admin/shippingmethods')}}"><i class="fa fa-truck" aria-hidden="true"></i> <span> {{ trans('labels.link_shipping_methods') }}</span>
           </a>
         </li>
          @endif
-        @if(session('payment_methods_view')==1 or auth()->guard('admin')->user()->adminType=='1')
+        @if( auth()->guard('admin')->user()->adminType=='1')
         <li class="treeview {{ Request::is('admin/paymentsetting') ? 'active' : '' }}">
           <a  href="{{ URL::to('admin/paymentsetting')}}"><i class="fa fa-credit-card" aria-hidden="true"></i> <span>
           {{ trans('labels.link_payment_methods') }}</span>
@@ -262,7 +259,7 @@
           
            @if(session('admin_type')!=1) 
          <li class="">
-          <a href="{{ URL::to('admin/AdminOrderSpecific')}}" ><i class="fa fa-tablet" aria-hidden="true"></i> <span>Orders</span></a>
+          <a href="{{ URL::to('admin/AdminOrderSpecific')}}" ><i class="fa fa-list-ul" aria-hidden="true"></i> <span> Orders </span></a>
         </li>  
           @endif
       </ul>

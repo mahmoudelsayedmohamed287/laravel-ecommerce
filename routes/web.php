@@ -69,11 +69,16 @@ Route::group(['prefix' => 'admin'], function () {
            Route::get('/singleadmin', 'admintypeController@dashboard'); 
             
             ///order of admin
+            
+            
              Route::get('/AdminOrderSpecific', 'AdminOrderadminController@index');
              Route::get('/showAdminOrderSpecific/{id}', 'AdminOrderadminController@viewOrder');
             // admin history
-            
             Route::get('/history', 'AdminhistoryController@index');
+            
+            //admin out of stock
+            
+             Route::get('/adminoutofstock', 'admintypeController@outofstock');
 			//main listingManufacturer
 			Route::get('/manufacturers', 'AdminManufacturerController@manufacturers');
 			Route::get('/addmanufacturer', 'AdminManufacturerController@addmanufacturer');
